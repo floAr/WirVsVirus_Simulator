@@ -33,6 +33,7 @@ public class Person : MonoBehaviour
         Counter = Random.Range(20, 80);
         Direction = Random.onUnitSphere.normalized;
         CurMission = null;
+        ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(this);
     }
 
     public void OnUpdate(bool bUpdateUnity)
