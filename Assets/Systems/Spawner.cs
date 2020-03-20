@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [System.Serializable]
-    public class PlaceSpawnCount
-    {
-        public Place PlacePrefab;
-        public int Count = 1;
-    }
+    //[System.Serializable]
+    //public class PlaceSpawnCount
+    //{
+    //    public Place PlacePrefab;
+    //    public int Count = 1;
+    //}
 
     public int PersonCount = 10;
     public Person PersonPrefab;
-    public List<PlaceSpawnCount> PlacesToSpawn = new List<PlaceSpawnCount>();
+    //public List<PlaceSpawnCount> PlacesToSpawn = new List<PlaceSpawnCount>();
     public List<Person> Persons = new List<Person>();
     public List<Place> Places = new List<Place>();
 
