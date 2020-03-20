@@ -10,6 +10,7 @@ public class ServiceLocator : MonoBehaviour
     public float InfectionRadius = 0.3f;
     public float InfectionChance = 0.02f;
     public Spawner Spawner;
+    public PersonBuilder PersonBuilder;
 
     private void Awake()
     {

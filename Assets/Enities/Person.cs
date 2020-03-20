@@ -19,6 +19,7 @@ public class Person : MonoBehaviour
 
     void Start()
     {
+        ageGroup = Random.Range(0, 3);
         Position = transform.position;
         AvailableMissions.Add(new Mission()
         {
@@ -125,6 +126,7 @@ public class Person : MonoBehaviour
 
     private void UpdateUnity()
     {
+        
         transform.position = Position;
 
         if (!isInfected) render.color = Color.gray;
