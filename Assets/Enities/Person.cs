@@ -24,14 +24,15 @@ public class Person : MonoBehaviour
         AvailableMissions.Add(new Mission()
         {
             Destination = typeof(House),
-            Counter = Random.Range(50, 100),
-            MaxCounter = 100,
-            Duration = 20,
-            MaxDuration = 20
+            Counter = Random.Range(200, 300),
+            MaxCounter = 300,
+            Duration = 50,
+            MaxDuration = 50
         });
 
         Counter = Random.Range(20, 80);
         Direction = Random.onUnitSphere.normalized;
+        CurMission = null;
     }
 
     public void OnUpdate(bool bUpdateUnity)
@@ -55,7 +56,7 @@ public class Person : MonoBehaviour
                 Counter = 30;
             }
 
-            Position += Direction * 0.1f;
+            Position += Direction * ServiceLocator.Instance.PersonSpeed;
         }
         else // follow mission
         {
@@ -67,7 +68,7 @@ public class Person : MonoBehaviour
             }
             else // goto place
             {
-                Position += dir.normalized * 0.1f;
+                Position += dir.normalized * ServiceLocator.Instance.PersonSpeed;
             }
 
             //mission finished?

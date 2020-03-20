@@ -20,6 +20,7 @@ public class Spawner : MonoBehaviour
     void Start()
     {
         Spawn();
+        Application.targetFrameRate = 30;
     }
 
     public void Spawn()
@@ -28,15 +29,29 @@ public class Spawner : MonoBehaviour
         float yBound = 5f;
 
         //Spawn places
-        foreach(PlaceSpawnCount placeSpawnCount in PlacesToSpawn)
-        {
-            for (int i = 0; i < placeSpawnCount.Count; i++)
-            {
-                GameObject go = Instantiate<GameObject>(placeSpawnCount.PlacePrefab.gameObject, new Vector3(Random.Range(-xBounds, xBounds),
-                    Random.Range(-yBound, yBound), 0f), Quaternion.identity, transform);
-                Places.Add(go.GetComponent<Place>());
-            }
-        }
+        //foreach(PlaceSpawnCount placeSpawnCount in PlacesToSpawn)
+        //{
+        //    for (int i = 0; i < placeSpawnCount.Count; i++)
+        //    {
+        //        bool validPosition = false;
+        //        Vector3 position = Vector2.zero;
+
+        //        while (!validPosition)
+        //        {
+        //            position = new Vector3(Random.Range(-xBounds, xBounds), Random.Range(-yBound, yBound), 0f);
+        //            validPosition = true;
+
+        //            for (int j=0; j< Places.Count; j++) //check for overlap
+        //            {
+        //                if (Vector2.Distance(Places[j].Position, position) < 0.3f)
+        //                    validPosition = false;
+        //            }
+        //        }
+
+        //        GameObject go = Instantiate<GameObject>(placeSpawnCount.PlacePrefab.gameObject, position, Quaternion.identity, transform);
+        //        Places.Add(go.GetComponent<Place>());
+        //    }
+        //}
 
         //spawn persons
         for (int i = 0; i < PersonCount; i++)
