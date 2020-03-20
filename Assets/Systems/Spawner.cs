@@ -25,7 +25,7 @@ public class Spawner : MonoBehaviour
             Persons.Add(go.GetComponent<Person>());
         }
 
-        Persons[0].CurState = Person.State.sickMedium;
+        Persons[0].isInfected = true;
     }
 
     void Update()

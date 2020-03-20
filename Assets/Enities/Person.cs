@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class Person : MonoBehaviour
 {
-    public enum State { normal, sickLigth, sickMedium, sickHard, healed }
-
     float Speed = 0.1f;
     public int Counter = 0;
     public Vector2 Position, Direction;
-    public State CurState = Person.State.normal;
+    public bool isInfected;
+    public bool isImmune = false; 
+    public int infectionSeverity = 0; // 0 = keine Sypthome 1 = Husten & Fieber 3 = Lungenentzündung
+    public int ageGroup = 1; //0 = Kind 1 = Erwachsen 2 = Rentner
+    public int deathCounter = 0;
     public SpriteRenderer render;
 
     void Start()
@@ -30,30 +32,45 @@ public class Person : MonoBehaviour
         Position += Direction * 0.1f;
 
         //update sickness state
-        for(int i=0; i<ServiceLocator.Instance.Spawner.Persons.Count; i++)
-        {
-            if(Vector2.Distance(Position, ServiceLocator.Instance.Spawner.Persons[i].Position) < ServiceLocator.Instance.InfectionRadius)
-            {
-                if(ServiceLocator.Instance.Spawner.Persons[i].CurState == State.sickMedium && Random.value < ServiceLocator.Instance.InfectionChance)
-                {
-                    CurState = State.sickMedium;
-                }
-            }
-        }
+        HandleSickness();
 
         //deflect from wall
-        if (Position.x < -ServiceLocator.Instance.xBounds || Position.x > ServiceLocator.Instance.xBounds)
-            Direction = new Vector2(-Direction.x, Direction.y);
-        if (Position.y < -ServiceLocator.Instance.yBounds || Position.y > ServiceLocator.Instance.yBounds)
-            Direction = new Vector2(Direction.x, -Direction.y);
+        HandleWallCollision();
 
         //Update Unity
         if (bUpdateUnity)
         {
-            transform.position = Position;
-
-            if (CurState == State.normal) render.color = Color.gray;
-            else if (CurState == State.sickMedium) render.color = Color.red;
+            UpdateUnity();
         }
+    }
+
+    private void HandleSickness()
+    {
+        for (int i = 0; i < ServiceLocator.Instance.Spawner.Persons.Count; i++)
+        {
+            if (Vector2.Distance(Position, ServiceLocator.Instance.Spawner.Persons[i].Position) < ServiceLocator.Instance.InfectionRadius)
+            {
+                if (ServiceLocator.Instance.Spawner.Persons[i].isInfected && Random.value < ServiceLocator.Instance.InfectionChance)
+                {
+                    isInfected = true;
+                }
+            }
+        }
+    }
+
+    private void UpdateUnity()
+    {
+        transform.position = Position;
+
+        if (!isInfected) render.color = Color.gray;
+        else if (isInfected) render.color = Color.red;
+    }
+
+    private void HandleWallCollision()
+    {
+        if (Position.x < -ServiceLocator.Instance.xBounds || Position.x > ServiceLocator.Instance.xBounds)
+            Direction = new Vector2(-Direction.x, Direction.y);
+        if (Position.y < -ServiceLocator.Instance.yBounds || Position.y > ServiceLocator.Instance.yBounds)
+            Direction = new Vector2(Direction.x, -Direction.y);
     }
 }
