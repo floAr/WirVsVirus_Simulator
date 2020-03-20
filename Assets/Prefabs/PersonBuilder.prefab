@@ -43,6 +43,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 285132f5aca48294f96a223bd14b0b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChildSprite: {fileID: 0}
-  AdultSprite: {fileID: 0}
-  ElderlySprite: {fileID: 0}
+  ChildSprite: {fileID: 21300000, guid: 8584e2e0301ab2f43af734819f6e3f39, type: 3}
+  AdultSprite: {fileID: 21300000, guid: d1f894a3c59d9344fbf7c6ebb7d111fd, type: 3}
+  ElderlySprite: {fileID: 21300000, guid: 1a2406f46093d474a886c991b30b8399, type: 3}

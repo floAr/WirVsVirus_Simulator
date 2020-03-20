@@ -16,7 +16,9 @@ public class Person : MonoBehaviour
 
     void Start()
     {
+        ageGroup = Random.Range(0, 3);
         Position = transform.position;
+        ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(this);
     }
 
     public void OnUpdate(bool bUpdateUnity)
@@ -60,6 +62,7 @@ public class Person : MonoBehaviour
 
     private void UpdateUnity()
     {
+        
         transform.position = Position;
 
         if (!isInfected) render.color = Color.gray;
