@@ -19,7 +19,9 @@ public class Person : MonoBehaviour
 
     void Start()
     {
+      
         ageGroup = Random.Range(0, 3);
+        infectionSeverity = Random.Range(0, 3);
         Position = transform.position;
         AvailableMissions.Add(new Mission()
         {
@@ -121,6 +123,7 @@ public class Person : MonoBehaviour
                 if (ServiceLocator.Instance.Spawner.Persons[i].isInfected && Random.value < ServiceLocator.Instance.InfectionChance)
                 {
                     isInfected = true;
+                    ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(this);
                 }
             }
         }
@@ -131,8 +134,8 @@ public class Person : MonoBehaviour
         
         transform.position = Position;
 
-        if (!isInfected) render.color = Color.gray;
-        else if (isInfected) render.color = Color.red;
+       // if (!isInfected) render.color = Color.gray;
+    //   else if (isInfected) render.color = Color.red;
     }
 
     private void HandleWallCollision()

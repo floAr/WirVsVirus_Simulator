@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1566,6 +1566,8 @@ MonoBehaviour:
   PersonSpeed: 0.035
   Spawner: {fileID: 1456102365}
   PersonBuilder: {fileID: 4825770728956786420}
+  SimMaster: {fileID: 1634658189}
+  Seed: 12345
 --- !u!4 &883055487
 Transform:
   m_ObjectHideFlags: 0
@@ -2788,6 +2790,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d4edded9f041d6c4392d8f146942e647, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1634658189 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1634658189, guid: 842bd042f6b52f245b2801d3d1aa9106,
+    type: 3}
+  m_PrefabInstance: {fileID: 6021960066056106948}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d918ca6209cdac248bdc5def392c0f05, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1699333077 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
@@ -3682,3 +3696,72 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 285132f5aca48294f96a223bd14b0b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &6021960066056106948
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 6021960066606978120, guid: 842bd042f6b52f245b2801d3d1aa9106,
+        type: 3}
+      propertyPath: m_Name
+      value: SimulationControl
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021960066606978121, guid: 842bd042f6b52f245b2801d3d1aa9106,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021960066606978121, guid: 842bd042f6b52f245b2801d3d1aa9106,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021960066606978121, guid: 842bd042f6b52f245b2801d3d1aa9106,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021960066606978121, guid: 842bd042f6b52f245b2801d3d1aa9106,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021960066606978121, guid: 842bd042f6b52f245b2801d3d1aa9106,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021960066606978121, guid: 842bd042f6b52f245b2801d3d1aa9106,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021960066606978121, guid: 842bd042f6b52f245b2801d3d1aa9106,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021960066606978121, guid: 842bd042f6b52f245b2801d3d1aa9106,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021960066606978121, guid: 842bd042f6b52f245b2801d3d1aa9106,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021960066606978121, guid: 842bd042f6b52f245b2801d3d1aa9106,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6021960066606978121, guid: 842bd042f6b52f245b2801d3d1aa9106,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 842bd042f6b52f245b2801d3d1aa9106, type: 3}

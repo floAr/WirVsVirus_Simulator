@@ -21,7 +21,9 @@ public class Spawner : MonoBehaviour
     {
         Spawn();
         Application.targetFrameRate = 30;
+        ServiceLocator.Instance.SimMaster.UnityUpdate += SimMaster_UnityUpdate;
     }
+
 
     public void Spawn()
     {
@@ -63,11 +65,13 @@ public class Spawner : MonoBehaviour
         Persons[0].isInfected = true;
     }
 
-    void Update()
+
+    private void SimMaster_UnityUpdate(object sender, System.EventArgs e)
     {
-        for(int i=0; i<Persons.Count; i++)
+        for (int i = 0; i < Persons.Count; i++)
         {
             Persons[i].OnUpdate(true);
         }
     }
+
 }
