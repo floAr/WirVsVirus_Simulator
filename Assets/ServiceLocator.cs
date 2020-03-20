@@ -12,9 +12,13 @@ public class ServiceLocator : MonoBehaviour
     public float PersonSpeed = 0.1f;
     public Spawner Spawner;
     public PersonBuilder PersonBuilder;
+    public SimulationMaster SimMaster;
+
+    public int Seed = 12345;
 
     private void Awake()
     {
         Instance = this;
+        Random.InitState(Seed);
     }
 }

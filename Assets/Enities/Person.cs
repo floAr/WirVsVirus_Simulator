@@ -17,6 +17,8 @@ public class Person : MonoBehaviour
     public Mission CurMission = null;
     public Vector2 CurMissionPosition;
 
+    public int InfectedBy = -1;
+
     void Start()
     {
       
@@ -116,6 +118,8 @@ public class Person : MonoBehaviour
 
     private void HandleSickness()
     {
+        if (isInfected)
+            return;
         for (int i = 0; i < ServiceLocator.Instance.Spawner.Persons.Count; i++)
         {
             if (Vector2.Distance(Position, ServiceLocator.Instance.Spawner.Persons[i].Position) < ServiceLocator.Instance.InfectionRadius)
@@ -123,6 +127,7 @@ public class Person : MonoBehaviour
                 if (ServiceLocator.Instance.Spawner.Persons[i].isInfected && Random.value < ServiceLocator.Instance.InfectionChance)
                 {
                     isInfected = true;
+                    InfectedBy = i;
                     ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(this);
                 }
             }
@@ -144,5 +149,12 @@ public class Person : MonoBehaviour
             Direction = new Vector2(-Direction.x, Direction.y);
         if (Position.y < -ServiceLocator.Instance.yBounds || Position.y > ServiceLocator.Instance.yBounds)
             Direction = new Vector2(Direction.x, -Direction.y);
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        if (InfectedBy != -1)
+            Gizmos.DrawLine(this.transform.position, ServiceLocator.Instance.Spawner.Persons[InfectedBy].transform.position);
     }
 }
