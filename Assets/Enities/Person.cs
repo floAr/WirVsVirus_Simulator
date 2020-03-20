@@ -13,23 +13,70 @@ public class Person : MonoBehaviour
     public int ageGroup = 1; //0 = Kind 1 = Erwachsen 2 = Rentner
     public int deathCounter = 0;
     public SpriteRenderer render;
+    public List<Mission> AvailableMissions = new List<Mission>();
+    public Mission CurMission = null;
+    public Vector2 CurMissionPosition;
 
     void Start()
     {
         Position = transform.position;
+        AvailableMissions.Add(new Mission()
+        {
+            Destination = typeof(House),
+            Counter = Random.Range(50, 100),
+            MaxCounter = 100,
+            Duration = 20,
+            MaxDuration = 20
+        });
+
+        Counter = Random.Range(20, 80);
+        Direction = Random.onUnitSphere.normalized;
     }
 
     public void OnUpdate(bool bUpdateUnity)
     {
-        //new Task
-        if (Counter-- <= 0)
+        //rethink task priorities
+        foreach(Mission mission in AvailableMissions)
         {
-            Direction = Random.insideUnitCircle.normalized * Speed;
-            Counter = Random.Range(30, 50);
+            if(--mission.Counter <= 0)
+            {
+                CurMission = mission;
+                CurMissionPosition = GetNearbyPlace(mission.Destination).transform.position;
+            }
         }
 
         //normal update
-        Position += Direction * 0.1f;
+        if (CurMission == null) // if nothing to do - just idle
+        {
+            if(--Counter <= 0)
+            {
+                Direction = Random.onUnitSphere.normalized;
+                Counter = 30;
+            }
+
+            Position += Direction * 0.1f;
+        }
+        else // follow mission
+        {
+            Vector2 dir = CurMissionPosition - Position;
+
+            if (dir.magnitude < 0.2f) //arrived at place
+            {
+                CurMission.Duration--;
+            }
+            else // goto place
+            {
+                Position += dir.normalized * 0.1f;
+            }
+
+            //mission finished?
+            if (CurMission.Duration <= 0)
+            {
+                CurMission.Duration = CurMission.MaxDuration;
+                CurMission.Counter = CurMission.MaxCounter;
+                CurMission = null;
+            }
+        }
 
         //update sickness state
         HandleSickness();
@@ -42,6 +89,24 @@ public class Person : MonoBehaviour
         {
             UpdateUnity();
         }
+    }
+
+    Place GetNearbyPlace(System.Type placeType)
+    {
+        Place bestPlace = null;
+        float bestDistance = float.MaxValue;
+
+        for (int i = 0; i < ServiceLocator.Instance.Spawner.Places.Count; i++)
+        {
+            if(ServiceLocator.Instance.Spawner.Places[i].GetType() == placeType && 
+                Vector2.Distance(Position, ServiceLocator.Instance.Spawner.Places[i].Position) < bestDistance)
+            {
+                bestDistance = Vector2.Distance(Position, ServiceLocator.Instance.Spawner.Places[i].Position);
+                bestPlace = ServiceLocator.Instance.Spawner.Places[i];
+            }
+        }
+
+        return bestPlace;
     }
 
     private void HandleSickness()
