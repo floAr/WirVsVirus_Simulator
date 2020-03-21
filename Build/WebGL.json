@@ -1,6 +1,6 @@
 {
 "companyName": "DefaultCompany",
-"productName": "workspace",
+"productName": "WirVsVirus_Simulator",
 "productVersion": "0.1",
 "dataUrl": "WebGL.data.unityweb",
 "wasmCodeUrl": "WebGL.wasm.code.unityweb",
