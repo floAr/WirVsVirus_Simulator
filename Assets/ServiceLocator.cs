@@ -13,6 +13,7 @@ public class ServiceLocator : MonoBehaviour
     public Spawner Spawner;
     public PersonBuilder PersonBuilder;
     public SimulationMaster SimMaster;
+    public InfectionGraph InfectionGraph;
 
     public int Seed = 12345;
 

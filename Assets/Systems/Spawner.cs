@@ -30,6 +30,7 @@ public class Spawner : MonoBehaviour
                     Quaternion.identity, transform);
                 Persons.Add(go.GetComponent<Person>());
             }
+            Persons[Persons.Count - 1].Id = Persons.Count - 1;
         }
         Persons[0].isInfected = true;
     }
