@@ -37,7 +37,10 @@ public class Person : MonoBehaviour
         if (randInt < 5) infectionSeverity = 0;
         else if (randInt < 8) infectionSeverity = 1;
         else infectionSeverity = 2;
+    }
 
+    void Start()
+    { 
         Position = transform.position;
 
         CreateTasks();
@@ -347,7 +350,7 @@ public class Person : MonoBehaviour
             //social distancing
             if(distance < ServiceLocator.Instance.InfectionRadius * 2)
             {
-                evasionVector += (Position - ServiceLocator.Instance.Spawner.Persons[i].Position);
+                evasionVector -= (Position - ServiceLocator.Instance.Spawner.Persons[i].Position);
             }
 
             //infection
@@ -364,7 +367,7 @@ public class Person : MonoBehaviour
         }
 
         //apply social distancing
-        Position += evasionVector.normalized * ServiceLocator.Instance.PersonSpeed / 2f;
+        //Position += evasionVector.normalized * ServiceLocator.Instance.PersonSpeed / 2f;
     }
 
     private void Die()

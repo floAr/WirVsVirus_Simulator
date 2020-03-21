@@ -9,6 +9,7 @@ public class Hospital : Place
     void Start()
     {
         _capacity = Capacity;
+        base.Start();
     }
 
     private void FixedUpdate()
