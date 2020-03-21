@@ -1194,7 +1194,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2001870511}
-  m_RootOrder: 35
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &511595166
 MonoBehaviour:
@@ -5282,9 +5282,10 @@ Transform:
   - {fileID: 887345389}
   - {fileID: 2063214620}
   - {fileID: 317774080}
+  - {fileID: 511595165}
   - {fileID: 1267253047}
-  - {fileID: 609635311}
   - {fileID: 2122238302}
+  - {fileID: 609635311}
   - {fileID: 1518923794}
   - {fileID: 714959431}
   - {fileID: 1547916998}
@@ -5299,7 +5300,6 @@ Transform:
   - {fileID: 5171071974135837724}
   - {fileID: 933074892}
   - {fileID: 650909169}
-  - {fileID: 511595165}
   - {fileID: 250313288}
   - {fileID: 801462631142506048}
   - {fileID: 1682890320}
@@ -6493,6 +6493,10 @@ PrefabInstance:
     - target: {fileID: 6021960066606978121, guid: 842bd042f6b52f245b2801d3d1aa9106,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1634658189, guid: 842bd042f6b52f245b2801d3d1aa9106, type: 3}
+      propertyPath: isRunning
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6021960065728917581, guid: 842bd042f6b52f245b2801d3d1aa9106,
