@@ -1194,7 +1194,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2001870511}
-  m_RootOrder: 47
+  m_RootOrder: 35
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &511595166
 MonoBehaviour:
@@ -2225,7 +2225,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &840712791
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5299,6 +5299,7 @@ Transform:
   - {fileID: 5171071974135837724}
   - {fileID: 933074892}
   - {fileID: 650909169}
+  - {fileID: 511595165}
   - {fileID: 250313288}
   - {fileID: 801462631142506048}
   - {fileID: 1682890320}
@@ -5311,7 +5312,6 @@ Transform:
   - {fileID: 1880892165}
   - {fileID: 476756204}
   - {fileID: 704618584}
-  - {fileID: 511595165}
   - {fileID: 1143428180}
   - {fileID: 1576120983}
   - {fileID: 1106490578}
@@ -6718,12 +6718,12 @@ PrefabInstance:
     - target: {fileID: 8938481327913442474, guid: 884b390b49f875246bc7813c910bd6e8,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8938481328294501136, guid: 884b390b49f875246bc7813c910bd6e8,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 884b390b49f875246bc7813c910bd6e8, type: 3}
