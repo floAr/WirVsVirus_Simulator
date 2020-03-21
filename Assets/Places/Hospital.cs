@@ -9,4 +9,10 @@ public class Hospital : Place
         p.isInfected = false;
         p.isImmune = true;
     }
+
+    public override void OnStartMission(Person p)
+    {
+        p.isInfected = false;
+        p.isImmune = true;
+    }
 }

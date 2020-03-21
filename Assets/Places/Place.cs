@@ -12,5 +12,7 @@ public class Place : MonoBehaviour
         Position = transform.position;
     }
 
+    public virtual void OnStartMission(Person p) { }
+
     public virtual void OnFinishMission(Person p) { }
 }
