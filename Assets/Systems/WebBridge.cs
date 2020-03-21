@@ -15,7 +15,7 @@ public class WebBridge : MonoBehaviour
 
     public void EmitData(string key, string payload)
     {
-     //   Debug.Log(payload);
+        PushJsonData(payload);
     }
 
 }
