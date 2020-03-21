@@ -28,6 +28,23 @@
   color: #fff;
 }
 </style>
+
+<script>
+var isPaused=true
+
+function ToggleRunPause() {
+if(isPaused){
+  document.getElementById("RunPause").innerHTML = "Pause";
+}
+else
+{
+  document.getElementById("RunPause").innerHTML = "Start";
+}
+isPaused=!isPaused
+
+
+}
+</script>
   </head>
   
 
@@ -40,8 +57,8 @@
     <div id="unityContainer" style="width: 960px; height: 600px; margin: auto"></div>
 
   <div class="mdl-card__actions mdl-card--border">
-    <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-      Get Started
+    <a id="RunPause" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="ToggleRunPause()">
+      Start
     </a>
   </div>
   <div class="mdl-card__menu">
