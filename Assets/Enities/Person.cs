@@ -9,7 +9,9 @@ public class Person : MonoBehaviour
     public int Counter = 0;
     public Vector2 Position, Direction;
     public bool isInfected;
-    public bool isImmune = false; 
+    public bool isImmune = false;
+    public bool isDead = false;
+    public int sicknessCounter = 360;
     public int infectionSeverity = 0; // 0 = keine Sypthome 1 = Husten & Fieber 3 = Lungenentzündung
     public int ageGroup = 1; //0 = Kind 1 = Erwachsen 2 = Rentner
     public int deathCounter = 0;
@@ -40,7 +42,7 @@ public class Person : MonoBehaviour
             MaxCounter = 120,
             Duration = 50,
             MaxDuration = 50,
-            IsApplicable = (p) => p.isInfected
+            IsApplicable = (p) => p.isInfected && p.infectionSeverity == 2
         });
 
         //Go Home
@@ -181,6 +183,26 @@ public class Person : MonoBehaviour
 
     private void HandleSickness()
     {
+        if(isInfected)
+        {
+            sicknessCounter--;
+
+            
+            if(sicknessCounter < 0)
+            {
+                if (infectionSeverity == 3)
+                {
+                    Die();
+                }
+                else
+                {
+                    isInfected = false;
+                    isImmune = true;
+                    ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(this);
+                }
+            }
+        }
+
         if (isInfected || isImmune)
             return;
 
@@ -197,6 +219,15 @@ public class Person : MonoBehaviour
                 }
             }
         }
+    }
+
+    private void Die()
+    {
+        if (CurMission != null) FinishMission();
+
+        isDead = true;
+        ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(this);
+        enabled = false;
     }
 
     private void UpdateUnity()

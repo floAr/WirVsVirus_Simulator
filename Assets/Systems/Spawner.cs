@@ -40,7 +40,8 @@ public class Spawner : MonoBehaviour
     {
         for (int i = 0; i < Persons.Count; i++)
         {
-            Persons[i].OnUpdate(true);
+            if(!Persons[i].isDead)
+                Persons[i].OnUpdate(true);
         }
     }
 
