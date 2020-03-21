@@ -44,22 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eb33c2ebf852d9c4283d392187745fec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Id: 0
   Counter: 0
   Position: {x: 0, y: 0}
   Direction: {x: 0, y: 0}
   isInfected: 0
   isImmune: 0
+  isDead: 0
+  sicknessCounter: 360
   infectionSeverity: 0
   ageGroup: 1
   deathCounter: 0
   render: {fileID: 3465818326561158393}
-  AvailableMissions: []
-  CurMission:
-    Counter: 50
-    Duration: 10
-    MaxCounter: 50
-    MaxDuration: 20
-  CurMissionPosition: {x: 0, y: 0}
+  CurTargetPlace: {fileID: 0}
+  InfectedBy: -1
 --- !u!212 &3465818326561158393
 SpriteRenderer:
   m_ObjectHideFlags: 0
