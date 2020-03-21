@@ -40,7 +40,15 @@ public class ServiceLocator : MonoBehaviour
         }
     }
 
-    
+    #region WebFunctions
+    public void TOGGLE_doubleKh() { MoreHospitalCapacity = !MoreHospitalCapacity; }
+    public void TOGGLE_verhaltensregeln() { WashYourHands = !WashYourHands; }
+    public void TOGGLE_stayHome() { StayAtHome = !StayAtHome; }
+    public void TOGGLE_closeSchools() { CloseSchools = !CloseSchools; }
+    public void TOGGLE_homeoffice() { HomeOffice = !HomeOffice; }
+    public void TOGGLE_coronaTests() { CoronaTests = !CoronaTests; }
+    public void TOGGLE_closePublic() { CloseRestaurants = !CloseRestaurants; }
+    #endregion
 
 
     private void Awake()
