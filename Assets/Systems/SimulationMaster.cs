@@ -23,6 +23,8 @@ public class SimulationMaster : MonoBehaviour
     private Spawner _spawnerRef;
     private WebBridge _webBridgeRef;
 
+    private List<int[]> _dataPoints;
+
     public void Run()
     {
         isRunning = true;
@@ -82,15 +84,30 @@ public class SimulationMaster : MonoBehaviour
 
             uninfected += 1;
         }
+        var data = new int[] { uninfected, sick_0, sick_1, sick_2, recovered };
+        _dataPoints.Add(data);
 
-        _webBridgeRef.EmitData("population",$"{{ {uninfected}, {sick_0}, {sick_1}, {sick_2}, {recovered}, {dead} }}");
+        _webBridgeRef.EmitData("pop_data", DataArrayToJS());
 
+    }
+
+    private string DataArrayToJS()
+    {
+        string result = "[";
+        foreach (var series in _dataPoints)
+        {
+            result += $"[{series[0]},{series[1]},{series[2]},{series[3]},{series[4]},{series[5]}],";
+        }
+        result = result.Substring(0, result.Length - 1);
+        result += "]";
+        return result;
     }
 
     private void Start()
     {
         _spawnerRef = ServiceLocator.Instance.Spawner;
         _webBridgeRef = ServiceLocator.Instance.WebBridge;
+        _dataPoints = new List<int[]>();
         this.OnUnityUpdate += SimulationMaster_OnUnityUpdate;
     }
 
