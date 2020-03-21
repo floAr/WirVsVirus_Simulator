@@ -71,6 +71,17 @@ public class Person : MonoBehaviour
             IsApplicable = (p) => p.isInfected && p.infectionSeverity == 1
         });
 
+        //Do selfquarantaine
+        AvailableMissions.Add(new Mission()
+        {
+            Destination = typeof(Hospital),
+            Counter = 30,
+            MaxCounter = 30,
+            Duration = 120,
+            MaxDuration = 120,
+            IsApplicable = (p) => p.isInfected && p.infectionSeverity == 0
+        });
+
         //Go to work
         if (ageGroup == 1)
             AvailableMissions.Add(new Mission()
@@ -95,6 +106,55 @@ public class Person : MonoBehaviour
                 MaxDuration = 120,
                 IsApplicable = (p) => ServiceLocator.Instance.HomeOffice
             });
+
+        //Go to School
+        if (ageGroup == 0)
+            AvailableMissions.Add(new Mission()
+            {
+                Destination = typeof(School),
+                Counter = Random.Range(200, 300),
+                MaxCounter = 300,
+                Duration = 120,
+                MaxDuration = 120,
+                IsApplicable = (p) => !ServiceLocator.Instance.CloseSchools
+            });
+
+        //Do Home schooling
+        if (ageGroup == 0)
+            AvailableMissions.Add(new Mission()
+            {
+                Destination = typeof(House),
+                SpecificPlace = GetNearbyPlace(typeof(House)),
+                Counter = Random.Range(200, 300),
+                MaxCounter = 300,
+                Duration = 120,
+                MaxDuration = 120,
+                IsApplicable = (p) => ServiceLocator.Instance.CloseSchools
+            });
+
+        //parents also need to stay at home
+        if (ageGroup == 1)
+            AvailableMissions.Add(new Mission()
+            {
+                Destination = typeof(House),
+                SpecificPlace = GetNearbyPlace(typeof(House)),
+                Counter = Random.Range(200, 300),
+                MaxCounter = 300,
+                Duration = 60,
+                MaxDuration = 60,
+                IsApplicable = (p) => ServiceLocator.Instance.CloseSchools
+            });
+
+        //Go to a restaurant
+        AvailableMissions.Add(new Mission()
+        {
+            Destination = typeof(Freetime),
+            SpecificPlace = GetNearbyPlace(typeof(Freetime)),
+            Counter = Random.Range(300, 1000),
+            MaxCounter = 900,
+            Duration = 50,
+            MaxDuration = 50
+        });
 
         //Go Home
         AvailableMissions.Add(new Mission()
