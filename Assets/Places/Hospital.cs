@@ -5,6 +5,7 @@ using UnityEngine;
 public class Hospital : Place
 {
     int _capacity;
+    bool moreHospitalsOn = false;
 
     void Start()
     {
@@ -12,13 +13,15 @@ public class Hospital : Place
         base.Start();
     }
 
-    //private void FixedUpdate()
-    //{
-    //    if (ServiceLocator.Instance.MoreHospitalCapacity)
-    //        Capacity = _capacity * 2;
-    //    else
-    //        Capacity = _capacity;
-    //}
+    private void FixedUpdate()
+    {
+        if (ServiceLocator.Instance.MoreHospitalCapacity != moreHospitalsOn)
+        {
+            moreHospitalsOn = ServiceLocator.Instance.MoreHospitalCapacity;
+            if (moreHospitalsOn) Capacity += _capacity;
+            else Capacity -= _capacity;
+        }
+    }
 
     public override void OnFinishMission(Person p)
     {

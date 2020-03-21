@@ -12200,7 +12200,7 @@ PrefabInstance:
     - target: {fileID: 884995164733764133, guid: 36eb960731ac0034881a2484c9b2a534,
         type: 3}
       propertyPath: timeSteps
-      value: 20
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 884995164733764133, guid: 36eb960731ac0034881a2484c9b2a534,
         type: 3}
