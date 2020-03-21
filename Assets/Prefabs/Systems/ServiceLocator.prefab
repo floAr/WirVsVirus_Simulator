@@ -52,11 +52,15 @@ MonoBehaviour:
   BaseInfectionChance: 0.02
   InfectionChanceReductionPercent: 0.3
   PersonSpeed: 0.035
+  HomeOffice: 0
+  CloseSchools: 0
+  SelfQuarantaine: 0
   Spawner: {fileID: 884995164733764133}
   PersonBuilder: {fileID: 899544945915065194}
   SimMaster: {fileID: 0}
   InfectionGraph: {fileID: 0}
   WebBridge: {fileID: 1338830173846808217}
+  Graveyard: {fileID: 0}
   OptimizeBehaviour: 0
   Seed: 1
 --- !u!1001 &4032808899501151643
