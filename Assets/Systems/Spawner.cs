@@ -11,7 +11,10 @@ public class Spawner : MonoBehaviour
     public int timeSteps = 1;
     public int maxTimesteps = 0;
 
+    public int TotalPersonCount { get; private set; }
+
     private int _timestepCount = 0;
+
 
     void Start()
     {
@@ -44,6 +47,8 @@ public class Spawner : MonoBehaviour
             Persons[r].isInfected = true;
             ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(Persons[r]);
         }
+
+        TotalPersonCount = Persons.Count;
         
     }
 

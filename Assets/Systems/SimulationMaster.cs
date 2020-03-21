@@ -29,7 +29,6 @@ public class SimulationMaster : MonoBehaviour
     private Spawner _spawnerRef;
     private WebBridge _webBridgeRef;
 
-    private List<float[]> _dataPoints;
 
     private StringBuilder[] _dataChains;
 
@@ -52,9 +51,7 @@ public class SimulationMaster : MonoBehaviour
     public void GatherSimulationData()
     {
         var uninfected = 0;
-        var sick_0 = 0;
-        var sick_1 = 0;
-        var sick_2 = 0;
+        var sick = 0;
         var dead = 0;
         var recovered = 0;
 
@@ -75,40 +72,28 @@ public class SimulationMaster : MonoBehaviour
 
             if (p.isInfected)
             {
-                switch (p.infectionSeverity)
-                {
-                    case 0:
-                        sick_0 += 1;
-                        break;
-                    case 1:
-                        sick_1 += 1;
-                        break;
-                    case 2:
-                        sick_2 += 1;
-                        break;
-                    default:
-                        break;
-                }
+                sick += 1;
                 continue;
             }
 
             uninfected += 1;
         }
-        var data = new float[] { uninfected/(float)_spawnerRef.Persons.Count, sick_0 / (float)_spawnerRef.Persons.Count, sick_1 / (float)_spawnerRef.Persons.Count, sick_2 / (float)_spawnerRef.Persons.Count, dead / (float)_spawnerRef.Persons.Count, recovered / (float)_spawnerRef.Persons.Count };
-        Debug.Log($"[{data[0]},{data[1]},{data[2]},{data[3]},{data[4]},{data[5]}]");
-        _dataPoints.Add(data);
+        var data = new float[] { uninfected/(float)_spawnerRef.Persons.Count, sick / (float)_spawnerRef.Persons.Count, dead / (float)_spawnerRef.Persons.Count, recovered / (float)_spawnerRef.Persons.Count };
+        Debug.Log($"[{data[0]},{data[1]},{data[2]},{data[3]}]");
 
-        chart.AddData(0, sick_0 + sick_1 + sick_2);
+
+        chart.AddData(0, sick);
         chart.AddData(1, recovered);
         chart.AddData(2, dead);
-        for (int i = 0; i < 6; i++)
+
+        for (int i = 0; i < _dataChains.Length; i++)
         {
             if (_dataChains[i].Length == 0)
-                _dataChains[i].Append($"[{data[i].ToString(CultureInfo.InvariantCulture)}]");
+                _dataChains[i].Append($"[{(data[i]*100f).ToString(CultureInfo.InvariantCulture)}]");
             else
             {
                 _dataChains[i].Remove(_dataChains[i].Length - 1, 1); // cut closing bracket
-                _dataChains[i].Append("," + data[i].ToString(CultureInfo.InvariantCulture) + "]");
+                _dataChains[i].Append("," + (data[i]*100f).ToString(CultureInfo.InvariantCulture) + "]");
             }
         }
 
@@ -119,28 +104,15 @@ public class SimulationMaster : MonoBehaviour
     private string DataChainsToJS()
     {
 
-        return $"[{_dataChains[0].ToString()},{_dataChains[1].ToString()},{_dataChains[2].ToString()},{_dataChains[3].ToString()},{_dataChains[4].ToString()},{_dataChains[5].ToString()}]";
-    }
-
-    private string DataArrayToJS()
-    {
-        string result = "[";
-        foreach (var series in _dataPoints)
-        {
-            result += $"[{series[0]},{series[1]},{series[2]},{series[3]},{series[4]},{series[5]}],";
-        }
-        result = result.Substring(0, result.Length - 1);
-        result += "]";
-        return result;
+        return $"[{_dataChains[0].ToString()},{_dataChains[1].ToString()},{_dataChains[2].ToString()},{_dataChains[3].ToString()}]";
     }
 
     private void Start()
     {
         _spawnerRef = ServiceLocator.Instance.Spawner;
         _webBridgeRef = ServiceLocator.Instance.WebBridge;
-        _dataPoints = new List<float[]>();
-        _dataChains = new StringBuilder[6];
-        for (int i = 0; i < 6; i++)
+        _dataChains = new StringBuilder[4];
+        for (int i = 0; i < 4; i++)
         {
             _dataChains[i] = new StringBuilder();
             

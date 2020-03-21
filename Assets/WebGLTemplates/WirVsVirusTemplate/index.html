@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en-us">
 
 <head>
@@ -260,47 +260,46 @@
             var gesund = {
                 x: xEntrys,
                 y: array[0],
-                name: 'gesund',
-                type: 'bar'
+                name: 'Gesund',
+                type: 'bar',
+                marker: {
+                    color: 'rgb(226,226,226)'
+                }
             };
 
-            var krank1 = {
+            var krank = {
                 x: xEntrys,
                 y: array[1],
-                name: 'krank1',
-                type: 'bar'
+                name: 'Krank',
+                type: 'bar',
+                marker: {
+                    color: 'rgb(192,0,0)'
+                }
             };
 
-            var krank2 = {
-                x: xEntrys,
-                y: array[2],
-                name: 'krank2',
-                type: 'bar'
-            };
-
-            var krank3 = {
-                x: xEntrys,
-                y: array[3],
-                name: 'krank3',
-                type: 'bar'
-            };
 
             var tot = {
                 x: xEntrys,
-                y: array[4],
-                name: 'tot',
-                type: 'bar'
+                y: array[2],
+                name: 'Verstorben',
+                type: 'bar',
+                marker: {
+                    color: 'rgb(37,37,37)'
+                }
             };
 
             var genesen = {
                 x: xEntrys,
-                y: array[5],
-                name: 'genesen',
-                type: 'bar'
+                y: array[3],
+                name: 'Immune',
+                type: 'bar',
+                marker: {
+                    color: 'rgb(167,202,255)'
+                }
             };
 
 
-            var data = [gesund, krank1, krank2, krank3, tot, genesen];
+            var data = [gesund, krank,  genesen,tot];
 
             var layout = {  autosize: false,
                 height: 250,
