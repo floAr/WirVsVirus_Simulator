@@ -11997,6 +11997,26 @@ PrefabInstance:
       propertyPath: HomeOffice
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 884995164224680582, guid: 36eb960731ac0034881a2484c9b2a534,
+        type: 3}
+      propertyPath: SelfQuarantaine
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 884995164224680582, guid: 36eb960731ac0034881a2484c9b2a534,
+        type: 3}
+      propertyPath: CoronaTests
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 884995164224680582, guid: 36eb960731ac0034881a2484c9b2a534,
+        type: 3}
+      propertyPath: SocialDistancing
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 884995164224680582, guid: 36eb960731ac0034881a2484c9b2a534,
+        type: 3}
+      propertyPath: StayAtHome
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 884995164733764133, guid: 36eb960731ac0034881a2484c9b2a534,
         type: 3}
       propertyPath: Places.Array.data[0]

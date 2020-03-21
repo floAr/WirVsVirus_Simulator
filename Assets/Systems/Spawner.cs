@@ -37,9 +37,13 @@ public class Spawner : MonoBehaviour
             Persons[Persons.Count - 1].Id = Persons.Count - 1;
         }
 
-        Persons[0].infectionSeverity = 0;
-        Persons[0].isInfected = true;
-        ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(Persons[0]);
+        for (int i = 0; i < 8; i++)
+        {
+            int r = Random.Range(0, Persons.Count);
+            Persons[r].infectionSeverity = 0;
+            Persons[r].isInfected = true;
+            ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(Persons[r]);
+        }
         
     }
 
