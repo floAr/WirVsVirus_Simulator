@@ -104,7 +104,7 @@ public class SimulationMaster : MonoBehaviour
         for (int i = 0; i < 6; i++)
         {
             if (_dataChains[i].Length == 0)
-                _dataChains[i].Append($"[{data[i].ToString(CultureInfo.InvariantCulture}]");
+                _dataChains[i].Append($"[{data[i].ToString(CultureInfo.InvariantCulture)}]");
             else
             {
                 _dataChains[i].Remove(_dataChains[i].Length - 1, 1); // cut closing bracket
