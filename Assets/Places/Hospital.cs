@@ -12,13 +12,13 @@ public class Hospital : Place
         base.Start();
     }
 
-    private void FixedUpdate()
-    {
-        if (ServiceLocator.Instance.MoreHospitalCapacity)
-            Capacity = _capacity * 2;
-        else
-            Capacity = _capacity;
-    }
+    //private void FixedUpdate()
+    //{
+    //    if (ServiceLocator.Instance.MoreHospitalCapacity)
+    //        Capacity = _capacity * 2;
+    //    else
+    //        Capacity = _capacity;
+    //}
 
     public override void OnFinishMission(Person p)
     {
