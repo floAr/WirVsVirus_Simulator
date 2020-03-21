@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Person : MonoBehaviour
 {
+    public int Id;
     float Speed = 0.1f;
     public int Counter = 0;
     public Vector2 Position, Direction;
@@ -129,6 +130,7 @@ public class Person : MonoBehaviour
                     isInfected = true;
                     InfectedBy = i;
                     ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(this);
+                    ServiceLocator.Instance.InfectionGraph.AddInfectedPerson(this);
                 }
             }
         }

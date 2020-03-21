@@ -61,6 +61,7 @@ public class Spawner : MonoBehaviour
             GameObject go = Instantiate<GameObject>(PersonPrefab.gameObject, new Vector3(Random.Range(-xBounds, xBounds),
                 Random.Range(-yBound, yBound), 0f), Quaternion.identity, transform);
             Persons.Add(go.GetComponent<Person>());
+            Persons[Persons.Count - 1].Id = Persons.Count - 1;
         }
         Persons[0].isInfected = true;
     }
