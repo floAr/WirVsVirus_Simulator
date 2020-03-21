@@ -22,15 +22,16 @@
       width: 960px;
     }
     .measuresCard {
-      width: 450px;
+      width: 550px;
+    }
+    .sideCardContentBox {
+      height: 200px;
     }
     .demo-layout-transparent {
-      background: url('https://getmdl.io/assets/demos/transparent.jpg') center / cover;
+      background: url('https://dfcby4322olzt.cloudfront.net/wp-content/uploads/2020/03/1800x1200_coronavirus_1.jpg') center / cover;
     }
     .demo-layout-transparent .mdl-layout__header,
     .demo-layout-transparent .mdl-layout__drawer-button {
-      /* This background is dark, so we set text to white. Use 87% black instead if
-         your background is light. */
       color: white;
     }
   </style>
@@ -42,6 +43,7 @@
     function ToggleRunPause() {
       if(isPaused){
         document.getElementById("RunPause").innerHTML = "Pause";
+        unityInstance.SendMessage("SimulationControl","Run");
         startedOnce = true;
       }
       else
@@ -52,6 +54,7 @@
         else {
           document.getElementById("RunPause").innerHTML = "Resume";
         }
+        unityInstance.SendMessage("SimulationControl","Pause");
       }
       isPaused=!isPaused
     }
@@ -84,7 +87,7 @@
   <main id="SiteMain" class="mdl-layout__content">
     <div class="mdl-grid">
 
-      <div class="mdl-cell mdl-cell--8-col">
+      <div class="mdl-cell mdl-cell--7-col">
 
         <div class="mdl-grid">
 
@@ -99,11 +102,24 @@
 
           </div>
 
+        </div>
+      </div>
+
+      <div class="mdl-cell mdl-cell--5-col">
+
+        <div class="mdl-grid">
+
           <div class="mdl-cell mdl-cell--12-col">
 
             <div class="statisticsCard demo-card-wide mdl-card mdl-shadow--2dp" id="statistics">
               <div class="mdl-card__title">
                 <h2 class="mdl-card__title-text">Statistics</h2>
+              </div>
+              <div class="sideCardContentBox">
+                <div class="mdl-card__supporting-text mdl-card--border">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Mauris sagittis pellentesque lacus eleifend lacinia...
+                </div>
               </div>
               <div class="mdl-card__actions mdl-card--border">
                 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
@@ -119,22 +135,17 @@
 
           </div>
 
-        </div>
-      </div>
-
-      <div class="mdl-cell mdl-cell--4-col">
-
-        <div class="mdl-grid">
-
           <div class="mdl-cell mdl-cell--12-col">
 
             <div class="measuresCard demo-card-wide mdl-card mdl-shadow--2dp">
               <div class="mdl-card__title">
                 <h2 class="mdl-card__title-text">Measures</h2>
               </div>
-              <div class="mdl-card__supporting-text">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Mauris sagittis pellentesque lacus eleifend lacinia...
+              <div class="sideCardContentBox">
+                <div class="mdl-card__supporting-text mdl-card--border">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Mauris sagittis pellentesque lacus eleifend lacinia...
+                </div>
               </div>
               <div class="mdl-card__actions mdl-card--border">
                 <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="ToggleRunPause()">Start</a>
