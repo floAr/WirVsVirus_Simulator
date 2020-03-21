@@ -39,6 +39,8 @@ public class SimulationMaster : MonoBehaviour
         PauseButton.gameObject.SetActive(false);
     }
 
+
+
     public void GatherSimulationData()
     {
         var uninfected = 0;
@@ -84,7 +86,7 @@ public class SimulationMaster : MonoBehaviour
 
             uninfected += 1;
         }
-        var data = new int[] { uninfected, sick_0, sick_1, sick_2, recovered };
+        var data = new int[] { uninfected, sick_0, sick_1, sick_2, dead, recovered };
         _dataPoints.Add(data);
 
         _webBridgeRef.EmitData("pop_data", DataArrayToJS());
