@@ -11,6 +11,8 @@ public class ServiceLocator : MonoBehaviour
     public float InfectionChance = 0.02f;
     public float PersonSpeed = 0.1f;
     public bool HomeOffice = false;
+    public bool CloseSchools = false;
+    public bool SelfQuarantaine = false;
     public Spawner Spawner;
     public PersonBuilder PersonBuilder;
     public SimulationMaster SimMaster;
