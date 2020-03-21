@@ -19,6 +19,7 @@ public class ServiceLocator : MonoBehaviour
     public SimulationMaster SimMaster;
     public InfectionGraph InfectionGraph;
     public WebBridge WebBridge;
+    public Graveyard Graveyard;
 
     public bool OptimizeBehaviour;
 

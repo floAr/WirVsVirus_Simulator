@@ -343,6 +343,9 @@ public class Person : MonoBehaviour
 
         isDead = true;
         ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(this);
+
+        ServiceLocator.Instance.Graveyard.MoveToGraveyard(this);
+
         enabled = false;
     }
 
