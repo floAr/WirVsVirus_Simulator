@@ -15,7 +15,7 @@ public class Person : MonoBehaviour
     public SpriteRenderer render;
     public List<Mission> AvailableMissions = new List<Mission>();
     public Mission CurMission = null;
-    public Vector2 CurMissionPosition;
+    public Place CurTargetPlace = null;
 
     public int InfectedBy = -1;
 
@@ -23,8 +23,26 @@ public class Person : MonoBehaviour
     {
       
         ageGroup = Random.Range(0, 3);
-        infectionSeverity = Random.Range(0, 3);
+
+        int randInt = Random.Range(0, 10);
+        if (randInt < 5) infectionSeverity = 0;
+        else if (randInt < 8) infectionSeverity = 1;
+        else infectionSeverity = 2;
+
         Position = transform.position;
+
+        //Go to Hospital if sick
+        AvailableMissions.Add(new Mission()
+        {
+            Destination = typeof(Hospital),
+            Counter = 150,
+            MaxCounter = 150,
+            Duration = 50,
+            MaxDuration = 50,
+            IsApplicable = (p) => p.isInfected
+        });
+
+        //Go Home
         AvailableMissions.Add(new Mission()
         {
             Destination = typeof(House),
@@ -35,62 +53,25 @@ public class Person : MonoBehaviour
             MaxDuration = 50
         });
 
+        CurMission = null;
         Counter = Random.Range(20, 80);
         Direction = Random.onUnitSphere.normalized;
-        CurMission = null;
         ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(this);
     }
 
     public void OnUpdate(bool bUpdateUnity)
     {
         //rethink task priorities
-        foreach(Mission mission in AvailableMissions)
-        {
-            if(--mission.Counter <= 0)
-            {
-                CurMission = mission;
-                if (mission.SpecificPlace != null)
-                {
-                    CurMissionPosition = mission.SpecificPlace.transform.position;
-                }
-                else
-                {
-                    CurMissionPosition = GetNearbyPlace(mission.Destination).transform.position;
-                }
-            }
-        }
+        PlanTasks();
 
         //normal update
         if (CurMission == null) // if nothing to do - just idle
         {
-            if(--Counter <= 0)
-            {
-                Direction = Random.onUnitSphere.normalized;
-                Counter = 30;
-            }
-
-            Position += Direction * ServiceLocator.Instance.PersonSpeed;
+            DoIdle();
         }
         else // follow mission
         {
-            Vector2 dir = CurMissionPosition - Position;
-
-            if (dir.magnitude < 0.2f) //arrived at place
-            {
-                CurMission.Duration--;
-            }
-            else // goto place
-            {
-                Position += dir.normalized * ServiceLocator.Instance.PersonSpeed;
-            }
-
-            //mission finished?
-            if (CurMission.Duration <= 0)
-            {
-                CurMission.Duration = CurMission.MaxDuration;
-                CurMission.Counter = CurMission.MaxCounter;
-                CurMission = null;
-            }
+            DoMission();
         }
 
         //update sickness state
@@ -104,6 +85,79 @@ public class Person : MonoBehaviour
         {
             UpdateUnity();
         }
+    }
+
+    private void PlanTasks()
+    {
+        foreach (Mission mission in AvailableMissions)
+        {
+            if (mission.IsApplicable(this))
+            {
+                if (--mission.Counter <= 0 && CurMission == null)
+                {
+                    StartMission(mission);
+                }
+            }
+        }
+    }
+
+    private void StartMission(Mission mission)
+    {
+        CurMission = mission;
+
+        if (mission.SpecificPlace != null)
+        {
+            CurTargetPlace = mission.SpecificPlace;
+        }
+        else
+        {
+            CurTargetPlace = GetNearbyPlace(mission.Destination);
+        }
+
+        CurTargetPlace.Capacity--;
+    }
+
+    private void DoMission()
+    {
+        Vector2 dir = CurTargetPlace.Position - Position;
+
+        if (dir.magnitude < 0.2f) //arrived at place
+        {
+            CurMission.Duration--;
+        }
+        else // goto place
+        {
+            Position += dir.normalized * ServiceLocator.Instance.PersonSpeed;
+        }
+
+        //mission finished?
+        if (CurMission.Duration <= 0)
+        {
+            FinishMission();
+        }
+    }
+
+    private void FinishMission()
+    {
+        CurTargetPlace.Capacity++;
+        CurTargetPlace.OnFinishMission(this);
+        ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(this);
+
+        CurMission.Duration = CurMission.MaxDuration;
+        CurMission.Counter = CurMission.MaxCounter;
+        CurTargetPlace = null;
+        CurMission = null;
+    }
+
+    private void DoIdle()
+    {
+        if (--Counter <= 0)
+        {
+            Direction = Random.onUnitSphere.normalized;
+            Counter = 30;
+        }
+
+        Position += Direction * ServiceLocator.Instance.PersonSpeed;
     }
 
     Place GetNearbyPlace(System.Type placeType)
@@ -126,8 +180,9 @@ public class Person : MonoBehaviour
 
     private void HandleSickness()
     {
-        if (isInfected)
+        if (isInfected || isImmune)
             return;
+
         for (int i = 0; i < ServiceLocator.Instance.Spawner.Persons.Count; i++)
         {
             if (Vector2.Distance(Position, ServiceLocator.Instance.Spawner.Persons[i].Position) < ServiceLocator.Instance.InfectionRadius)
@@ -143,12 +198,8 @@ public class Person : MonoBehaviour
     }
 
     private void UpdateUnity()
-    {
-        
+    {      
         transform.position = Position;
-
-       // if (!isInfected) render.color = Color.gray;
-    //   else if (isInfected) render.color = Color.red;
     }
 
     private void HandleWallCollision()

@@ -132,6 +132,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House (17)
       objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -219,6 +224,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House (12)
       objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -287,6 +297,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: House (24)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
@@ -357,6 +372,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House (18)
       objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -425,6 +445,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: House (21)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
@@ -585,6 +610,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House (35)
       objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -696,6 +726,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House (25)
       objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -764,6 +799,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: House (23)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
@@ -870,6 +910,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -939,6 +984,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1007,6 +1057,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: House (15)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
@@ -1113,6 +1168,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hospital (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2373968770121139650, guid: 7696fb5fac60a4e4fb22d1200f8f5f44,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 623331131669611956, guid: 7696fb5fac60a4e4fb22d1200f8f5f44,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1218,6 +1278,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House (26)
       objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1286,6 +1351,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: House (11)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
@@ -1391,6 +1461,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: House (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
@@ -1579,6 +1654,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House (14)
       objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1647,6 +1727,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: House (22)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
@@ -1853,6 +1938,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House (34)
       objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1922,6 +2012,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1990,6 +2085,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: House (20)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
@@ -2233,6 +2333,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House (9)
       objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2301,6 +2406,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: House (10)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
@@ -2371,6 +2481,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House (16)
       objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2439,6 +2554,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: House (19)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
@@ -2533,6 +2653,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House (28)
       objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2620,6 +2745,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House (6)
       objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2688,6 +2818,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: House (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
@@ -2902,6 +3037,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House (27)
       objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3018,6 +3158,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: House (13)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
@@ -3175,6 +3320,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House (33)
       objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3262,6 +3412,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House (32)
       objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3330,6 +3485,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: House (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
@@ -3468,6 +3628,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House (31)
       objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3537,6 +3702,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3605,6 +3775,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: House (30)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
@@ -3711,6 +3886,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: House (29)
       objectReference: {fileID: 0}
+    - target: {fileID: 7481189724278120968, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3815,6 +3995,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Hospital
+      objectReference: {fileID: 0}
+    - target: {fileID: 2373968770121139650, guid: 7696fb5fac60a4e4fb22d1200f8f5f44,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 623331131669611956, guid: 7696fb5fac60a4e4fb22d1200f8f5f44,
         type: 3}

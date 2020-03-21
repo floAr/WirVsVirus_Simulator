@@ -19,6 +19,8 @@ public class Spawner : MonoBehaviour
 
     public void Spawn()
     {
+        Places = new List<Place>(FindObjectsOfType<Place>());
+
         foreach (House house in FindObjectsOfType<House>())
         {
             //spawn persons

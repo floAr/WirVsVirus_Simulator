@@ -1,8 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
+//[System.Serializable]
 public class Mission
 {
     public System.Type Destination;
@@ -11,4 +12,5 @@ public class Mission
     public int Duration = 10; // how long to stay there
     public int MaxCounter = 50;
     public int MaxDuration = 20;
+    public Func<Person, bool> IsApplicable = (p) => true;
 }
