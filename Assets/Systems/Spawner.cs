@@ -8,6 +8,10 @@ public class Spawner : MonoBehaviour
     public Person PersonPrefab;
     public List<Person> Persons = new List<Person>();
     public List<Place> Places = new List<Place>();
+    public int timeSteps = 1;
+    public int maxTimesteps = 0;
+
+    private int _timestepCount = 0;
 
     void Start()
     {
@@ -42,10 +46,20 @@ public class Spawner : MonoBehaviour
 
     private void SimMaster_UnityUpdate(object sender, System.EventArgs e)
     {
-        for (int i = 0; i < Persons.Count; i++)
+        if (maxTimesteps != 0 && _timestepCount > maxTimesteps)
         {
-            if(!Persons[i].isDead)
-                Persons[i].OnUpdate(true);
+            ServiceLocator.Instance.SimMaster.enabled = false;
+            return;
+        }
+
+        for (int n = 0; n < timeSteps; n++)
+        {
+            _timestepCount++;
+            for (int i = 0; i < Persons.Count; i++)
+            {
+                if (!Persons[i].isDead)
+                    Persons[i].OnUpdate(true);
+            }
         }
     }
 
