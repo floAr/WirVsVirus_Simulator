@@ -28,6 +28,7 @@ public class Person : MonoBehaviour
         AvailableMissions.Add(new Mission()
         {
             Destination = typeof(House),
+            SpecificPlace = GetNearbyPlace(typeof(House)),
             Counter = Random.Range(200, 300),
             MaxCounter = 300,
             Duration = 50,
@@ -48,7 +49,14 @@ public class Person : MonoBehaviour
             if(--mission.Counter <= 0)
             {
                 CurMission = mission;
-                CurMissionPosition = GetNearbyPlace(mission.Destination).transform.position;
+                if (mission.SpecificPlace != null)
+                {
+                    CurMissionPosition = mission.SpecificPlace.transform.position;
+                }
+                else
+                {
+                    CurMissionPosition = GetNearbyPlace(mission.Destination).transform.position;
+                }
             }
         }
 
