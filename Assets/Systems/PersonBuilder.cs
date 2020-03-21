@@ -12,10 +12,25 @@ public class PersonBuilder : MonoBehaviour
     public Sprite InfectedAdultSprite;
     public Sprite InfectedElderlySprite;
 
+    public Sprite DeadSprite;
+
+    public Color HealthyColor;
+    public Color SevereInfectionColor;
+    public Color ImmuneColor;
+
+
     public void UpdateRepresentation(Person person)
     {
         SpriteRenderer renderer = person.GetComponent<SpriteRenderer>();
 
+        if (person.isDead)
+        {
+            renderer.sprite = DeadSprite;
+            renderer.color = Color.white;
+            renderer.size = renderer.size * 3f;
+            return;
+        }
+        
         // age based spriteshape
         switch (person.ageGroup)
         {
@@ -38,9 +53,9 @@ public class PersonBuilder : MonoBehaviour
 
 
         renderer.color =
-            person.isImmune ? Color.blue :
-            !person.isInfected ? Color.grey :
-            Color.Lerp(Color.grey, Color.red, person.infectionSeverity / 3f);
+            person.isImmune ? ImmuneColor :
+            !person.isInfected ? HealthyColor :
+            Color.Lerp(HealthyColor, SevereInfectionColor, (person.infectionSeverity+1) / 3f);
 
 
     }
