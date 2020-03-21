@@ -64,10 +64,10 @@ public class Person : MonoBehaviour
             IsApplicable = (p) => p.isInfected && p.infectionSeverity == 2
         });
 
-        //Go to Hospital a little later if midly sick
+        //Go to Home a little later if midly sick // todo ? balance death rate
         AvailableMissions.Add(new Mission()
         {
-            Destination = typeof(Hospital),
+            Destination = typeof(House),
             Counter = 180,
             MaxCounter = 180,
             Duration = 60,
@@ -75,26 +75,15 @@ public class Person : MonoBehaviour
             IsApplicable = (p) => p.isInfected && p.infectionSeverity == 1
         });
 
-        //all go to hospital when they are tested positive for corona
-        AvailableMissions.Add(new Mission()
-        {
-            Destination = typeof(Hospital),
-            Counter = 180,
-            MaxCounter = 180,
-            Duration = 60,
-            MaxDuration = 60,
-            IsApplicable = (p) => p.isInfected && ServiceLocator.Instance.CoronaTests
-        });
-
-        //Do selfquarantaine
+        //all other go to self quaratine if we have tests 
         AvailableMissions.Add(new Mission()
         {
             Destination = typeof(House),
             Counter = 30,
             MaxCounter = 30,
-            Duration = 120,
-            MaxDuration = 120,
-            IsApplicable = (p) => p.isInfected && p.infectionSeverity == 0
+            Duration = 60,
+            MaxDuration = 60,
+            IsApplicable = (p) => p.isInfected && ServiceLocator.Instance.CoronaTests
         });
      
         //Go to work
@@ -172,7 +161,7 @@ public class Person : MonoBehaviour
             IsApplicable = (p) => !ServiceLocator.Instance.CloseRestaurants
         });
 
-        //Stay at Home
+        //Stay at Home // todo add numerical values
         AvailableMissions.Add(new Mission()
         {
             Destination = typeof(House),
