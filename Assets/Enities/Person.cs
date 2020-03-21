@@ -11,7 +11,7 @@ public class Person : MonoBehaviour
     public bool isInfected;
     public bool isImmune = false;
     public bool isDead = false;
-    public int sicknessCounter = 360;
+    public int sicknessCounter = 900;
     public int deathCounter = 150;
     public int infectionSeverity = 0; // 0 = keine Sypthome 1 = Husten & Fieber 3 = Lungenentzündung
     public int ageGroup = 1; //0 = Kind 1 = Erwachsen 2 = Rentner
