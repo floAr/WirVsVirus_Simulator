@@ -19,6 +19,7 @@ public class Person : MonoBehaviour
     public List<Mission> AvailableMissions = new List<Mission>();
     public Mission CurMission = null;
     public Place CurTargetPlace = null;
+    public Place CurPlace = null;
 
     public int InfectedBy = -1;
 
@@ -38,8 +39,8 @@ public class Person : MonoBehaviour
         AvailableMissions.Add(new Mission()
         {
             Destination = typeof(Hospital),
-            Counter = 120,
-            MaxCounter = 120,
+            Counter = 240,
+            MaxCounter = 240,
             Duration = 50,
             MaxDuration = 50,
             IsApplicable = (p) => p.isInfected && p.infectionSeverity == 2
@@ -116,8 +117,6 @@ public class Person : MonoBehaviour
         {
             CurTargetPlace = GetNearbyPlace(mission.Destination);
         }
-
-        CurTargetPlace.Capacity--;
     }
 
     private void DoMission()
@@ -126,7 +125,18 @@ public class Person : MonoBehaviour
 
         if (dir.magnitude < 0.2f) //arrived at place
         {
-            CurMission.Duration--;
+            if (CurPlace == null) //wait for capacity
+            {
+                if(CurTargetPlace.Capacity > 0)
+                {
+                    CurPlace = CurTargetPlace;
+                    CurPlace.Capacity--;
+                }
+            }
+            else //wait for treatment
+            {
+                CurMission.Duration--;
+            }
         }
         else // goto place
         {
@@ -149,6 +159,7 @@ public class Person : MonoBehaviour
         CurMission.Duration = CurMission.MaxDuration;
         CurMission.Counter = CurMission.MaxCounter;
         CurTargetPlace = null;
+        CurPlace = null;
         CurMission = null;
     }
 
@@ -187,7 +198,6 @@ public class Person : MonoBehaviour
         {
             sicknessCounter--;
 
-            
             if(sicknessCounter < 0)
             {
                 if (infectionSeverity == 3)
