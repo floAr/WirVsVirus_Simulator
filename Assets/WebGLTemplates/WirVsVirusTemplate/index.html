@@ -25,7 +25,7 @@
       width: 550px;
     }
     .sideCardContentBox {
-      height: 200px;
+      height: 257px;
     }
     .demo-layout-transparent {
       background: url('https://dfcby4322olzt.cloudfront.net/wp-content/uploads/2020/03/1800x1200_coronavirus_1.jpg') center / cover;
@@ -33,6 +33,36 @@
     .demo-layout-transparent .mdl-layout__header,
     .demo-layout-transparent .mdl-layout__drawer-button {
       color: white;
+    }
+
+    .sliderLabel {
+      display: block;
+      position: absolute;
+      top: -55px;
+      width: 25px;
+      height: 25px;
+      border-radius: 0 50% 50% 50%;
+      background-color: rgb(63, 81, 181);
+      transform: rotate(-135deg);
+      margin-top: 20px;
+    }
+
+    .sliderLabel div {
+      line-height: 25px;
+      color: #ffffff;
+      font-size: 10px;
+      font-weight: 300;
+      letter-spacing: 1px;
+      text-align: center;
+      transform: rotate(135deg);
+    }
+
+    .sliderLabel.zeroed {
+      background-color: rgba(0, 0, 0, 0.3);
+    }
+
+    .space {
+      height: 35px;
     }
   </style>
 
@@ -58,6 +88,48 @@
       }
       isPaused=!isPaused
     }
+
+    $( document ).ready(function() {
+      const demoInput = document.getElementById('selfQuarantine');
+      const labelMaker = function (e) {
+        const input = e.target || e;
+        const label = input.parentElement.querySelectorAll('.label')[0] || document.createElement('div');
+        const labelInner = label.firstChild || document.createElement('div');
+        const parentWidth = input.parentElement.offsetWidth;
+        const inputWidth = input.offsetWidth ;
+        const labelOffset = (parentWidth - inputWidth) / 2;
+
+        if(input.value == 80) {
+          var calcValue = 100;
+        }
+        else if(input.value == 20) {
+          var calcValue = 0;
+        }
+        else if(input.value == 50){
+          // 50%
+          var calcValue = 50;
+        }
+
+        const labelPosX = inputWidth * (calcValue/100) + ((100 - calcValue) * 14)/100;
+
+        label.classList.add('sliderLabel');
+        if (input.value == 0) {
+          label.classList.add('zeroed');
+        } else {
+          label.classList.remove('zeroed');
+        }
+        labelInner.innerText = input.value + "%";
+        label.appendChild(labelInner);
+        label.style.left = labelPosX + 'px';
+        input.parentElement.appendChild(label);
+      };
+
+      demoInput.addEventListener('input', labelMaker);
+
+      window.onload = function() {
+        labelMaker(demoInput)
+      };
+    });
   </script>
 
 </head>
@@ -94,7 +166,7 @@
           <div class="mdl-cell mdl-cell--12-col">
 
             <div class="unityCard demo-card-wide mdl-card mdl-shadow--2dp">
-              <div id="unityContainer" style="width: 960px; height: 600px; margin: auto"></div>
+              <div id="unityContainer" style="width: %UNITY_WIDTH%px; height: %UNITY_HEIGHT%px; margin: auto"></div>
               <div class="mdl-card__actions mdl-card--border">
                 <a id="RunPause" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="ToggleRunPause()">Start</a>
               </div>
@@ -116,15 +188,9 @@
                 <h2 class="mdl-card__title-text">Statistics</h2>
               </div>
               <div class="sideCardContentBox">
-                <div class="mdl-card__supporting-text mdl-card--border">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Mauris sagittis pellentesque lacus eleifend lacinia...
+                <div class="mdl-card__actions mdl-card--border">
+
                 </div>
-              </div>
-              <div class="mdl-card__actions mdl-card--border">
-                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                  Get Started
-                </a>
               </div>
               <div class="mdl-card__menu">
                 <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
@@ -142,13 +208,43 @@
                 <h2 class="mdl-card__title-text">Measures</h2>
               </div>
               <div class="sideCardContentBox">
-                <div class="mdl-card__supporting-text mdl-card--border">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Mauris sagittis pellentesque lacus eleifend lacinia...
+                <div class="mdl-card__actions mdl-card--border">
+
+                  <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-0">
+                    <input type="checkbox" id="switch-0" class="mdl-switch__input" checked>
+                    <span class="mdl-switch__label">Krankenhauskapazitäten erweitern</span>
+                  </label>
+
+                  <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-1">
+                    <input type="checkbox" id="switch-1" class="mdl-switch__input" checked>
+                    <span class="mdl-switch__label">Verhaltensregeln</span>
+                  </label>
+
+                  <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-2">
+                    <input type="checkbox" id="switch-2" class="mdl-switch__input" checked>
+                    <span class="mdl-switch__label">Ausgangssperre</span>
+                  </label>
+
+                  <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-3">
+                    <input type="checkbox" id="switch-3" class="mdl-switch__input" checked>
+                    <span class="mdl-switch__label">Schulen schließen</span>
+                  </label>
+
+                  <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-4">
+                    <input type="checkbox" id="switch-4" class="mdl-switch__input" checked>
+                    <span class="mdl-switch__label">HomeOffice</span>
+                  </label>
+
+                  <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="switch-5">
+                    <input type="checkbox" id="switch-5" class="mdl-switch__input" checked>
+                    <span class="mdl-switch__label">Corona Tests</span>
+                  </label>
+
+                  <div class="space"></div>
+                  <input id="selfQuarantine" class="mdl-slider mdl-js-slider" type="range" min="20" max="80" value="20" tabindex="0" step="30">
+                  <span class="mdl-switch__label">Selbstquarantäne</span>
+
                 </div>
-              </div>
-              <div class="mdl-card__actions mdl-card--border">
-                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="ToggleRunPause()">Start</a>
               </div>
             </div>
 
