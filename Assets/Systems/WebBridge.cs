@@ -17,9 +17,6 @@ public class WebBridge : MonoBehaviour
     {
         Debug.Log(payload);
     }
-    void Start()
-    {
-  
-    }
+
 }
 

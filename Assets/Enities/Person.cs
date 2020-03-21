@@ -23,7 +23,8 @@ public class Person : MonoBehaviour
 
     public int InfectedBy = -1;
 
-    void Start()
+
+    void Awake()
     {
         //age
         int randInt = Random.Range(0, 10);
@@ -74,14 +75,14 @@ public class Person : MonoBehaviour
         //Do selfquarantaine
         AvailableMissions.Add(new Mission()
         {
-            Destination = typeof(Hospital),
+            Destination = typeof(House),
             Counter = 30,
             MaxCounter = 30,
             Duration = 120,
             MaxDuration = 120,
             IsApplicable = (p) => p.isInfected && p.infectionSeverity == 0
         });
-
+     
         //Go to work
         if (ageGroup == 1)
             AvailableMissions.Add(new Mission()
