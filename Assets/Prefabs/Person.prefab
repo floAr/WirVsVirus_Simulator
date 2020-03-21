@@ -51,12 +51,13 @@ MonoBehaviour:
   isInfected: 0
   isImmune: 0
   isDead: 0
-  sicknessCounter: 360
+  sicknessCounter: 480
+  deathCounter: 240
   infectionSeverity: 0
   ageGroup: 1
-  deathCounter: 0
   render: {fileID: 3465818326561158393}
   CurTargetPlace: {fileID: 0}
+  CurPlace: {fileID: 0}
   InfectedBy: -1
 --- !u!212 &3465818326561158393
 SpriteRenderer:

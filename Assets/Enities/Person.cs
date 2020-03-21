@@ -12,9 +12,9 @@ public class Person : MonoBehaviour
     public bool isImmune = false;
     public bool isDead = false;
     public int sicknessCounter = 360;
+    public int deathCounter = 150;
     public int infectionSeverity = 0; // 0 = keine Sypthome 1 = Husten & Fieber 3 = Lungenentzündung
     public int ageGroup = 1; //0 = Kind 1 = Erwachsen 2 = Rentner
-    public int deathCounter = 0;
     public SpriteRenderer render;
     public List<Mission> AvailableMissions = new List<Mission>();
     public Mission CurMission = null;
@@ -39,8 +39,8 @@ public class Person : MonoBehaviour
         AvailableMissions.Add(new Mission()
         {
             Destination = typeof(Hospital),
-            Counter = 240,
-            MaxCounter = 240,
+            Counter = 30,
+            MaxCounter = 30,
             Duration = 50,
             MaxDuration = 50,
             IsApplicable = (p) => p.isInfected && p.infectionSeverity == 2
@@ -130,6 +130,7 @@ public class Person : MonoBehaviour
                 if(CurTargetPlace.Capacity > 0)
                 {
                     CurPlace = CurTargetPlace;
+                    CurPlace.OnStartMission(this);
                     CurPlace.Capacity--;
                 }
             }
@@ -197,19 +198,18 @@ public class Person : MonoBehaviour
         if(isInfected)
         {
             sicknessCounter--;
+            if(infectionSeverity == 2) deathCounter--;
 
-            if(sicknessCounter < 0)
+            if (deathCounter < 0)
             {
-                if (infectionSeverity == 3)
-                {
-                    Die();
-                }
-                else
-                {
-                    isInfected = false;
-                    isImmune = true;
-                    ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(this);
-                }
+                Die();
+            }
+
+            if (sicknessCounter < 0)
+            {
+                isInfected = false;
+                isImmune = true;
+                ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(this);
             }
         }
 
