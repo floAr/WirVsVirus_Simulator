@@ -23,7 +23,8 @@ public class Person : MonoBehaviour
 
     public int InfectedBy = -1;
 
-    void Start()
+
+    void Awake()
     {
         //age
         int randInt = Random.Range(0, 10);
@@ -36,7 +37,10 @@ public class Person : MonoBehaviour
         if (randInt < 5) infectionSeverity = 0;
         else if (randInt < 8) infectionSeverity = 1;
         else infectionSeverity = 2;
+    }
 
+    void Start()
+    { 
         Position = transform.position;
 
         CreateTasks();
@@ -71,17 +75,28 @@ public class Person : MonoBehaviour
             IsApplicable = (p) => p.isInfected && p.infectionSeverity == 1
         });
 
-        //Do selfquarantaine
+        //all go to hospital when they are tested positive for corona
         AvailableMissions.Add(new Mission()
         {
             Destination = typeof(Hospital),
+            Counter = 180,
+            MaxCounter = 180,
+            Duration = 60,
+            MaxDuration = 60,
+            IsApplicable = (p) => p.isInfected && ServiceLocator.Instance.CoronaTests
+        });
+
+        //Do selfquarantaine
+        AvailableMissions.Add(new Mission()
+        {
+            Destination = typeof(House),
             Counter = 30,
             MaxCounter = 30,
             Duration = 120,
             MaxDuration = 120,
             IsApplicable = (p) => p.isInfected && p.infectionSeverity == 0
         });
-
+     
         //Go to work
         if (ageGroup == 1)
             AvailableMissions.Add(new Mission()
@@ -153,7 +168,20 @@ public class Person : MonoBehaviour
             Counter = Random.Range(300, 1000),
             MaxCounter = 900,
             Duration = 50,
-            MaxDuration = 50
+            MaxDuration = 50,
+            IsApplicable = (p) => !ServiceLocator.Instance.CloseRestaurants
+        });
+
+        //Stay at Home
+        AvailableMissions.Add(new Mission()
+        {
+            Destination = typeof(House),
+            SpecificPlace = GetNearbyPlace(typeof(House)),
+            Counter = Random.Range(100, 200),
+            MaxCounter = 150,
+            Duration = 50,
+            MaxDuration = 50,
+            IsApplicable = (p) => ServiceLocator.Instance.StayAtHome
         });
 
         //Go Home
@@ -258,8 +286,11 @@ public class Person : MonoBehaviour
 
     private void FinishMission()
     {
-        CurTargetPlace.Capacity++;
-        CurTargetPlace.OnFinishMission(this);
+        if (CurPlace != null)
+        {
+            CurTargetPlace.Capacity++;
+            CurTargetPlace.OnFinishMission(this);
+        }
         ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(this);
 
         CurMission.Duration = CurMission.MaxDuration;
@@ -321,11 +352,24 @@ public class Person : MonoBehaviour
         if (isInfected || isImmune)
             return;
 
+        float infectionChance = ServiceLocator.Instance.InfectionChance * (ServiceLocator.Instance.WashYourHands ? 0.7f : 1f) *
+           (ServiceLocator.Instance.SocialDistancing ? 0.7f : 1f);
+        Vector2 evasionVector = Vector2.zero;
+
         for (int i = 0; i < ServiceLocator.Instance.Spawner.Persons.Count; i++)
         {
-            if (Vector2.Distance(Position, ServiceLocator.Instance.Spawner.Persons[i].Position) < ServiceLocator.Instance.InfectionRadius)
+            float distance = Vector2.Distance(Position, ServiceLocator.Instance.Spawner.Persons[i].Position);
+
+            //social distancing
+            if(distance < ServiceLocator.Instance.InfectionRadius * 2)
             {
-                if (ServiceLocator.Instance.Spawner.Persons[i].isInfected && Random.value < ServiceLocator.Instance.InfectionChance)
+                evasionVector += (Position - ServiceLocator.Instance.Spawner.Persons[i].Position);
+            }
+
+            //infection
+            if (distance < ServiceLocator.Instance.InfectionRadius)
+            {
+                if (ServiceLocator.Instance.Spawner.Persons[i].isInfected && Random.value < infectionChance)
                 {
                     isInfected = true;
                     InfectedBy = i;
@@ -334,6 +378,10 @@ public class Person : MonoBehaviour
                 }
             }
         }
+
+        //apply social distancing
+        if(CurMission == null && ServiceLocator.Instance.SocialDistancing)
+            Position += evasionVector.normalized * ServiceLocator.Instance.PersonSpeed * 0.8f;
     }
 
     private void Die()
@@ -342,6 +390,9 @@ public class Person : MonoBehaviour
 
         isDead = true;
         ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(this);
+
+        ServiceLocator.Instance.Graveyard.MoveToGraveyard(this);
+
         enabled = false;
     }
 

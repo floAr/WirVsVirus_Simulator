@@ -13,10 +13,10 @@ public class WebBridge : MonoBehaviour
     [DllImport("__Internal")]
     private static extern void PushJsonData(string str);
 
-
-    void Start()
+    public void EmitData(string key, string payload)
     {
-  
+     //   Debug.Log(payload);
     }
+
 }
 
