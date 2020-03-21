@@ -5,10 +5,12 @@ using UnityEngine;
 public class Place : MonoBehaviour
 {
     public Vector2 Position;
-    public int Capacity;
+    public int Capacity = -1;
 
     public void Start()
     {
         Position = transform.position;
     }
+
+    public virtual void OnFinishMission(Person p) { }
 }

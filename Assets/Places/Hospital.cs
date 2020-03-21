@@ -2,17 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Hospital : MonoBehaviour
+public class Hospital : Place
 {
-    // Start is called before the first frame update
-    void Start()
+    public override void OnFinishMission(Person p)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        p.isInfected = false;
+        p.isImmune = true;
     }
 }
