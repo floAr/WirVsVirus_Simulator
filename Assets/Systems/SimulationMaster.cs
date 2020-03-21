@@ -87,6 +87,7 @@ public class SimulationMaster : MonoBehaviour
             uninfected += 1;
         }
         var data = new int[] { uninfected, sick_0, sick_1, sick_2, dead, recovered };
+        Debug.Log($"[{data[0]},{data[1]},{data[2]},{data[3]},{data[4]},{data[5]}]");
         _dataPoints.Add(data);
 
         _webBridgeRef.EmitData("pop_data", DataArrayToJS());
