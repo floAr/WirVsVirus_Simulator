@@ -25,26 +25,76 @@ public class Person : MonoBehaviour
 
     void Start()
     {
-      
-        ageGroup = Random.Range(0, 3);
-
+        //age
         int randInt = Random.Range(0, 10);
+        if (randInt < 3) ageGroup = 0;
+        else if (randInt < 7) ageGroup = 1;
+        else ageGroup = 2;
+
+        //severity
+        randInt = Random.Range(0, 10);
         if (randInt < 5) infectionSeverity = 0;
         else if (randInt < 8) infectionSeverity = 1;
         else infectionSeverity = 2;
 
         Position = transform.position;
 
-        //Go to Hospital if sick
+        CreateTasks();
+
+        CurMission = null;
+        Counter = Random.Range(20, 80);
+        Direction = Random.onUnitSphere.normalized;
+        ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(this);
+    }
+
+    private void CreateTasks()
+    {
+        //Go to Hospital if severly sick
         AvailableMissions.Add(new Mission()
         {
             Destination = typeof(Hospital),
             Counter = 30,
             MaxCounter = 30,
-            Duration = 50,
-            MaxDuration = 50,
+            Duration = 120,
+            MaxDuration = 120,
             IsApplicable = (p) => p.isInfected && p.infectionSeverity == 2
         });
+
+        //Go to Hospital a little later if midly sick
+        AvailableMissions.Add(new Mission()
+        {
+            Destination = typeof(Hospital),
+            Counter = 180,
+            MaxCounter = 180,
+            Duration = 60,
+            MaxDuration = 60,
+            IsApplicable = (p) => p.isInfected && p.infectionSeverity == 1
+        });
+
+        //Go to work
+        if (ageGroup == 1)
+            AvailableMissions.Add(new Mission()
+            {
+                Destination = typeof(Workplace),
+                Counter = Random.Range(200, 300),
+                MaxCounter = 300,
+                Duration = 120,
+                MaxDuration = 120,
+                IsApplicable = (p) => !ServiceLocator.Instance.HomeOffice
+            });
+
+        //Do HomeOffice
+        if (ageGroup == 1)
+            AvailableMissions.Add(new Mission()
+            {
+                Destination = typeof(House),
+                SpecificPlace = GetNearbyPlace(typeof(House)),
+                Counter = Random.Range(200, 300),
+                MaxCounter = 300,
+                Duration = 120,
+                MaxDuration = 120,
+                IsApplicable = (p) => ServiceLocator.Instance.HomeOffice
+            });
 
         //Go Home
         AvailableMissions.Add(new Mission()
@@ -56,11 +106,6 @@ public class Person : MonoBehaviour
             Duration = 50,
             MaxDuration = 50
         });
-
-        CurMission = null;
-        Counter = Random.Range(20, 80);
-        Direction = Random.onUnitSphere.normalized;
-        ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(this);
     }
 
     public void OnUpdate(bool bUpdateUnity)

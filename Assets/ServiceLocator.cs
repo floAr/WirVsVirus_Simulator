@@ -10,6 +10,7 @@ public class ServiceLocator : MonoBehaviour
     public float InfectionRadius = 0.3f;
     public float InfectionChance = 0.02f;
     public float PersonSpeed = 0.1f;
+    public bool HomeOffice = false;
     public Spawner Spawner;
     public PersonBuilder PersonBuilder;
     public SimulationMaster SimMaster;
