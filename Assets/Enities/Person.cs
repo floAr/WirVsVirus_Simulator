@@ -35,8 +35,8 @@ public class Person : MonoBehaviour
         AvailableMissions.Add(new Mission()
         {
             Destination = typeof(Hospital),
-            Counter = 150,
-            MaxCounter = 150,
+            Counter = 120,
+            MaxCounter = 120,
             Duration = 50,
             MaxDuration = 50,
             IsApplicable = (p) => p.isInfected
