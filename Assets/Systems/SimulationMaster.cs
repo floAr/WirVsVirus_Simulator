@@ -4,12 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+public class SimulationMasterTickEventArg : EventArgs
+{
+    public int TimeStep;
+}
+
 public class SimulationMaster : MonoBehaviour
 {
     public bool isRunning;
     public int timeStep;
 
-    public event EventHandler UnityUpdate;
+    public event EventHandler<SimulationMasterTickEventArg> UnityUpdate;
 
 
     public Button PlayButton;
@@ -34,7 +39,11 @@ public class SimulationMaster : MonoBehaviour
     {
         if (!isRunning)
             return;
-        UnityUpdate?.Invoke(this, new EventArgs());
+        timeStep += 1;
+        UnityUpdate?.Invoke(this, new SimulationMasterTickEventArg()
+        {
+            TimeStep = timeStep
+        }); ;
     }
 }
 
