@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Text;
 using UnityEngine;
 using UnityEngine.UI;
+using XCharts;
 
 public class SimulationMasterTickEventArg : EventArgs
 {
@@ -14,6 +16,9 @@ public class SimulationMaster : MonoBehaviour
 {
     public bool isRunning;
     public int timeStep;
+    public LineChart chart;
+
+    private int _lastFrame = 0;
 
     public event EventHandler<SimulationMasterTickEventArg> OnUnityUpdate;
 
@@ -93,14 +98,17 @@ public class SimulationMaster : MonoBehaviour
         Debug.Log($"[{data[0]},{data[1]},{data[2]},{data[3]},{data[4]},{data[5]}]");
         _dataPoints.Add(data);
 
+        chart.AddData(0, sick_0 + sick_1 + sick_2);
+        chart.AddData(1, recovered);
+        chart.AddData(2, dead);
         for (int i = 0; i < 6; i++)
         {
             if (_dataChains[i].Length == 0)
-                _dataChains[i].Append($"[{data[i]}]");
+                _dataChains[i].Append($"[{data[i].ToString(CultureInfo.InvariantCulture}]");
             else
             {
                 _dataChains[i].Remove(_dataChains[i].Length - 1, 1); // cut closing bracket
-                _dataChains[i].Append("," + data[i] + "]");
+                _dataChains[i].Append("," + data[i].ToString(CultureInfo.InvariantCulture) + "]");
             }
         }
 
@@ -135,6 +143,7 @@ public class SimulationMaster : MonoBehaviour
         for (int i = 0; i < 6; i++)
         {
             _dataChains[i] = new StringBuilder();
+            
             _dataChains[i].Append("");
         }
         this.OnUnityUpdate += SimulationMaster_OnUnityUpdate;
@@ -142,7 +151,11 @@ public class SimulationMaster : MonoBehaviour
 
     private void SimulationMaster_OnUnityUpdate(object sender, SimulationMasterTickEventArg e)
     {
-        GatherSimulationData();
+        if (_lastFrame + 10 < Time.frameCount)
+        {
+            _lastFrame = Time.frameCount;
+            GatherSimulationData();
+        }
     }
 
     private void Update()
