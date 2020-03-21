@@ -13,4 +13,6 @@ public class Mission
     public int MaxCounter = 50;
     public int MaxDuration = 20;
     public Func<Person, bool> IsApplicable = (p) => true;
+
+    
 }
