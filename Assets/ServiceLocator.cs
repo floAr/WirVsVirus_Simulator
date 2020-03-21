@@ -18,6 +18,8 @@ public class ServiceLocator : MonoBehaviour
     public bool WashYourHands = false;
     public bool MoreHospitalCapacity = false;
     public bool CoronaTests = false;
+    public bool SocialDistancing = false;
+    public bool StayAtHome = false;
     public Spawner Spawner;
     public PersonBuilder PersonBuilder;
     public SimulationMaster SimMaster;
