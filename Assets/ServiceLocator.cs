@@ -8,7 +8,8 @@ public class ServiceLocator : MonoBehaviour
     public float xBounds = 8f;
     public float yBounds = 6f;
     public float InfectionRadius = 0.3f;
-    public float InfectionChance = 0.02f;
+    public float BaseInfectionChance = 0.02f;
+    public float InfectionChanceReductionPercent = 0.3f;
     public float PersonSpeed = 0.1f;
     public bool HomeOffice = false;
     public bool CloseSchools = false;
@@ -21,8 +22,21 @@ public class ServiceLocator : MonoBehaviour
     public PersonBuilder PersonBuilder;
     public SimulationMaster SimMaster;
     public InfectionGraph InfectionGraph;
+    public WebBridge WebBridge;
+
+    public bool OptimizeBehaviour;
 
     public int Seed = 12345;
+
+    public float InfectionChance
+    {
+        get
+        {
+            return OptimizeBehaviour ? BaseInfectionChance * InfectionChanceReductionPercent : BaseInfectionChance;
+        }
+    }
+
+
 
     private void Awake()
     {
