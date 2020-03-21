@@ -1,38 +1,41 @@
 <!DOCTYPE html>
 <html lang="en-us">
 
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | WirVsVirus_Simulator</title>
-	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons"> 
-	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-amber.min.css" /> 
-	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="Build/UnityLoader.js"></script>
-    <script>
-      var unityInstance = UnityLoader.instantiate("unityContainer", "Build/WebGL.json");
-    </script>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <title>Unity WebGL Player | WirVsVirus_Simulator</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-amber.min.css" />
+  <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="Build/UnityLoader.js"></script>
+  <script>
+    var unityInstance = UnityLoader.instantiate("unityContainer", "Build/WebGL.json");
+  </script>
 
-    <style>
-      #SiteMain {
-        margin-left: 72px;
-      }
-      .demo-card-wide.mdl-card {
-        width: 960px;
-      }
-      .demo-layout-transparent {
-        background: url('https://getmdl.io/assets/demos/transparent.jpg') center / cover;
-      }
-      .demo-layout-transparent .mdl-layout__header,
-      .demo-layout-transparent .mdl-layout__drawer-button {
-        /* This background is dark, so we set text to white. Use 87% black instead if
-           your background is light. */
-        color: white;
-      }
-    </style>
+  <style>
+    .unityCard {
+      width: 960px;
+    }
+    .statisticsCard {
+      width: 960px;
+    }
+    .measuresCard {
+      width: 450px;
+    }
+    .demo-layout-transparent {
+      background: url('https://getmdl.io/assets/demos/transparent.jpg') center / cover;
+    }
+    .demo-layout-transparent .mdl-layout__header,
+    .demo-layout-transparent .mdl-layout__drawer-button {
+      /* This background is dark, so we set text to white. Use 87% black instead if
+         your background is light. */
+      color: white;
+    }
+  </style>
 
-    <script>
+  <script>
     var isPaused = true;
     var startedOnce = false;
 
@@ -52,41 +55,102 @@
       }
       isPaused=!isPaused
     }
-    </script>
-  </head>
-  
+  </script>
+
+</head>
 
 
-  <body>
-    <div class="demo-layout-transparent mdl-layout mdl-js-layout">
-      <header class="mdl-layout__header mdl-layout__header--transparent">
-        <div class="mdl-layout__header-row">
-          <!-- Title -->
-          <span class="mdl-layout-title">WirVsVirus_Simulator</span>
-          <!-- Add spacer, to align navigation to the right -->
-          <div class="mdl-layout-spacer"></div>
-          <!-- Navigation -->
-          <nav class="mdl-navigation">
-            <a class="mdl-navigation__link" target="_blank" href="https://wirvsvirushackathon.org/">WirVsVirus Hackathon</a>
-          </nav>
-        </div>
-      </header>
-      <div class="mdl-layout__drawer">
-        <span class="mdl-layout-title">WirVsVirus Simulator</span>
-        <nav class="mdl-navigation">
-          <a class="mdl-navigation__link" target="_blank" href="https://wirvsvirushackathon.org/">WirVsVirus Hackathon</a>
-          <a class="mdl-navigation__link" target="_blank" href="https://github.com/floAr/WirVsVirus_Simulator">Source on Github</a>
-        </nav>
-      </div>
-      <main id="SiteMain" class="mdl-layout__content">
-        <div class="demo-card-wide mdl-card mdl-shadow--2dp">
-          <div id="unityContainer" style="width: 960px; height: 600px; margin: auto"></div>
-          <div class="mdl-card__actions mdl-card--border">
-            <a id="RunPause" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="ToggleRunPause()">Start</a>
-          </div>
-        </div>
-      </main>
+
+<body>
+<div class="demo-layout-transparent mdl-layout mdl-js-layout">
+  <header class="mdl-layout__header mdl-layout__header--transparent">
+    <div class="mdl-layout__header-row">
+      <span class="mdl-layout-title">WirVsVirus_Simulator</span>
+      <div class="mdl-layout-spacer"></div>
+      <nav class="mdl-navigation">
+        <a class="mdl-navigation__link" target="_blank" href="https://wirvsvirushackathon.org/">WirVsVirus Hackathon</a>
+      </nav>
     </div>
-  </body>
-  
+  </header>
+
+  <div class="mdl-layout__drawer">
+    <span class="mdl-layout-title">WirVsVirus Simulator</span>
+    <nav class="mdl-navigation">
+      <a class="mdl-navigation__link" target="_blank" href="https://wirvsvirushackathon.org/">WirVsVirus Hackathon</a>
+      <a class="mdl-navigation__link" target="_blank" href="https://github.com/floAr/WirVsVirus_Simulator">Source on Github</a>
+    </nav>
+  </div>
+
+  <main id="SiteMain" class="mdl-layout__content">
+    <div class="mdl-grid">
+
+      <div class="mdl-cell mdl-cell--8-col">
+
+        <div class="mdl-grid">
+
+          <div class="mdl-cell mdl-cell--12-col">
+
+            <div class="unityCard demo-card-wide mdl-card mdl-shadow--2dp">
+              <div id="unityContainer" style="width: 960px; height: 600px; margin: auto"></div>
+              <div class="mdl-card__actions mdl-card--border">
+                <a id="RunPause" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="ToggleRunPause()">Start</a>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="mdl-cell mdl-cell--12-col">
+
+            <div class="statisticsCard demo-card-wide mdl-card mdl-shadow--2dp" id="statistics">
+              <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">Statistics</h2>
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                  Get Started
+                </a>
+              </div>
+              <div class="mdl-card__menu">
+                <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                  <i class="material-icons">share</i>
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+
+      <div class="mdl-cell mdl-cell--4-col">
+
+        <div class="mdl-grid">
+
+          <div class="mdl-cell mdl-cell--12-col">
+
+            <div class="measuresCard demo-card-wide mdl-card mdl-shadow--2dp">
+              <div class="mdl-card__title">
+                <h2 class="mdl-card__title-text">Measures</h2>
+              </div>
+              <div class="mdl-card__supporting-text">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Mauris sagittis pellentesque lacus eleifend lacinia...
+              </div>
+              <div class="mdl-card__actions mdl-card--border">
+                <a class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="ToggleRunPause()">Start</a>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+</div>
+</body>
+
 </html>
