@@ -2,512 +2,530 @@
 <html lang="en-us">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Unity WebGL Player | WirVsVirus_Simulator</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined">
-    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-amber.min.css" />
-    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-    <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
-    <script src="%UNITY_WEBGL_LOADER_URL%"></script>
-    <script>
-        var unityInstance = UnityLoader.instantiate("unityContainer", "%UNITY_WEBGL_BUILD_URL%");
-    </script>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>Unity WebGL Player | WirVsVirus_Simulator</title>
+	<link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined">
+	<link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-amber.min.css" />
+	<script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+	<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+	<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+	<script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+	<script src="%UNITY_WEBGL_LOADER_URL%"></script>
+	<script>
+		var unityInstance = UnityLoader.instantiate("unityContainer", "%UNITY_WEBGL_BUILD_URL%");
+	</script>
 
-    <style>
-        .unityCard {
-            width: %UNITY_WIDTH%px;
-        }
-        .statisticsCard {
-            width: 550px;
-        }
-        .measuresCard {
-            width: 550px;
-        }
-        .sideCardContentBox {
-            height: 257px;
-        }
-        .demo-layout-transparent {
-            background: url('https://dfcby4322olzt.cloudfront.net/wp-content/uploads/2020/03/1800x1200_coronavirus_1.jpg') center / cover;
-        }
-        .demo-layout-transparent .mdl-layout__header,
-        .demo-layout-transparent .mdl-layout__drawer-button {
-            color: white;
-        }
+	<style>
+		.unityCard {
+			width: %UNITY_WIDTH%px;
+		}
+		.statisticsCard {
+			width: 550px;
+		}
+		.measuresCard {
+			width: 550px;
+		}
+		.sideCardContentBox {
+			height: 257px;
+		}
+		.demo-layout-transparent {
+			background: url('https://dfcby4322olzt.cloudfront.net/wp-content/uploads/2020/03/1800x1200_coronavirus_1.jpg') center / cover;
+		}
+		.demo-layout-transparent .mdl-layout__header,
+		.demo-layout-transparent .mdl-layout__drawer-button {
+			color: white;
+		}
 
-        .sliderLabel {
-            display: block;
-            position: absolute;
-            top: -55px;
-            width: 25px;
-            height: 25px;
-            border-radius: 0 50% 50% 50%;
-            background-color: rgb(63, 81, 181);
-            transform: rotate(-135deg);
-            margin-top: 20px;
-        }
+		.sliderLabel {
+			display: block;
+			position: absolute;
+			top: -55px;
+			width: 25px;
+			height: 25px;
+			border-radius: 0 50% 50% 50%;
+			background-color: rgb(63, 81, 181);
+			transform: rotate(-135deg);
+			margin-top: 20px;
+		}
 
-        .sliderLabel div {
-            line-height: 25px;
-            color: #ffffff;
-            font-size: 10px;
-            font-weight: 300;
-            letter-spacing: 1px;
-            text-align: center;
-            transform: rotate(135deg);
-        }
+		.sliderLabel div {
+			line-height: 25px;
+			color: #ffffff;
+			font-size: 10px;
+			font-weight: 300;
+			letter-spacing: 1px;
+			text-align: center;
+			transform: rotate(135deg);
+		}
 
-        .sliderLabel.zeroed {
-            background-color: rgba(0, 0, 0, 0.3);
-        }
+		.sliderLabel.zeroed {
+			background-color: rgba(0, 0, 0, 0.3);
+		}
 
-        .space {
-            height: 35px;
-        }
+		.space {
+			height: 35px;
+		}
 
-        .infoBox {
-            top: 35%;
-            left: 40%;
-            width: 40%;
-            margin-top: -9em; /*set to a negative number 1/2 of your height*/
-            margin-left: -15em; /*set to a negative number 1/2 of your width*/
-            position:fixed;
-            z-index: 1000;
-        }
+		.infoBox {
+			top: 35%;
+			left: 40%;
+			width: 40%;
+			margin-top: -9em; /*set to a negative number 1/2 of your height*/
+			margin-left: -15em; /*set to a negative number 1/2 of your width*/
+			position:fixed;
+			z-index: 1000;
+		}
 
-        .backgroundBlur {
-            filter: blur(4px);
-            position: absolute;
-            width: 100%;
-            height: 100%;
-        }
+		.backgroundBlur {
+			filter: blur(4px);
+			position: absolute;
+			width: 100%;
+			height: 100%;
+		}
 
-        .closeInfoBoxBtn {
-            float: right;
-        }
-    </style>
+		.closeInfoBoxBtn {
+			float: right;
+		}
+	</style>
 
-    <script>
-        var isPaused = true;
-        var startedOnce = false;
+	<script>
+		var isPaused = true;
+		var startedOnce = false;
 
-        function ToggleRunPause() {
-            if(isPaused){
-                document.getElementById("RunPause").innerHTML = "Pause";
-                unityInstance.SendMessage("SimulationControl","Run");
-                startedOnce = true;
-            }
-            else
-            {
-                if(!startedOnce) {
-                    document.getElementById("RunPause").innerHTML = "Start";
-                }
-                else {
-                    document.getElementById("RunPause").innerHTML = "Resume";
-                }
-                unityInstance.SendMessage("SimulationControl","Pause");
-            }
-            isPaused=!isPaused
-        }
+		function ToggleRunPause() {
+			if(isPaused){
+				document.getElementById("RunPause").innerHTML = "Pause";
+				unityInstance.SendMessage("SimulationControl","Run");
+				startedOnce = true;
+			}
+			else
+			{
+				if(!startedOnce) {
+					document.getElementById("RunPause").innerHTML = "Start";
+				}
+				else {
+					document.getElementById("RunPause").innerHTML = "Resume";
+				}
+				unityInstance.SendMessage("SimulationControl","Pause");
+			}
+			isPaused=!isPaused
+		}
 
-        $( document ).ready(function() {
-            const demoInput = document.getElementById('selfQuarantine');
-            const labelMaker = function (e) {
-                const input = e.target || e;
-                const label = input.parentElement.querySelectorAll('.label')[0] || document.createElement('div');
-                const labelInner = label.firstChild || document.createElement('div');
-                const parentWidth = input.parentElement.offsetWidth;
-                const inputWidth = input.offsetWidth ;
-                const labelOffset = (parentWidth - inputWidth) / 2;
+		$( document ).ready(function() {
+			const demoInput = document.getElementById('selfQuarantine');
+			const labelMaker = function (e) {
+				const input = e.target || e;
+				const label = input.parentElement.querySelectorAll('.label')[0] || document.createElement('div');
+				const labelInner = label.firstChild || document.createElement('div');
+				const parentWidth = input.parentElement.offsetWidth;
+				const inputWidth = input.offsetWidth ;
+				const labelOffset = (parentWidth - inputWidth) / 2;
 
-                if(input.value == 80) {
-                    var calcValue = 100;
-                }
-                else if(input.value == 20) {
-                    var calcValue = 0;
-                }
-                else if(input.value == 50){
-                    // 50%
-                    var calcValue = 50;
-                }
+				if(input.value == 80) {
+					var calcValue = 100;
+				}
+				else if(input.value == 20) {
+					var calcValue = 0;
+				}
+				else if(input.value == 50){
+					// 50%
+					var calcValue = 50;
+				}
 
-                const labelPosX = inputWidth * (calcValue/100) + ((100 - calcValue) * 14)/100;
+				const labelPosX = inputWidth * (calcValue/100) + ((100 - calcValue) * 14)/100;
 
-                label.classList.add('sliderLabel');
-                if (input.value == 0) {
-                    label.classList.add('zeroed');
-                } else {
-                    label.classList.remove('zeroed');
-                }
-                labelInner.innerText = input.value + "%";
-                label.appendChild(labelInner);
-                label.style.left = labelPosX + 'px';
-                input.parentElement.appendChild(label);
-            };
+				label.classList.add('sliderLabel');
+				if (input.value == 0) {
+					label.classList.add('zeroed');
+				} else {
+					label.classList.remove('zeroed');
+				}
+				labelInner.innerText = input.value + "%";
+				label.appendChild(labelInner);
+				label.style.left = labelPosX + 'px';
+				input.parentElement.appendChild(label);
+			};
 
-            demoInput.addEventListener('input', labelMaker);
+			demoInput.addEventListener('input', labelMaker);
 
-            window.onload = function() {
-                labelMaker(demoInput)
-            };
-
-
-            $(".infoBoxOpener").bind( "click", function() {
-                openDialog(this.id);
-            });
-
-            $(".closeInfoBoxBtn").on("click", function() {
-                $("#infoBox").fadeOut();
-                $("#siteMain").removeClass("backgroundBlur");
-            });
-
-            $('.toggleInput').click(function() {
-                unityInstance.SendMessage("ServiceLocator", this.id);
-                console.log(this.id);
-            });
+			window.onload = function() {
+				labelMaker(demoInput)
+			};
 
 
-            //updateChart([[0,9935898,0,9935898,0,9935898,0,9935898,0,9935898,0,9935898,0,9935898,0,9871795,0,9871795,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359],[0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077],[0,0,0,0,0,0,0,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]);
+			$(".infoBoxOpener").bind( "click", function() {
+				openDialog(this.id);
+			});
 
-        });
+			$(".closeInfoBoxBtn").on("click", function() {
+				$("#infoBox").fadeOut();
+				$("#siteMain").removeClass("backgroundBlur");
+			});
 
-        function openDialog(id) {
-            $("#siteMain").addClass("backgroundBlur");
-            var title = "";
-            var text = "";
-
-            if(id == "coronaTests") {
-                title = "Corona-Tests";
-                text = '          <p><strong>Maßnahme: Corona-Tests</strong></p>\n' +
-                    '<p><strong>Problem:</strong> Die Krankheitsverläufe von COVID-19 sind sehr unterschiedlich und viele Infizierte haben gar keine oder nur leichte Symptome. Deshalb ist es schwierig, alle Erkrankungen zu erkennen und zu verhindern, dass Patientinnen und Patienten das Virus weiter verbreiten.</p>\n' +
-                    '<p><strong>Lösung:</strong> Labortests können das neue Corona-Virus innerhalb von ein bis zwei Tagen nachweisen. Weiß man dadurch früh, dass eine Person infiziert ist, kann sie sich in Quarantäne begeben, bevor sie weitere Menschen ansteckt. Außerdem kann man dann schnell die Personen informieren, die mit der oder dem Infizierten in den letzten zwei Wochen engen Kontakt hatten. Die Kontaktpersonen können dann auch getestet werden und/oder sich in Quarantäne begeben. Allerdings sind die Kapazitäten der Test-Materialen und Labore begrenzt, weshalb nicht alle Menschen vorsorglich getestet werden können.</p>\n' +
-                    '<p><strong>Fazit:</strong> Je mehr Menschen man auf das neue Corona-Virus testen kann und je schneller nach ihrer Infektion das passiert, desto eher lässt sich verhindern, dass sie weitere Personen anstecken. Das Virus verbreitet sich insgesamt langsamer.</p>\n';
-            }
-            else if(id == "doubleKh") {
-                title = "Kapazitäten der Krankenhäuser verdoppeln";
-                text = '          <p><strong>Maßnahme: Kapazitäten der Krankenhäuser verdoppeln</strong></p>\n' +
-                    '<p><strong>Problem:</strong> Patientinnen und Patienten mit einem schweren Verlauf von COVID-19 kommen auf die Intensivstation eines Krankenhauses. Manche können nur überleben, wenn eine Beatmungsmaschine sie künstlich beatmen. Es gibt aber nur eine bestimmte Anzahl von Intensivbetten und Beatmungsmaschinen in den Krankenhäusern, von denen viele auch für andere Krankheiten oder Unfälle gebraucht werden. Wenn zu viele Patientinnen und Patienten gleichzeitig schwer krank werden, aber alle Intensivbetten schon belegt sind, müssen Menschen sterben, die sonst vielleicht gerettet werden könnten. Außerdem braucht es genügend Ärztinnen und Ärzte sowie Pflegekräfte, die sich um die Patienten kümmern können.</p>\n' +
-                    '<p><strong>Lösung:</strong> Das Gesundheitswesen bereitet sich auf die steigende Zahl COVID-19-Patienten vor, indem es die Anzahl von Intensivbetten erhöht. Dazu sagen Kliniken beispielsweise geplante Operationen ab, die nicht dringend nötig sind, sie funktionieren normale Stationen zu Intensivstationen um oder bauen Ersatzkrankenhäuser in Messehallen oder anderen öffentlichen Orten auf. Außerdem werden Ärzte und Pflegekräfte zum Beispiel aus dem Ruhestand, aus dem Medizinstudium oder aus Pflegeschulen in die Kliniken geholt, um das reguläre Personal zu unterstützen.</p>\n' +
-                    '<p><strong>Fazit:</strong> Je weniger Menschen gleichzeitig wegen COVID-19 ins Krankenhaus müssen und je länger es dauert, bis viele Menschen sich angesteckt haben, desto mehr Zeit hat das Gesundheitswesen, um sich darauf vorzubereiten. Es müssen weniger Menschen an dem Virus sterben.</p>';
-            }
-            else if(id == "selbstquarantäne") {
-                title = "Selbstquarantäne";
-                text = '          <p><strong>Maßnahme: Selbstquarantäne</strong></p>\n' +
-                    '<p><strong>Problem:</strong> Wenn man sich mit dem neuen Coronavirus ansteckt, wird man nicht unbedingt sofort krank. Es kann bis zu zwei Wochen dauern, bis man die Symptome merkt. Außerdem ist bei jungen und gesunden Menschen der Verlauf der Krankheit meist sehr mild und fühlt sich an wie ein normaler grippaler Infekt. Viele Infizierte merken sogar gar nicht, dass sie krank sind. Trotzdem können all diese Menschen das Virus an andere weitergeben und so viele andere anstecken, ohne es zu merken.</p>\n' +
-                    '<p><strong>Lösung:</strong> Wer bei sich selbst die typischen Symptome von COVID-19 <em>(Link zu offizieller Symptomliste bei BMG, RKI o.ä.)</em> bemerkt, kann sich in sogenannte Selbstquarantäne begeben. Das heißt, dass die Person ab sofort komplett zu Hause bleibt und keine anderen Menschen mehr trifft. Wenn möglich, sollte diejenige oder derjenige dann auch andere für sich einkaufen gehen lassen – am besten ohne diese Personen direkt zu treffen (Einkäufe z.B. vor der Wohnungstür abstellen). Eine Selbstquarantäne ist auch sinnvoll, wenn man mit einer Person engen Kontakt hatte, die nachweislich an COVID-19 erkrankt ist. Ganz wichtig ist, beim Verdacht, sich angesteckt zu haben, zuerst die Hotline des Gesundheitsamtes <em>(Link zu Liste/Anlaufstelle)</em> anzurufen und zu besprechen, was man tun soll. Man sollte auf keinen Fall einfach direkt zu seinem Arzt gehen, da man auch dort viele andere Menschen anstecken kann. Das Gesundheitsamt kann eine Quarantäne von 14 Tagen auch anordnen.</p>\n' +
-                    '<p><strong>Fazit:</strong> Wenn sich Menschen auch mit leichten Symptomen oder nach dem Kontakt mit COVID-19-Erkrankten in Quarantäne begeben, können sie viele Ansteckungen verhindern.</p>';
-            }
-            else if(id == "homeoffice") {
-                title = "Homeoffice";
-                text = '          <p><strong>Maßnahme: Von zu Hause aus arbeiten</strong></p>\n' +
-                    '<p><strong>Problem:</strong> Genau wie Schulen, Kitas und vielen Freizeiteinrichtungen sind auch die Arbeitsstätten der meisten Menschen Orte, an denen sich das neue Coronavirus rasant verbreiten kann. Hinzu kommt, dass in Deutschland sehr viele Menschen mit öffentlichen Verkehrsmitteln zur Arbeit und nach Hause fahren – auch das ist ein weiterer Risikofaktor.</p>\n' +
-                    '<p><strong>Lösung:</strong> Viele Aufgaben, die Beschäftigte auf der Arbeit erledigen, lassen sich auch zu Hause erledigen. Das gilt vor allem für klassische Bürojobs. Es gibt mittlerweile viele technische Möglichkeiten, dass Menschen theoretisch von überall aus gut arbeiten können. In vielen Unternehmen ist das sogenannte Homeoffice sowieso schon üblich - um die Ausbreitung von Corona zu verhindern, kann das mobile Arbeiten aber noch deutlich ausgebaut werden. Dazu können Arbeitgeber beispielsweise mehr Beschäftigte mit Laptops oder Smartphones ausstatten oder ihnen Programme für Telefon- oder Videokonferenzen installieren. Natürlich ist das nicht in allen Berufen möglich.</p>\n' +
-                    '<p><strong>Fazit:</strong> Je mehr Menschen von zu Hause aus arbeiten, anstatt zur Arbeit zu fahren, desto langsamer verbreitet sich das Virus. Gleichzeitig wird es für viele Eltern leichter, ihre Kinder zu betreuen, falls diese nicht mehr in die Schule oder die Kita gehen können.</p>';
-            }
-            else if(id == "stayHome") {
-                title = "Menschen sollen zu Hause bleiben";
-                text = '<p><strong>Maßnahme: Zu Hause bleiben</strong></p>\n' +
-                    '<p><strong>Problem:</strong> Selbst wenn man die Verhaltensregeln beachtet, ist die Gefahr groß, dass man sich gegenseitig ansteckt. Hinzu kommt, dass viele Menschen das neue Coronavirus in sich haben, ohne es selbst zu merken. Bei vielen bricht die Krankheit erst nach mehreren Tagen (bis zu zwei Wochen) aus, in denen sie bereits mehrere andere Personen infiziert haben. Außerdem gibt es viele Menschen, die selbst gar nicht krank werden, das Virus aber in sich tragen und andere damit anstecken können.</p>\n' +
-                    '<p><strong>Lösung:</strong> Der sicherste Schutz davor, das Virus weiter zu verbreiten, ist, möglichst wenige Menschen persönlich zu sehen. Am besten wäre, wenn jede und jeder für einige Wochen nur mit den Personen zusammen ist, mit denen sie oder er sowieso in einem Haushalt zusammenlebt. Natürlich ist das nicht für alle Menschen möglich, da viele zum Beispiel weiter arbeiten oder sich um andere Menschen kümmern müssen. Umso wichtiger ist aber, dass wir für eine gewisse Zeit auf alle Kontakte verzichten, die nicht unbedingt sein müssen. Nach ca. zwei Wochen sind wir nicht mehr ansteckend, selbst wenn wir das Virus in uns tragen.<br>\n' +
-                    'Wenn die Menschen nicht freiwillig zu Hause bleiben, kann der Staat ihnen verbieten, sich draußen in Gruppen zu treffen (Versammlungsverbot) oder sogar ganz verbieten, raus zu gehen (Ausgangssperre). Beide Maßnahmen sind große Eingriffe in die Freiheitsrechte unsere Gesellschaft und dürfen deshalb nur in absoluten Ausnahmesituationen getroffen werden. Grundlage dafür ist im Falle von COVID-19 das Infektionsschutzgesetz der Bundesländer.</p>\n' +
-                    '<p><strong>Fazit:</strong> Je mehr Menschen mehr Zeit zu Hause verbringen und niemand anderen treffen, desto langsamer verbreitet sich das Virus insgesamt. Dadurch werden nicht so viele Menschen gleichzeitig krank und auch die Anzahl schwerer Verläufe der Krankheit ist viel geringer. Es müssen nicht so viele Patientinnen und Patienten gleichzeitig ins Krankenhaus und das Gesundheitswesen hat mehr Zeit, sich auf die neue Situation vorzubereiten <em>(Link zu Maßnahme „Kapazitäten der Krankenhäuser erhöhen“)</em></p>';
-            }
-            else if(id == "closeSchools") {
-                title = "Schulen und Kitas schließen";
-                text = '          <p><strong>Maßnahme: Schulen und Kitas schließen</strong></p>\n' +
-                    '<p><strong>Problem:</strong> In Schulen und Kindertagesstätten kann sich das neue Coronavirus sehr schnell verbreiten. Hier sind viele Menschen zusammen, die sich nicht gegenseitig aus dem Weg gehen können und die Räume (z. B. Toiletten oder Umkleidekabinen) und Material (z. B. Bücher oder Computer) gemeinsam nutzen. Vor allem bei kleinen Kindern kann man außerdem nicht sicherstellen, dass sie sich an die Verhaltensregeln <em>(Link zu Maßnahme Verhaltensregeln)</em> halten. Für die meisten gesunden Kinder ist das neue Coronavirus nicht sehr gefährlich, sie können aber andere, gefährdete Personen wie beispielsweise ihre Großeltern anstecken.</p>\n' +
-                    '<p><strong>Lösung:</strong> Der Staat kann auf Basis des Infektionsschutzgesetzes Schulen und Kitas vorübergehend schließen. Wichtig ist dann, dass die Kinder in der Zeit, in der sie sonst in der Schule/Kita wären, zu Hause bleiben, sich nicht mit Freunden treffen und keinen Freizeitaktivitäten in Gruppen nachgehen. Die Schließung von Schulen und Kitas ist ein großer Schritt, der viele Schwierigkeiten nach sich zieht und der deshalb nur in Extremsituationen gemacht werden darf. Denn zum einen ist es für viele berufstätige Eltern schwierig, ihre Kinder zu Hause zu betreuen. Zum anderen gehen bei längerem Schulausfall Bildungsinhalte und soziale Kontakte verloren, die für die Kinder wichtig wären.</p>\n' +
-                    '<p><strong>Fazit:</strong> Sind Schulen und Kitas geschlossen und bleiben die Kinder stattdessen zu Hause, fällt ein großer Risikofaktor für die Ausbreitung des neuen Coronavirus weg. Es werden weniger Kinder und Lehrer krank und das Virus verbreitet sich insgesamt viel langsamer.</p>';
-            }
-            else if(id == "verhaltensregeln") {
-                title = "Verhaltensregeln";
-                text = '<p><strong>Maßnahme: An die Verhaltensregeln halten</strong></p>\n' +
-                    '<p><strong>Problem:</strong> Das neue Coronavirus ist sehr ansteckend – viel ansteckender als viele andere Viren, die wir kennen. Es überträgt sich von Mensch zu Mensch vor allem über Körperflüssigkeiten, beispielsweise wenn wir niesen oder husten. Dabei reicht es schon, sich selbst in die Hand zu husten, und damit jemand anderen anzufassen. Das Virus kommt vor allem über die Schleimhäute in den Körper, also über Mund und Nase oder auch über die Augen.</p>\n' +
-                    '<p><strong>Lösung:</strong> Die Expertinnen und Experten aus der Medizin haben klare und einfache Regeln <em>(Link zu Übersicht Regeln von BMG, RKI o.ä.)</em> aufgestellt, wie wir verhindern können, andere anzustecken:</p>\n' +
-                    '<ul>\n' +
-                    '<li>Häufig und richtig Händewaschen: Mit Seife, mindestens 30 Sekunden lang und so, dass alle Teile der Hände gewaschen werden. <em>( Link zu Erklärvideo o.ä.)</em></li>\n' +
-                    '<li>Richtig husten und niesen: Nicht in die Luft oder in die eigene Hand, sondern in die Armbeuge.</li>\n' +
-                    '<li>Abstand halten: Mindestens 1,5 Meter zu anderen Menschen – egal ob auf der Straße, in der Bahn oder im Supermarkt.</li>\n' +
-                    '<li>Nicht ins eigene Gesicht fassen.</li>\n' +
-                    '</ul>\n' +
-                    '<p><strong>Fazit:</strong> Wenn sich alle Menschen an diese Regeln halten, verringert sich das Risiko deutlich, andere Personen anzustecken. Es werden weniger Menschen krank.</p>';
-            }
-            else if(id == "closePublic") {
-                title = "Freizeitstätten schließen und Veranstaltungen absagen";
-                text = '          <p><strong>Maßnahme: Freizeitstätten schließen und Veranstaltungen absagen</strong></p>\n' +
-                    '<p><strong>Problem:</strong> An vielen Orten, an denen wir unsere Freizeit verbringen, kann das neue Coronavirus sich sehr schnell verbreiten. Das sind vor allem Orte wie Bars oder Clubs, Konzerte oder Großveranstaltungen, Sportvereine oder Fitnessstudios. An diesen Orten ist es quasi unmöglich, die Verhaltensregeln <em>(Link zu Maßnahme Verhaltensregel)</em> einzuhalten.</p>\n' +
-                    '<p><strong>Lösung:</strong> Der Staat kann auf Basis des Infektionsschutzgesetzes verhindern, dass große Menschengruppen in ihrer Freizeit zusammenkommen, indem er Veranstaltungen verbietet und Freizeiteinrichtungen schließt. Auch das ist ein großer Eingriff in die Freiheitsrechte jeder und jedes einzelnen und deshalb nur in extremen Ausnahmen möglich. Diese Maßnahme bringt viele wirtschaftliche Probleme mit sich, da die Inhaberinnen in Inhaber von z. B. Restaurants oder Sportstätten plötzlich keinen Umsatz mehr haben. Auch alle Personen, die mit Veranstaltungen ich Geld verdienen (Veranstalter, Messebauer, Künstler etc.) stehen von heute auf morgen ohne Einkommen da.</p>\n' +
-                    '<p><strong>Fazit:</strong> Je weniger öffentliche Orte es gibt, an denen Menschen ihre Freizeit in Gruppen verbringen, desto langsamer kann sich das Virus in der Gesellschaft ausbreiten. Das funktioniert allerdings nur, wenn die Menschen dann auch tatsächlich zu Hause bleiben, anstatt sich privat zu Hause zu verabreden.</p>';
-            }
+			$('.toggleInput').click(function() {
+				unityInstance.SendMessage("ServiceLocator", this.id);
+				console.log(this.id);
+			});
 
 
-            $("#infoBoxTitle").html(title);
-            $("#infoBoxText").html(text);
-            $("#infoBox").fadeIn();
-        }
+			//updateChart([[0,9935898,0,9935898,0,9935898,0,9935898,0,9935898,0,9935898,0,9935898,0,9871795,0,9871795,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359],[0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077],[0,0,0,0,0,0,0,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]);
 
-        function updateChart(array) {
+		});
 
-            var xEntrys = [];
+		function openDialog(id) {
+			$("#siteMain").addClass("backgroundBlur");
+			var title = "";
+			var text = "";
 
-            for (var i = 0; i < array[0].length; i++) {
-                xEntrys.push('Tag ' + i);
-            }
+			if(id == "coronaTests") {
+				title = "Corona-Tests";
+				text = '          <p><strong>Maßnahme: Corona-Tests</strong></p>\n' +
+					'<p><strong>Problem:</strong> Die Krankheitsverläufe von COVID-19 sind sehr unterschiedlich und viele Infizierte haben gar keine oder nur leichte Symptome. Deshalb ist es schwierig, alle Erkrankungen zu erkennen und zu verhindern, dass Patientinnen und Patienten das Virus weiter verbreiten.</p>\n' +
+					'<p><strong>Lösung:</strong> Labortests können das neue Corona-Virus innerhalb von ein bis zwei Tagen nachweisen. Weiß man dadurch früh, dass eine Person infiziert ist, kann sie sich in Quarantäne begeben, bevor sie weitere Menschen ansteckt. Außerdem kann man dann schnell die Personen informieren, die mit der oder dem Infizierten in den letzten zwei Wochen engen Kontakt hatten. Die Kontaktpersonen können dann auch getestet werden und/oder sich in Quarantäne begeben. Allerdings sind die Kapazitäten der Test-Materialen und Labore begrenzt, weshalb nicht alle Menschen vorsorglich getestet werden können.</p>\n' +
+					'<p><strong>Fazit:</strong> Je mehr Menschen man auf das neue Corona-Virus testen kann und je schneller nach ihrer Infektion das passiert, desto eher lässt sich verhindern, dass sie weitere Personen anstecken. Das Virus verbreitet sich insgesamt langsamer.</p>\n';
+			}
+			else if(id == "doubleKh") {
+				title = "Kapazitäten der Krankenhäuser verdoppeln";
+				text = '          <p><strong>Maßnahme: Kapazitäten der Krankenhäuser verdoppeln</strong></p>\n' +
+					'<p><strong>Problem:</strong> Patientinnen und Patienten mit einem schweren Verlauf von COVID-19 kommen auf die Intensivstation eines Krankenhauses. Manche können nur überleben, wenn eine Beatmungsmaschine sie künstlich beatmen. Es gibt aber nur eine bestimmte Anzahl von Intensivbetten und Beatmungsmaschinen in den Krankenhäusern, von denen viele auch für andere Krankheiten oder Unfälle gebraucht werden. Wenn zu viele Patientinnen und Patienten gleichzeitig schwer krank werden, aber alle Intensivbetten schon belegt sind, müssen Menschen sterben, die sonst vielleicht gerettet werden könnten. Außerdem braucht es genügend Ärztinnen und Ärzte sowie Pflegekräfte, die sich um die Patienten kümmern können.</p>\n' +
+					'<p><strong>Lösung:</strong> Das Gesundheitswesen bereitet sich auf die steigende Zahl COVID-19-Patienten vor, indem es die Anzahl von Intensivbetten erhöht. Dazu sagen Kliniken beispielsweise geplante Operationen ab, die nicht dringend nötig sind, sie funktionieren normale Stationen zu Intensivstationen um oder bauen Ersatzkrankenhäuser in Messehallen oder anderen öffentlichen Orten auf. Außerdem werden Ärzte und Pflegekräfte zum Beispiel aus dem Ruhestand, aus dem Medizinstudium oder aus Pflegeschulen in die Kliniken geholt, um das reguläre Personal zu unterstützen.</p>\n' +
+					'<p><strong>Fazit:</strong> Je weniger Menschen gleichzeitig wegen COVID-19 ins Krankenhaus müssen und je länger es dauert, bis viele Menschen sich angesteckt haben, desto mehr Zeit hat das Gesundheitswesen, um sich darauf vorzubereiten. Es müssen weniger Menschen an dem Virus sterben.</p>';
+			}
+			else if(id == "selbstquarantäne") {
+				title = "Selbstquarantäne";
+				text = '          <p><strong>Maßnahme: Selbstquarantäne</strong></p>\n' +
+					'<p><strong>Problem:</strong> Wenn man sich mit dem neuen Coronavirus ansteckt, wird man nicht unbedingt sofort krank. Es kann bis zu zwei Wochen dauern, bis man die Symptome merkt. Außerdem ist bei jungen und gesunden Menschen der Verlauf der Krankheit meist sehr mild und fühlt sich an wie ein normaler grippaler Infekt. Viele Infizierte merken sogar gar nicht, dass sie krank sind. Trotzdem können all diese Menschen das Virus an andere weitergeben und so viele andere anstecken, ohne es zu merken.</p>\n' +
+					'<p><strong>Lösung:</strong> Wer bei sich selbst die typischen Symptome von COVID-19 <em>(Link zu offizieller Symptomliste bei BMG, RKI o.ä.)</em> bemerkt, kann sich in sogenannte Selbstquarantäne begeben. Das heißt, dass die Person ab sofort komplett zu Hause bleibt und keine anderen Menschen mehr trifft. Wenn möglich, sollte diejenige oder derjenige dann auch andere für sich einkaufen gehen lassen – am besten ohne diese Personen direkt zu treffen (Einkäufe z.B. vor der Wohnungstür abstellen). Eine Selbstquarantäne ist auch sinnvoll, wenn man mit einer Person engen Kontakt hatte, die nachweislich an COVID-19 erkrankt ist. Ganz wichtig ist, beim Verdacht, sich angesteckt zu haben, zuerst die Hotline des Gesundheitsamtes <em>(Link zu Liste/Anlaufstelle)</em> anzurufen und zu besprechen, was man tun soll. Man sollte auf keinen Fall einfach direkt zu seinem Arzt gehen, da man auch dort viele andere Menschen anstecken kann. Das Gesundheitsamt kann eine Quarantäne von 14 Tagen auch anordnen.</p>\n' +
+					'<p><strong>Fazit:</strong> Wenn sich Menschen auch mit leichten Symptomen oder nach dem Kontakt mit COVID-19-Erkrankten in Quarantäne begeben, können sie viele Ansteckungen verhindern.</p>';
+			}
+			else if(id == "homeoffice") {
+				title = "Homeoffice";
+				text = '          <p><strong>Maßnahme: Von zu Hause aus arbeiten</strong></p>\n' +
+					'<p><strong>Problem:</strong> Genau wie Schulen, Kitas und vielen Freizeiteinrichtungen sind auch die Arbeitsstätten der meisten Menschen Orte, an denen sich das neue Coronavirus rasant verbreiten kann. Hinzu kommt, dass in Deutschland sehr viele Menschen mit öffentlichen Verkehrsmitteln zur Arbeit und nach Hause fahren – auch das ist ein weiterer Risikofaktor.</p>\n' +
+					'<p><strong>Lösung:</strong> Viele Aufgaben, die Beschäftigte auf der Arbeit erledigen, lassen sich auch zu Hause erledigen. Das gilt vor allem für klassische Bürojobs. Es gibt mittlerweile viele technische Möglichkeiten, dass Menschen theoretisch von überall aus gut arbeiten können. In vielen Unternehmen ist das sogenannte Homeoffice sowieso schon üblich - um die Ausbreitung von Corona zu verhindern, kann das mobile Arbeiten aber noch deutlich ausgebaut werden. Dazu können Arbeitgeber beispielsweise mehr Beschäftigte mit Laptops oder Smartphones ausstatten oder ihnen Programme für Telefon- oder Videokonferenzen installieren. Natürlich ist das nicht in allen Berufen möglich.</p>\n' +
+					'<p><strong>Fazit:</strong> Je mehr Menschen von zu Hause aus arbeiten, anstatt zur Arbeit zu fahren, desto langsamer verbreitet sich das Virus. Gleichzeitig wird es für viele Eltern leichter, ihre Kinder zu betreuen, falls diese nicht mehr in die Schule oder die Kita gehen können.</p>';
+			}
+			else if(id == "stayHome") {
+				title = "Menschen sollen zu Hause bleiben";
+				text = '<p><strong>Maßnahme: Zu Hause bleiben</strong></p>\n' +
+					'<p><strong>Problem:</strong> Selbst wenn man die Verhaltensregeln beachtet, ist die Gefahr groß, dass man sich gegenseitig ansteckt. Hinzu kommt, dass viele Menschen das neue Coronavirus in sich haben, ohne es selbst zu merken. Bei vielen bricht die Krankheit erst nach mehreren Tagen (bis zu zwei Wochen) aus, in denen sie bereits mehrere andere Personen infiziert haben. Außerdem gibt es viele Menschen, die selbst gar nicht krank werden, das Virus aber in sich tragen und andere damit anstecken können.</p>\n' +
+					'<p><strong>Lösung:</strong> Der sicherste Schutz davor, das Virus weiter zu verbreiten, ist, möglichst wenige Menschen persönlich zu sehen. Am besten wäre, wenn jede und jeder für einige Wochen nur mit den Personen zusammen ist, mit denen sie oder er sowieso in einem Haushalt zusammenlebt. Natürlich ist das nicht für alle Menschen möglich, da viele zum Beispiel weiter arbeiten oder sich um andere Menschen kümmern müssen. Umso wichtiger ist aber, dass wir für eine gewisse Zeit auf alle Kontakte verzichten, die nicht unbedingt sein müssen. Nach ca. zwei Wochen sind wir nicht mehr ansteckend, selbst wenn wir das Virus in uns tragen.<br>\n' +
+					'Wenn die Menschen nicht freiwillig zu Hause bleiben, kann der Staat ihnen verbieten, sich draußen in Gruppen zu treffen (Versammlungsverbot) oder sogar ganz verbieten, raus zu gehen (Ausgangssperre). Beide Maßnahmen sind große Eingriffe in die Freiheitsrechte unsere Gesellschaft und dürfen deshalb nur in absoluten Ausnahmesituationen getroffen werden. Grundlage dafür ist im Falle von COVID-19 das Infektionsschutzgesetz der Bundesländer.</p>\n' +
+					'<p><strong>Fazit:</strong> Je mehr Menschen mehr Zeit zu Hause verbringen und niemand anderen treffen, desto langsamer verbreitet sich das Virus insgesamt. Dadurch werden nicht so viele Menschen gleichzeitig krank und auch die Anzahl schwerer Verläufe der Krankheit ist viel geringer. Es müssen nicht so viele Patientinnen und Patienten gleichzeitig ins Krankenhaus und das Gesundheitswesen hat mehr Zeit, sich auf die neue Situation vorzubereiten <em>(Link zu Maßnahme „Kapazitäten der Krankenhäuser erhöhen“)</em></p>';
+			}
+			else if(id == "closeSchools") {
+				title = "Schulen und Kitas schließen";
+				text = '          <p><strong>Maßnahme: Schulen und Kitas schließen</strong></p>\n' +
+					'<p><strong>Problem:</strong> In Schulen und Kindertagesstätten kann sich das neue Coronavirus sehr schnell verbreiten. Hier sind viele Menschen zusammen, die sich nicht gegenseitig aus dem Weg gehen können und die Räume (z. B. Toiletten oder Umkleidekabinen) und Material (z. B. Bücher oder Computer) gemeinsam nutzen. Vor allem bei kleinen Kindern kann man außerdem nicht sicherstellen, dass sie sich an die Verhaltensregeln <em>(Link zu Maßnahme Verhaltensregeln)</em> halten. Für die meisten gesunden Kinder ist das neue Coronavirus nicht sehr gefährlich, sie können aber andere, gefährdete Personen wie beispielsweise ihre Großeltern anstecken.</p>\n' +
+					'<p><strong>Lösung:</strong> Der Staat kann auf Basis des Infektionsschutzgesetzes Schulen und Kitas vorübergehend schließen. Wichtig ist dann, dass die Kinder in der Zeit, in der sie sonst in der Schule/Kita wären, zu Hause bleiben, sich nicht mit Freunden treffen und keinen Freizeitaktivitäten in Gruppen nachgehen. Die Schließung von Schulen und Kitas ist ein großer Schritt, der viele Schwierigkeiten nach sich zieht und der deshalb nur in Extremsituationen gemacht werden darf. Denn zum einen ist es für viele berufstätige Eltern schwierig, ihre Kinder zu Hause zu betreuen. Zum anderen gehen bei längerem Schulausfall Bildungsinhalte und soziale Kontakte verloren, die für die Kinder wichtig wären.</p>\n' +
+					'<p><strong>Fazit:</strong> Sind Schulen und Kitas geschlossen und bleiben die Kinder stattdessen zu Hause, fällt ein großer Risikofaktor für die Ausbreitung des neuen Coronavirus weg. Es werden weniger Kinder und Lehrer krank und das Virus verbreitet sich insgesamt viel langsamer.</p>';
+			}
+			else if(id == "verhaltensregeln") {
+				title = "Verhaltensregeln";
+				text = '<p><strong>Maßnahme: An die Verhaltensregeln halten</strong></p>\n' +
+					'<p><strong>Problem:</strong> Das neue Coronavirus ist sehr ansteckend – viel ansteckender als viele andere Viren, die wir kennen. Es überträgt sich von Mensch zu Mensch vor allem über Körperflüssigkeiten, beispielsweise wenn wir niesen oder husten. Dabei reicht es schon, sich selbst in die Hand zu husten, und damit jemand anderen anzufassen. Das Virus kommt vor allem über die Schleimhäute in den Körper, also über Mund und Nase oder auch über die Augen.</p>\n' +
+					'<p><strong>Lösung:</strong> Die Expertinnen und Experten aus der Medizin haben klare und einfache Regeln <em>(Link zu Übersicht Regeln von BMG, RKI o.ä.)</em> aufgestellt, wie wir verhindern können, andere anzustecken:</p>\n' +
+					'<ul>\n' +
+					'<li>Häufig und richtig Händewaschen: Mit Seife, mindestens 30 Sekunden lang und so, dass alle Teile der Hände gewaschen werden. <em>( Link zu Erklärvideo o.ä.)</em></li>\n' +
+					'<li>Richtig husten und niesen: Nicht in die Luft oder in die eigene Hand, sondern in die Armbeuge.</li>\n' +
+					'<li>Abstand halten: Mindestens 1,5 Meter zu anderen Menschen – egal ob auf der Straße, in der Bahn oder im Supermarkt.</li>\n' +
+					'<li>Nicht ins eigene Gesicht fassen.</li>\n' +
+					'</ul>\n' +
+					'<p><strong>Fazit:</strong> Wenn sich alle Menschen an diese Regeln halten, verringert sich das Risiko deutlich, andere Personen anzustecken. Es werden weniger Menschen krank.</p>';
+			}
+			else if(id == "closePublic") {
+				title = "Freizeitstätten schließen und Veranstaltungen absagen";
+				text = '          <p><strong>Maßnahme: Freizeitstätten schließen und Veranstaltungen absagen</strong></p>\n' +
+					'<p><strong>Problem:</strong> An vielen Orten, an denen wir unsere Freizeit verbringen, kann das neue Coronavirus sich sehr schnell verbreiten. Das sind vor allem Orte wie Bars oder Clubs, Konzerte oder Großveranstaltungen, Sportvereine oder Fitnessstudios. An diesen Orten ist es quasi unmöglich, die Verhaltensregeln <em>(Link zu Maßnahme Verhaltensregel)</em> einzuhalten.</p>\n' +
+					'<p><strong>Lösung:</strong> Der Staat kann auf Basis des Infektionsschutzgesetzes verhindern, dass große Menschengruppen in ihrer Freizeit zusammenkommen, indem er Veranstaltungen verbietet und Freizeiteinrichtungen schließt. Auch das ist ein großer Eingriff in die Freiheitsrechte jeder und jedes einzelnen und deshalb nur in extremen Ausnahmen möglich. Diese Maßnahme bringt viele wirtschaftliche Probleme mit sich, da die Inhaberinnen in Inhaber von z. B. Restaurants oder Sportstätten plötzlich keinen Umsatz mehr haben. Auch alle Personen, die mit Veranstaltungen ich Geld verdienen (Veranstalter, Messebauer, Künstler etc.) stehen von heute auf morgen ohne Einkommen da.</p>\n' +
+					'<p><strong>Fazit:</strong> Je weniger öffentliche Orte es gibt, an denen Menschen ihre Freizeit in Gruppen verbringen, desto langsamer kann sich das Virus in der Gesellschaft ausbreiten. Das funktioniert allerdings nur, wenn die Menschen dann auch tatsächlich zu Hause bleiben, anstatt sich privat zu Hause zu verabreden.</p>';
+			}
 
 
-            var gesund = {
-                x: xEntrys,
-                y: array[0],
-                name: 'Gesund',
-                type: 'bar',
-                marker: {
-                    color: 'rgb(226,226,226)'
-                }
-            };
+			$("#infoBoxTitle").html(title);
+			$("#infoBoxText").html(text);
+			$("#infoBox").fadeIn();
+		}
 
-            var krank = {
-                x: xEntrys,
-                y: array[1],
-                name: 'Krank',
-                type: 'bar',
-                marker: {
-                    color: 'rgb(192,0,0)'
-                }
-            };
+		function updateChart(array) {
+
+			var xEntrys = [];
+
+			for (var i = 0; i < array[0].length; i++) {
+				xEntrys.push(i);
+			}
 
 
-            var tot = {
-                x: xEntrys,
-                y: array[2],
-                name: 'Verstorben',
-                type: 'bar',
-                marker: {
-                    color: 'rgb(37,37,37)'
-                }
-            };
+			var gesund = {
+				x: xEntrys,
+				y: array[0],
+				name: 'Gesund',
+				type: 'bar',
+				marker: {
+					color: 'rgb(226,226,226)'
+				}
+			};
 
-            var genesen = {
-                x: xEntrys,
-                y: array[3],
-                name: 'Immune',
-                type: 'bar',
-                marker: {
-                    color: 'rgb(167,202,255)'
-                }
-            };
+			var krank = {
+				x: xEntrys,
+				y: array[1],
+				name: 'Krank',
+				type: 'bar',
+				marker: {
+					color: 'rgb(192,0,0)'
+				}
+			};
 
 
-            var data = [gesund, krank,  genesen,tot];
+			var tot = {
+				x: xEntrys,
+				y: array[2],
+				name: 'Verstorben',
+				type: 'bar',
+				marker: {
+					color: 'rgb(37,37,37)'
+				}
+			};
 
-            var layout = {  autosize: false,
-                height: 250,
-                width: 500,
-                barmode: 'stack'};
+			var genesen = {
+				x: xEntrys,
+				y: array[3],
+				name: 'Immune',
+				type: 'bar',
+				marker: {
+					color: 'rgb(167,202,255)'
+				}
+			};
 
-            Plotly.newPlot('chartDiv', data, layout);
 
-        }
+			var data = [gesund, krank, genesen, tot];
 
-    </script>
+			var layout = {  autosize: false,
+				height: 400,
+				width: 500,
+				 margin: {
+					l: 60,
+					r: 10,
+					b: 0,
+					t: 25,
+					pad: 4
+				 },
+				barmode: 'stack',
+				bargap:0,
+				legend: {"orientation": "h"},
+				title: {
+					text:'Verteilung:',
+					xref: 'paper',
+					x: 0.01,
+					y: 0.99
+				},
+				xaxis: {
+					showticklabels:false
+				}
+				};
+
+			Plotly.newPlot('chartDiv', data, layout, {displayModeBar: false});
+		}
+
+	</script>
 
 </head>
 
 
 
 <body>
-    <div class="demo-layout-transparent mdl-layout mdl-js-layout">
-        <header class="mdl-layout__header mdl-layout__header--transparent">
-            <div class="mdl-layout__header-row">
-                <span class="mdl-layout-title">WirVsVirus_Simulator</span>
-                <div class="mdl-layout-spacer"></div>
-                <nav class="mdl-navigation">
-                    <a class="mdl-navigation__link" target="_blank" href="https://wirvsvirushackathon.org/">WirVsVirus Hackathon</a>
-                </nav>
-            </div>
-        </header>
+	<div class="demo-layout-transparent mdl-layout mdl-js-layout">
+		<header class="mdl-layout__header mdl-layout__header--transparent">
+			<div class="mdl-layout__header-row">
+				<span class="mdl-layout-title">WirVsVirus_Simulator</span>
+				<div class="mdl-layout-spacer"></div>
+				<nav class="mdl-navigation">
+					<a class="mdl-navigation__link" target="_blank" href="https://wirvsvirushackathon.org/">WirVsVirus Hackathon</a>
+				</nav>
+			</div>
+		</header>
 
-        <div class="mdl-layout__drawer">
-            <span class="mdl-layout-title">WirVsVirus Simulator</span>
-            <nav class="mdl-navigation">
-                <a class="mdl-navigation__link" target="_blank" href="https://wirvsvirushackathon.org/">WirVsVirus Hackathon</a>
-                <a class="mdl-navigation__link" target="_blank" href="https://github.com/floAr/WirVsVirus_Simulator">Source on Github</a>
-            </nav>
-        </div>
+		<div class="mdl-layout__drawer">
+			<span class="mdl-layout-title">WirVsVirus Simulator</span>
+			<nav class="mdl-navigation">
+				<a class="mdl-navigation__link" target="_blank" href="https://wirvsvirushackathon.org/">WirVsVirus Hackathon</a>
+				<a class="mdl-navigation__link" target="_blank" href="https://github.com/floAr/WirVsVirus_Simulator">Source on Github</a>
+			</nav>
+		</div>
 
 
-        <main id="siteMain" class="mdl-layout__content">
-            <div class="mdl-grid">
+		<main id="siteMain" class="mdl-layout__content">
+			<div class="mdl-grid">
 
-                <div class="mdl-cell mdl-cell--7-col">
+				<div class="mdl-cell mdl-cell--7-col">
 
-                    <div class="mdl-grid">
+					<div class="mdl-grid">
 
-                        <div class="mdl-cell mdl-cell--12-col">
+						<div class="mdl-cell mdl-cell--12-col">
 
-                            <div class="unityCard demo-card-wide mdl-card mdl-shadow--2dp">
-                                <div id="unityContainer" style="width: %UNITY_WIDTH%px; height: %UNITY_HEIGHT%px; margin: auto"></div>
-                                <div class="mdl-card__actions mdl-card--border">
-                                    <a id="RunPause" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="ToggleRunPause()">Start</a>
-                                </div>
-                            </div>
+							<div class="unityCard demo-card-wide mdl-card mdl-shadow--2dp">
+								<div id="unityContainer" style="width: %UNITY_WIDTH%px; height: %UNITY_HEIGHT%px; margin: auto"></div>
+								<div class="mdl-card__actions mdl-card--border">
+									<a id="RunPause" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="ToggleRunPause()">Start</a>
+								</div>
+							</div>
 
-                        </div>
+						</div>
 
-                    </div>
-                </div>
+					</div>
+				</div>
 
-                <div class="mdl-cell mdl-cell--5-col">
+				<div class="mdl-cell mdl-cell--5-col">
 
-                    <div class="mdl-grid">
+					<div class="mdl-grid">
 
-                        <div class="mdl-cell mdl-cell--12-col">
+						<div class="mdl-cell mdl-cell--12-col">
 
-                            <div class="statisticsCard demo-card-wide mdl-card mdl-shadow--2dp" id="statistics">
-                                <div class="mdl-card__title">
-                                    <h2 class="mdl-card__title-text">Statistics</h2>
-                                </div>
-                                <div class="sideCardContentBox">
-                                    <div class="mdl-card__actions mdl-card--border">
-                                    </div>
-                                    <div id="chartDiv">
-                                    </div>
-                                </div>
-                                <div class="mdl-card__menu">
-                                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                                        <i class="material-icons">share</i>
-                                    </button>
-                                </div>
-                            </div>
+							<div class="statisticsCard demo-card-wide mdl-card mdl-shadow--2dp" id="statistics">
+								<div class="mdl-card__title">
+									<h2 class="mdl-card__title-text">Statistics</h2>
+								</div>
+								<div class="sideCardContentBox">
+									<div class="mdl-card__actions mdl-card--border">
+									</div>
+									<div id="chartDiv">
+									</div>
+								</div>
+								<div class="mdl-card__menu">
+									<button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+										<i class="material-icons">share</i>
+									</button>
+								</div>
+							</div>
 
-                        </div>
+						</div>
 
-                        <div class="mdl-cell mdl-cell--12-col">
+						<div class="mdl-cell mdl-cell--12-col">
 
-                            <div class="measuresCard demo-card-wide mdl-card mdl-shadow--2dp">
-                                <div class="mdl-card__title">
-                                    <h2 class="mdl-card__title-text">Maßnahmen</h2>
-                                </div>
-                                <div class="sideCardContentBox">
-                                    <div class="mdl-card__actions mdl-card--border">
+							<div class="measuresCard demo-card-wide mdl-card mdl-shadow--2dp">
+								<div class="mdl-card__title">
+									<h2 class="mdl-card__title-text">Maßnahmen</h2>
+								</div>
+								<div class="sideCardContentBox">
+									<div class="mdl-card__actions mdl-card--border">
 
-                                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_doubleKh">
-                                            <input type="checkbox" id="TOGGLE_doubleKh" class="toggleInput mdl-switch__input">
-                                            <span class="mdl-switch__label">
-                                                Kapazitäten der Krankenhäuser verdoppeln
-                                                <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                    <i id="doubleKh" class="material-icons-outlined infoBoxOpener">info</i>
-                                                </button>
-                                            </span>
-                                        </label>
+										<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_doubleKh">
+											<input type="checkbox" id="TOGGLE_doubleKh" class="toggleInput mdl-switch__input">
+											<span class="mdl-switch__label">
+												Kapazitäten der Krankenhäuser verdoppeln
+												<button class="mdl-button mdl-js-button mdl-button--icon">
+													<i id="doubleKh" class="material-icons-outlined infoBoxOpener">info</i>
+												</button>
+											</span>
+										</label>
 
-                                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_verhaltensregeln">
-                                            <input type="checkbox" id="TOGGLE_verhaltensregeln" class="toggleInput mdl-switch__input">
-                                            <span class="mdl-switch__label">
-                                                Verhaltensregeln
-                                                <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                    <i id="verhaltensregeln" class="material-icons-outlined infoBoxOpener">info</i>
-                                                </button>
-                                            </span>
-                                        </label>
+										<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_verhaltensregeln">
+											<input type="checkbox" id="TOGGLE_verhaltensregeln" class="toggleInput mdl-switch__input">
+											<span class="mdl-switch__label">
+												Verhaltensregeln
+												<button class="mdl-button mdl-js-button mdl-button--icon">
+													<i id="verhaltensregeln" class="material-icons-outlined infoBoxOpener">info</i>
+												</button>
+											</span>
+										</label>
 
-                                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_stayHome">
-                                            <input type="checkbox" id="TOGGLE_stayHome" class="toggleInput mdl-switch__input">
-                                            <span class="mdl-switch__label">
-                                                Menschen sollen zu Hause bleiben
-                                                <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                    <i id="stayHome" class="material-icons-outlined infoBoxOpener">info</i>
-                                                </button>
-                                            </span>
-                                        </label>
+										<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_stayHome">
+											<input type="checkbox" id="TOGGLE_stayHome" class="toggleInput mdl-switch__input">
+											<span class="mdl-switch__label">
+												Menschen sollen zu Hause bleiben
+												<button class="mdl-button mdl-js-button mdl-button--icon">
+													<i id="stayHome" class="material-icons-outlined infoBoxOpener">info</i>
+												</button>
+											</span>
+										</label>
 
-                                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_closeSchools">
-                                            <input type="checkbox" id="TOGGLE_closeSchools" class="toggleInput mdl-switch__input">
-                                            <span class="mdl-switch__label">
-                                                Schulschließungen
-                                                <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                    <i id="closeSchools" class="material-icons-outlined infoBoxOpener">info</i>
-                                                </button>
-                                            </span>
-                                        </label>
+										<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_closeSchools">
+											<input type="checkbox" id="TOGGLE_closeSchools" class="toggleInput mdl-switch__input">
+											<span class="mdl-switch__label">
+												Schulschließungen
+												<button class="mdl-button mdl-js-button mdl-button--icon">
+													<i id="closeSchools" class="material-icons-outlined infoBoxOpener">info</i>
+												</button>
+											</span>
+										</label>
 
-                                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_homeoffice">
-                                            <input type="checkbox" id="TOGGLE_homeoffice" class="toggleInput mdl-switch__input">
-                                            <span class="mdl-switch__label">
-                                                Homeoffice
-                                                <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                    <i id="homeoffice" class="material-icons-outlined infoBoxOpener">info</i>
-                                                </button>
-                                            </span>
-                                        </label>
+										<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_homeoffice">
+											<input type="checkbox" id="TOGGLE_homeoffice" class="toggleInput mdl-switch__input">
+											<span class="mdl-switch__label">
+												Homeoffice
+												<button class="mdl-button mdl-js-button mdl-button--icon">
+													<i id="homeoffice" class="material-icons-outlined infoBoxOpener">info</i>
+												</button>
+											</span>
+										</label>
 
-                                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_coronaTests">
-                                            <input type="checkbox" id="TOGGLE_coronaTests" class="toggleInput mdl-switch__input">
-                                            <span class="mdl-switch__label">
-                                                Corona Tests
-                                                <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                    <i id="coronaTests" class="material-icons-outlined infoBoxOpener">info</i>
-                                                </button>
-                                            </span>
-                                        </label>
+										<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_coronaTests">
+											<input type="checkbox" id="TOGGLE_coronaTests" class="toggleInput mdl-switch__input">
+											<span class="mdl-switch__label">
+												Corona Tests
+												<button class="mdl-button mdl-js-button mdl-button--icon">
+													<i id="coronaTests" class="material-icons-outlined infoBoxOpener">info</i>
+												</button>
+											</span>
+										</label>
 
-                                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_closePublic">
-                                            <input type="checkbox" id="TOGGLE_closePublic" class="toggleInput mdl-switch__input">
-                                            <span class="mdl-switch__label">
-                                                Freizeitstätten schließen und Veranstaltungen absagen
-                                                <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                    <i id="closePublic" class="material-icons-outlined infoBoxOpener">info</i>
-                                                </button>
-                                            </span>
-                                        </label>
+										<label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_closePublic">
+											<input type="checkbox" id="TOGGLE_closePublic" class="toggleInput mdl-switch__input">
+											<span class="mdl-switch__label">
+												Freizeitstätten schließen und Veranstaltungen absagen
+												<button class="mdl-button mdl-js-button mdl-button--icon">
+													<i id="closePublic" class="material-icons-outlined infoBoxOpener">info</i>
+												</button>
+											</span>
+										</label>
 
-                                        <div class="space"></div>
-                                        <input id="selfQuarantine" class="mdl-slider mdl-js-slider" type="range" min="20" max="80" value="20" tabindex="0" step="30">
-                                        <span class="mdl-switch__label">
-                                            Selbstquarantäne
-                                            <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                <i id="selbstquarantäne" class="material-icons-outlined infoBoxOpener">info</i>
-                                            </button>
-                                        </span>
+										<div class="space"></div>
+										<input id="selfQuarantine" class="mdl-slider mdl-js-slider" type="range" min="20" max="80" value="20" tabindex="0" step="30">
+										<span class="mdl-switch__label">
+											Selbstquarantäne
+											<button class="mdl-button mdl-js-button mdl-button--icon">
+												<i id="selbstquarantäne" class="material-icons-outlined infoBoxOpener">info</i>
+											</button>
+										</span>
 
-                                    </div>
+									</div>
 
-                                </div>
-                            </div>
+								</div>
+							</div>
 
-                        </div>
+						</div>
 
-                    </div>
+					</div>
 
-                </div>
+				</div>
 
-            </div>
+			</div>
 
-        </main>
+		</main>
 
-        <div id="infoBox" class="infoBox demo-card-wide mdl-card mdl-shadow--2dp" style="display: none">
-            <div class="mdl-card__title">
-                <h2 id="infoBoxTitle" class="mdl-card__title-text">Title</h2>
-            </div>
-            <div id="infoBoxText" class="mdl-card__supporting-text">
-                TEXT
-            </div>
-            <div class="mdl-card__actions mdl-card--border">
-                <div class="mdl-layout-spacer"></div>
-                <a class="closeInfoBoxBtn mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    Close
-                </a>
-            </div>
-            <!--
-            <div class="mdl-card__menu">
-              <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                <i class="material-icons">share</i>
-              </button>
-            </div>
-            -->
-        </div>
-    </div>
+		<div id="infoBox" class="infoBox demo-card-wide mdl-card mdl-shadow--2dp" style="display: none">
+			<div class="mdl-card__title">
+				<h2 id="infoBoxTitle" class="mdl-card__title-text">Title</h2>
+			</div>
+			<div id="infoBoxText" class="mdl-card__supporting-text">
+				TEXT
+			</div>
+			<div class="mdl-card__actions mdl-card--border">
+				<div class="mdl-layout-spacer"></div>
+				<a class="closeInfoBoxBtn mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+					Close
+				</a>
+			</div>
+			<!--
+			<div class="mdl-card__menu">
+			  <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+				<i class="material-icons">share</i>
+			  </button>
+			</div>
+			-->
+		</div>
+	</div>
 </body>
 
 </html>
