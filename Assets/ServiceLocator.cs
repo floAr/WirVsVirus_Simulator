@@ -21,6 +21,7 @@ public class ServiceLocator : MonoBehaviour
     public bool CoronaTests = false; //
     public bool SocialDistancing = false; // Haben wir grade keine story zu.
     public bool StayAtHome = false; //
+    public bool DebugVis = false;
 
     public static bool oldValues = false;
     public static bool oldHomeOffice = false; //
@@ -32,6 +33,7 @@ public class ServiceLocator : MonoBehaviour
     public static bool oldCoronaTests = false; //
     public static bool oldSocialDistancing = false; // Haben wir grade keine story zu.
     public static bool oldStayAtHome = false; //
+    public static bool oldDebugVis = false;
 
     public Spawner Spawner;
     public PersonBuilder PersonBuilder;
@@ -87,6 +89,7 @@ public class ServiceLocator : MonoBehaviour
     public void TOGGLE_coronaTests() { CoronaTests = !CoronaTests; }
     public void TOGGLE_closePublic() { CloseRestaurants = !CloseRestaurants; }
     public void TOGGLE_selfQuarantine() { SelfQuarantaine = !SelfQuarantaine; }
+    public void TOGGLE_debugVis() { DebugVis = !DebugVis; }
     #endregion
 
 

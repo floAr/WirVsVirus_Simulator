@@ -26,6 +26,11 @@ public class InfectionGraph : MonoBehaviour
         _infectionSpots = new List<Vector3>();
     }
 
+    void Update()
+    {
+        SpotParent.gameObject.SetActive(ServiceLocator.Instance.DebugVis);
+    }
+
     //private void Update()
     //{
     //    GraphRenderer.positionCount = _linearGraph.Count;
@@ -69,6 +74,9 @@ public class InfectionGraph : MonoBehaviour
 
     void OnPostRender()
     {
+        if (!ServiceLocator.Instance.DebugVis)
+            return;
+
         if (!glMat)
         {
             Debug.LogError("Please Assign a material on the inspector");

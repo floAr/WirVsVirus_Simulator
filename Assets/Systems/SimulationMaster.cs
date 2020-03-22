@@ -65,8 +65,6 @@ public class SimulationMaster : MonoBehaviour
         PauseButton.gameObject.SetActive(false);
     }
 
-
-
     public void GatherSimulationData()
     {
         var uninfected = 0;
