@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en-us">
 
 <head>
@@ -291,69 +291,82 @@
             $("#infoBox").fadeIn();
         }
 
-        function updateChart(array) {
+		function updateChart(array) {
 
-            var xEntrys = [];
+			var xEntrys = [];
 
-            for (var i = 0; i < array[0].length; i++) {
-                xEntrys.push('Tag ' + i);
-            }
-
-
-            var gesund = {
-                x: xEntrys,
-                y: array[0],
-                name: 'Gesund',
-                type: 'bar',
-                marker: {
-                    color: 'rgb(226,226,226)'
-                }
-            };
-
-            var krank = {
-                x: xEntrys,
-                y: array[1],
-                name: 'Krank',
-                type: 'bar',
-                marker: {
-                    color: 'rgb(192,0,0)'
-                }
-            };
+			for (var i = 0; i < array[0].length; i++) {
+				xEntrys.push(i);
+			}
 
 
-            var tot = {
-                x: xEntrys,
-                y: array[2],
-                name: 'Verstorben',
-                type: 'bar',
-                marker: {
-                    color: 'rgb(37,37,37)'
-                }
-            };
+			var gesund = {
+				x: xEntrys,
+				y: array[0],
+				name: 'Gesund',
+				type: 'bar',
+				marker: {
+					color: 'rgb(226,226,226)'
+				}
+			};
 
-            var genesen = {
-                x: xEntrys,
-                y: array[3],
-                name: 'Immune',
-                type: 'bar',
-                marker: {
-                    color: 'rgb(167,202,255)'
-                }
-            };
+			var krank = {
+				x: xEntrys,
+				y: array[1],
+				name: 'Krank',
+				type: 'bar',
+				marker: {
+					color: 'rgb(192,0,0)'
+				}
+			};
 
 
-            var data = [gesund, krank,  genesen,tot];
+			var tot = {
+				x: xEntrys,
+				y: array[2],
+				name: 'Verstorben',
+				type: 'bar',
+				marker: {
+					color: 'rgb(37,37,37)'
+				}
+			};
 
-            var layout = {  autosize: false,
-                height: 250,
-                width: 500,
-                barmode: 'stack'};
+			var genesen = {
+				x: xEntrys,
+				y: array[3],
+				name: 'Immune',
+				type: 'bar',
+				marker: {
+					color: 'rgb(167,202,255)'
+				}
+			};
 
-            Plotly.newPlot('chartDiv', data, layout);
 
-        }
+            var data = [tot, krank, genesen, gesund];
 
-    </script>
+			var layout = {  autosize: false,
+				height: 400,
+				width: 500,
+				 margin: {
+					l: 60,
+					r: 10,
+					b: 0,
+					t: 25,
+					pad: 4
+				 },
+				barmode: 'stack',
+				bargap:0,
+				legend: {"orientation": "h"},
+				xaxis: {
+					showticklabels:false
+                },
+
+				};
+
+			Plotly.newPlot('chartDiv', data, layout, {displayModeBar: false});
+		}
+
+	</script>
 
 </head>
 
@@ -413,7 +426,7 @@
 
                             <div class="statisticsCard demo-card-wide mdl-card mdl-shadow--2dp" id="statistics">
                                 <div class="mdl-card__title">
-                                    <h2 class="mdl-card__title-text">Statistics</h2>
+                                    <h2 class="mdl-card__title-text">Verteilung Bevölkerung (%)</h2>
                                 </div>
                                 <div class="sideCardContentBox">
                                     <div class="mdl-card__actions mdl-card--border">
