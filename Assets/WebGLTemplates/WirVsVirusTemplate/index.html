@@ -299,7 +299,7 @@
 			};
 
 
-			var data = [gesund, krank, genesen, tot];
+            var data = [tot, krank, genesen, gesund];
 
 			var layout = {  autosize: false,
 				height: 400,
@@ -314,15 +314,10 @@
 				barmode: 'stack',
 				bargap:0,
 				legend: {"orientation": "h"},
-				title: {
-					text:'Verteilung:',
-					xref: 'paper',
-					x: 0.01,
-					y: 0.99
-				},
 				xaxis: {
 					showticklabels:false
-				}
+                },
+
 				};
 
 			Plotly.newPlot('chartDiv', data, layout, {displayModeBar: false});
@@ -384,7 +379,7 @@
 
 							<div class="statisticsCard demo-card-wide mdl-card mdl-shadow--2dp" id="statistics">
 								<div class="mdl-card__title">
-									<h2 class="mdl-card__title-text">Statistics</h2>
+									<h2 class="mdl-card__title-text">Verteilung Bevölkerung (%)</h2>
 								</div>
 								<div class="sideCardContentBox">
 									<div class="mdl-card__actions mdl-card--border">
