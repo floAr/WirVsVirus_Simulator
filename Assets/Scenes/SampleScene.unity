@@ -12665,12 +12665,12 @@ PrefabInstance:
     - target: {fileID: 884995164733764133, guid: 36eb960731ac0034881a2484c9b2a534,
         type: 3}
       propertyPath: timeSteps
-      value: 15
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 884995164733764133, guid: 36eb960731ac0034881a2484c9b2a534,
         type: 3}
       propertyPath: maxTimesteps
-      value: 2000
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 36eb960731ac0034881a2484c9b2a534, type: 3}
@@ -12992,7 +12992,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1634658189, guid: 842bd042f6b52f245b2801d3d1aa9106, type: 3}
       propertyPath: isRunning
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1634658189, guid: 842bd042f6b52f245b2801d3d1aa9106, type: 3}
       propertyPath: chart
