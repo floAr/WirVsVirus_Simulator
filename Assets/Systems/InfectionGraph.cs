@@ -12,8 +12,10 @@ public class InfectionGraph : MonoBehaviour
     //private List<Transform> _linearGraph;
 
     public Material glMat;
+    public GameObject infectonSpotPrefab;
     public List<Person> _persons;
     public List<Vector3> _infectionSpots;
+    public Transform SpotParent;
 
     private void Start()
     {
@@ -22,6 +24,11 @@ public class InfectionGraph : MonoBehaviour
         _spawnerRef = ServiceLocator.Instance.Spawner;
         _persons = new List<Person>();
         _infectionSpots = new List<Vector3>();
+    }
+
+    void Update()
+    {
+        SpotParent.gameObject.SetActive(ServiceLocator.Instance.DebugVis);
     }
 
     //private void Update()
@@ -67,6 +74,9 @@ public class InfectionGraph : MonoBehaviour
 
     void OnPostRender()
     {
+        if (!ServiceLocator.Instance.DebugVis)
+            return;
+
         if (!glMat)
         {
             Debug.LogError("Please Assign a material on the inspector");
@@ -94,5 +104,6 @@ public class InfectionGraph : MonoBehaviour
     public void RegisterInfection(Vector3 pos)
     {
         _infectionSpots.Add(pos);
+        Instantiate<GameObject>(infectonSpotPrefab, pos, Quaternion.identity, SpotParent);
     }
 }

@@ -50,13 +50,10 @@ public class PersonBuilder : MonoBehaviour
                 break;
         }
 
-
-
         renderer.color =
             person.isImmune ? ImmuneColor :
             !person.isInfected ? HealthyColor :
             Color.Lerp(HealthyColor, SevereInfectionColor, (person.infectionSeverity+1) / 3f);
-
 
     }
 }

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using XCharts;
 
@@ -32,10 +33,26 @@ public class SimulationMaster : MonoBehaviour
 
     private StringBuilder[] _dataChains;
 
-    public void Run(int seed = 1)
+    private void Awake()
+    {
+        UnityEngine.Random.InitState(1);
+    }
+
+    [ContextMenu("Reset Scene")]
+    void ResetScene()
+    {
+        Reset(1);
+    }
+
+    public void Reset(int seed)
+    {
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
+    }
+
+    public void Run()
     {
 
-        UnityEngine.Random.InitState(seed);
         isRunning = true;
         PlayButton.gameObject.SetActive(false);
         PauseButton.gameObject.SetActive(true);
@@ -47,8 +64,6 @@ public class SimulationMaster : MonoBehaviour
         PlayButton.gameObject.SetActive(true);
         PauseButton.gameObject.SetActive(false);
     }
-
-
 
     public void GatherSimulationData()
     {
@@ -140,7 +155,7 @@ public class SimulationMaster : MonoBehaviour
         OnUnityUpdate?.Invoke(this, new SimulationMasterTickEventArg()
         {
             TimeStep = timeStep
-        }); ;
+        });
     }
 }
 
