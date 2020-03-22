@@ -21,6 +21,8 @@ public class Person : MonoBehaviour
     public Place CurTargetPlace = null;
     public Place CurPlace = null;
 
+    public ParticleSystem InfectionSystem;
+
     public int InfectedBy = -1;
 
 
@@ -359,11 +361,9 @@ public class Person : MonoBehaviour
             if (distance < ServiceLocator.Instance.InfectionRadius)
             {
                 if (ServiceLocator.Instance.Spawner.Persons[i].isInfected && Random.value < infectionChance)
-                {
-                    isInfected = true;
+                {                   
                     InfectedBy = i;
-                    ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(this);
-                    ServiceLocator.Instance.InfectionGraph.AddInfectedPerson(this);
+                    Infect();
                 }
             }
         }
@@ -383,6 +383,15 @@ public class Person : MonoBehaviour
         ServiceLocator.Instance.Graveyard.MoveToGraveyard(this);
 
         enabled = false;
+    }
+
+
+    public void Infect()
+    {
+        isInfected = true;
+        ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(this);
+        ServiceLocator.Instance.InfectionGraph.AddInfectedPerson(this);
+        InfectionSystem.Play();
     }
 
     private void UpdateUnity()
