@@ -6,7 +6,7 @@
         <title>Unity WebGL Player | WirVsVirus_Simulator</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined">
         <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.blue_grey-amber.min.css" />
+        <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.light_blue-indigo.min.css" />
         <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
         <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
@@ -15,7 +15,8 @@
         <script>
             var unityInstance = UnityLoader.instantiate("unityContainer", "Build/WebGL.json");
         </script>
-        
+
+
         <style>
             .unityCard {
                 width: 100%;
@@ -23,8 +24,6 @@
                 margin-left: 72px;
                 min-height: 74vh;
             }
-
-            /* webgl layout */
 
             .webgl-wrapper {
                 width: 100%;
@@ -323,12 +322,12 @@
                         '<p><strong>Problem:</strong> Selbst wenn man die Verhaltensregeln beachtet, ist die Gefahr groß, dass man sich gegenseitig ansteckt. Hinzu kommt, dass viele Menschen das neue Coronavirus in sich haben, ohne es selbst zu merken. Bei vielen bricht die Krankheit erst nach mehreren Tagen (bis zu zwei Wochen) aus, in denen sie bereits mehrere andere Personen infiziert haben. Außerdem gibt es viele Menschen, die selbst gar nicht krank werden, das Virus aber in sich tragen und andere damit anstecken können.</p>\n' +
                         '<p><strong>Lösung:</strong> Der sicherste Schutz davor, das Virus weiter zu verbreiten, ist, möglichst wenige Menschen persönlich zu sehen. Am besten wäre, wenn jede und jeder für einige Wochen nur mit den Personen zusammen ist, mit denen sie oder er sowieso in einem Haushalt zusammenlebt. Natürlich ist das nicht für alle Menschen möglich, da viele zum Beispiel weiter arbeiten oder sich um andere Menschen kümmern müssen. Umso wichtiger ist aber, dass wir für eine gewisse Zeit auf alle Kontakte verzichten, die nicht unbedingt sein müssen. Nach ca. zwei Wochen sind wir nicht mehr ansteckend, selbst wenn wir das Virus in uns tragen.<br>\n' +
                         'Wenn die Menschen nicht freiwillig zu Hause bleiben, kann der Staat ihnen verbieten, sich draußen in Gruppen zu treffen (Versammlungsverbot) oder sogar ganz verbieten, raus zu gehen (Ausgangssperre). Beide Maßnahmen sind große Eingriffe in die Freiheitsrechte unsere Gesellschaft und dürfen deshalb nur in absoluten Ausnahmesituationen getroffen werden. Grundlage dafür ist im Falle von COVID-19 das Infektionsschutzgesetz der Bundesländer.</p>\n' +
-                        '<p><strong>Fazit:</strong> Je mehr Menschen mehr Zeit zu Hause verbringen und niemand anderen treffen, desto langsamer verbreitet sich das Virus insgesamt. Dadurch werden nicht so viele Menschen gleichzeitig krank und auch die Anzahl schwerer Verläufe der Krankheit ist viel geringer. Es müssen nicht so viele Patientinnen und Patienten gleichzeitig ins Krankenhaus und das Gesundheitswesen hat mehr Zeit, sich auf die neue Situation vorzubereiten <em>(Link zu Maßnahme „Kapazitäten der Krankenhäuser erhöhen“)</em></p>';
+                        '<p><strong>Fazit:</strong> Je mehr Menschen mehr Zeit zu Hause verbringen und niemand anderen treffen, desto langsamer verbreitet sich das Virus insgesamt. Dadurch werden nicht so viele Menschen gleichzeitig krank und auch die Anzahl schwerer Verläufe der Krankheit ist viel geringer. Es müssen nicht so viele Patientinnen und Patienten gleichzeitig ins Krankenhaus und das Gesundheitswesen hat mehr Zeit, sich auf die neue Situation vorzubereiten</p>';
                 }
                 else if(id == "closeSchools") {
                     title = "Schulen und Kitas schließen";
                     text = '          <p><strong>Maßnahme: Schulen und Kitas schließen</strong></p>\n' +
-                        '<p><strong>Problem:</strong> In Schulen und Kindertagesstätten kann sich das neue Coronavirus sehr schnell verbreiten. Hier sind viele Menschen zusammen, die sich nicht gegenseitig aus dem Weg gehen können und die Räume (z. B. Toiletten oder Umkleidekabinen) und Material (z. B. Bücher oder Computer) gemeinsam nutzen. Vor allem bei kleinen Kindern kann man außerdem nicht sicherstellen, dass sie sich an die Verhaltensregeln <em>(Link zu Maßnahme Verhaltensregeln)</em> halten. Für die meisten gesunden Kinder ist das neue Coronavirus nicht sehr gefährlich, sie können aber andere, gefährdete Personen wie beispielsweise ihre Großeltern anstecken.</p>\n' +
+                        '<p><strong>Problem:</strong> In Schulen und Kindertagesstätten kann sich das neue Coronavirus sehr schnell verbreiten. Hier sind viele Menschen zusammen, die sich nicht gegenseitig aus dem Weg gehen können und die Räume (z. B. Toiletten oder Umkleidekabinen) und Material (z. B. Bücher oder Computer) gemeinsam nutzen. Vor allem bei kleinen Kindern kann man außerdem nicht sicherstellen, dass sie sich an die Verhaltensregeln halten. Für die meisten gesunden Kinder ist das neue Coronavirus nicht sehr gefährlich, sie können aber andere, gefährdete Personen wie beispielsweise ihre Großeltern anstecken.</p>\n' +
                         '<p><strong>Lösung:</strong> Der Staat kann auf Basis des Infektionsschutzgesetzes Schulen und Kitas vorübergehend schließen. Wichtig ist dann, dass die Kinder in der Zeit, in der sie sonst in der Schule/Kita wären, zu Hause bleiben, sich nicht mit Freunden treffen und keinen Freizeitaktivitäten in Gruppen nachgehen. Die Schließung von Schulen und Kitas ist ein großer Schritt, der viele Schwierigkeiten nach sich zieht und der deshalb nur in Extremsituationen gemacht werden darf. Denn zum einen ist es für viele berufstätige Eltern schwierig, ihre Kinder zu Hause zu betreuen. Zum anderen gehen bei längerem Schulausfall Bildungsinhalte und soziale Kontakte verloren, die für die Kinder wichtig wären.</p>\n' +
                         '<p><strong>Fazit:</strong> Sind Schulen und Kitas geschlossen und bleiben die Kinder stattdessen zu Hause, fällt ein großer Risikofaktor für die Ausbreitung des neuen Coronavirus weg. Es werden weniger Kinder und Lehrer krank und das Virus verbreitet sich insgesamt viel langsamer.</p>';
                 }
@@ -348,7 +347,7 @@
                 else if(id == "closePublic") {
                     title = "Freizeitstätten schließen und Veranstaltungen absagen";
                     text = '          <p><strong>Maßnahme: Freizeitstätten schließen und Veranstaltungen absagen</strong></p>\n' +
-                        '<p><strong>Problem:</strong> An vielen Orten, an denen wir unsere Freizeit verbringen, kann das neue Coronavirus sich sehr schnell verbreiten. Das sind vor allem Orte wie Bars oder Clubs, Konzerte oder Großveranstaltungen, Sportvereine oder Fitnessstudios. An diesen Orten ist es quasi unmöglich, die Verhaltensregeln <em>(Link zu Maßnahme Verhaltensregel)</em> einzuhalten.</p>\n' +
+                        '<p><strong>Problem:</strong> An vielen Orten, an denen wir unsere Freizeit verbringen, kann das neue Coronavirus sich sehr schnell verbreiten. Das sind vor allem Orte wie Bars oder Clubs, Konzerte oder Großveranstaltungen, Sportvereine oder Fitnessstudios. An diesen Orten ist es quasi unmöglich, die Verhaltensregeln einzuhalten.</p>\n' +
                         '<p><strong>Lösung:</strong> Der Staat kann auf Basis des Infektionsschutzgesetzes verhindern, dass große Menschengruppen in ihrer Freizeit zusammenkommen, indem er Veranstaltungen verbietet und Freizeiteinrichtungen schließt. Auch das ist ein großer Eingriff in die Freiheitsrechte jeder und jedes einzelnen und deshalb nur in extremen Ausnahmen möglich. Diese Maßnahme bringt viele wirtschaftliche Probleme mit sich, da die Inhaberinnen in Inhaber von z. B. Restaurants oder Sportstätten plötzlich keinen Umsatz mehr haben. Auch alle Personen, die mit Veranstaltungen ich Geld verdienen (Veranstalter, Messebauer, Künstler etc.) stehen von heute auf morgen ohne Einkommen da.</p>\n' +
                         '<p><strong>Fazit:</strong> Je weniger öffentliche Orte es gibt, an denen Menschen ihre Freizeit in Gruppen verbringen, desto langsamer kann sich das Virus in der Gesellschaft ausbreiten. Das funktioniert allerdings nur, wenn die Menschen dann auch tatsächlich zu Hause bleiben, anstatt sich privat zu Hause zu verabreden.</p>';
                 }
@@ -392,7 +391,7 @@
                 var tot = {
                     x: xEntrys,
                     y: array[2],
-                    name: 'Verstorben',
+                    name: 'Verstorbene',
                     type: 'bar',
                     marker: {
                         color: 'rgb(37,37,37)'
@@ -456,7 +455,7 @@
                 <span class="mdl-layout-title">WirVsVirus Simulator</span>
                 <nav class="mdl-navigation">
                     <a class="mdl-navigation__link" target="_blank" href="https://wirvsvirushackathon.org/"><img class="wirVsVirusImg wirVsVirusImgSide" src="Logo_Projekt.png">WirVsVirus Hackathon</a>
-                    <a class="mdl-navigation__link" target="_blank" href="https://github.com/floAr/WirVsVirus_Simulator">Source on Github</a>
+                    <a class="mdl-navigation__link" target="_blank" href="https://github.com/floAr/WirVsVirus_Simulator">Quellcode auf Github</a>
                     <a class="mdl-navigation__link" target="_blank" href="https://stock.adobe.com">Hintergundbild: ©dottedyeti - stock.adobe.com</a>
                 </nav>
             </div>
@@ -467,7 +466,11 @@
                     <div class="mdl-cell mdl-cell--12-col">
                         <div class="demo-card-wide mdl-card welcomeTxt">
                             <div class="mdl-card__supporting-text">
-                                Herzlich willkommen bei Simulator "Was tun gegen Corona?" Hier kannst du selbst ausprobieren, wie sich dein Verhalten und politische Entscheidungen auf die Ausbreitung und Entwicklung von COVID-19 in einer Stadt auswirken. Informationen zu den einzelnen Maßnahmen, ihren Chancen und Risiken bekommst du, wenn du auf das   <i class="material-icons inlineIcon">info</i> neben der Maßnahme klickst.
+                                Herzlich willkommen bei Simulator "Was tun gegen Corona?"
+                                <br>
+                                Hier kannst du selbst ausprobieren, wie sich dein Verhalten und politische Entscheidungen auf die Ausbreitung und Entwicklung von COVID-19 in einer Stadt auswirken.
+                                <br>
+                                Informationen zu den einzelnen Maßnahmen, ihren Chancen und Risiken bekommst du, wenn du auf das   <i class="material-icons inlineIcon">info</i> neben der Maßnahme klickst.
                                 <br>
                                 Hinweis: Die Simulation basiert auf den bisherigen Erfahrungswerten mit dem neuen Coronavirus (Ansteckungsrate etc.), soll aber in erster Linie das Grundprinzip der Verbreitung veranschaulichen und ist daher nicht maßstabsgetreu.
                             </div>
