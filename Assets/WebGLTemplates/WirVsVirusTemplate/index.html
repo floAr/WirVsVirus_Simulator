@@ -93,6 +93,7 @@
             margin-top: 20px;
         }
 
+        /*
         .sliderLabel div {
             line-height: 25px;
             color: #ffffff;
@@ -109,6 +110,12 @@
 
         .spaces {
             height: 35px;
+        }
+        */
+
+        .toggleInfektionsvisualisierung {
+            float: right;
+            margin-right: 1vw;
         }
 
         .infoBox {
@@ -140,6 +147,12 @@
         .closeInfoBoxBtn {
             float: right;
         }
+
+        .welcomeTxt {
+            width: 100%;
+            min-height:0!important;
+        }
+
     </style>
 
     <script>
@@ -164,10 +177,23 @@
             }
             isPaused=!isPaused
         }
+		
+		function reset() {
+                unityInstance.SendMessage("SimulationControl","Reset", 1);
+                //$(".is-checked").removeClass("is-checked");
+                $("#chartDiv").html("");
+                showStartStop();
+        }
 
-        $( document ).ready(function() {
+        $(document).ready(function() {
             $(".is-checked").removeClass("is-checked");
 
+            $(document).keyup(function(e) {
+                if (e.key === "Escape") { // escape key maps to keycode `27`
+                    closeDialog();
+                }
+            });
+            /*
             const demoInput = document.getElementById('stayHomeSlider');
             const labelMaker = function (e) {
                 const input = e.target || e;
@@ -207,6 +233,7 @@
             window.onload = function() {
                 labelMaker(demoInput)
             };
+             */
 
 
             $(".infoBoxOpener").bind( "click", function() {
@@ -214,8 +241,7 @@
             });
 
             $(".closeInfoBoxBtn").on("click", function() {
-                $("#infoBox").fadeOut();
-                $("#siteMain").removeClass("backgroundBlur");
+                closeDialog();
             });
 
             $('.toggleInput').click(function() {
@@ -224,6 +250,23 @@
             });
 
         });
+
+        function showStartStop() {
+            $("#RunPause").show();
+            $("#RunPause").html("Start");
+            isPaused = true;
+            startedOnce = false;
+
+        }
+
+        function hideStartStop() {
+            $("#RunPause").hide();
+        }
+
+        function closeDialog() {
+            $("#infoBox").fadeOut();
+            $("#siteMain").removeClass("backgroundBlur");
+        }
 
         function openDialog(id) {
             $("#siteMain").addClass("backgroundBlur");
@@ -277,9 +320,9 @@
                 title = "Verhaltensregeln";
                 text = '<p><strong>Maßnahme: An die Verhaltensregeln halten</strong></p>\n' +
                     '<p><strong>Problem:</strong> Das neue Coronavirus ist sehr ansteckend – viel ansteckender als viele andere Viren, die wir kennen. Es überträgt sich von Mensch zu Mensch vor allem über Körperflüssigkeiten, beispielsweise wenn wir niesen oder husten. Dabei reicht es schon, sich selbst in die Hand zu husten, und damit jemand anderen anzufassen. Das Virus kommt vor allem über die Schleimhäute in den Körper, also über Mund und Nase oder auch über die Augen.</p>\n' +
-                    '<p><strong>Lösung:</strong> Die Expertinnen und Experten aus der Medizin haben klare und einfache Regeln <em>(Link zu Übersicht Regeln von BMG, RKI o.ä.)</em> aufgestellt, wie wir verhindern können, andere anzustecken:</p>\n' +
+                    '<p><strong>Lösung:</strong> Die Expertinnen und Experten aus der Medizin haben <em><a href="https://www.infektionsschutz.de/coronavirus/hygiene/10-einfache-tipps-zum-schutz-vor-infektionen.html" target="_blank">klare und einfache Regeln</a></em> aufgestellt, wie wir verhindern können, andere anzustecken:</p>\n' +
                     '<ul>\n' +
-                    '<li>Häufig und richtig Händewaschen: Mit Seife, mindestens 30 Sekunden lang und so, dass alle Teile der Hände gewaschen werden. <em>( Link zu Erklärvideo o.ä.)</em></li>\n' +
+                    '<li>Häufig und richtig Händewaschen: Mit Seife, mindestens 30 Sekunden lang und so, dass alle Teile der Hände gewaschen werden. <em><a href="https://www.infektionsschutz.de/mediathek/filme/filme-zum-richtigen-haendewaschen.html#c10902" target="_blank">(Erklärungsvideo)</a></em></li>\n' +
                     '<li>Richtig husten und niesen: Nicht in die Luft oder in die eigene Hand, sondern in die Armbeuge.</li>\n' +
                     '<li>Abstand halten: Mindestens 1,5 Meter zu anderen Menschen – egal ob auf der Straße, in der Bahn oder im Supermarkt.</li>\n' +
                     '<li>Nicht ins eigene Gesicht fassen.</li>\n' +
@@ -354,8 +397,8 @@
             var data = [tot, krank, genesen, gesund];
 
             var layout = {  autosize: false,
-                height: $("#statistics").height() - 90,
-                width: $("#statistics").width() - 30,
+                height: $("#statisticsContentBox").height() * 0.93,
+                width: $("#statisticsContentBox").width() * 0.97,
                 margin: {
                     l: 60,
                     r: 10,
@@ -405,6 +448,15 @@
 
     <main id="siteMain" class="mdl-layout__content">
         <div class="mdl-grid">
+            <div class="mdl-cell mdl-cell--12-col">
+                <div class="demo-card-wide mdl-card welcomeTxt">
+                    <div class="mdl-card__supporting-text">
+                        Herzlich willkommen bei Simulator "Was tun gegen Corona?" Hier kannst du selbst ausprobieren, wie sich dein Verhalten und politische Entscheidungen auf die Ausbreitung und Entwicklung von COVID-19 in einer Stadt auswirken. Informationen zu den einzelnen Maßnahmen, ihren Chancen und Risiken bekommst du, wenn du auf das   <i class="material-icons" style="vertical-align:middle;">info</i> neben der Maßnahme klickst.
+                        <br>
+                        Hinweis: Die Simulation basiert auf den bisherigen Erfahrungswerten mit dem neuen Coronavirus (Ansteckungsrate etc.), soll aber in erster Linie das Grundprinzip der Verbreitung veranschaulichen und ist daher nicht maßstabsgetreu.
+                    </div>
+                </div>
+            </div>
 
             <div class="mdl-cell mdl-cell--7-col">
 
@@ -420,6 +472,15 @@
                             </div>
                             <div class="mdl-card__actions mdl-card--border">
                                 <a id="RunPause" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="ToggleRunPause()">Start</a>
+                                <a id="reset" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="reset()">Reset</a>
+                                <div class="toggleInfektionsvisualisierung">
+                                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOOGLE_debugVis">
+                                        <input type="checkbox" id="TOOGLE_debugVis" class="toggleInput mdl-switch__input">
+                                        <span class="mdl-switch__label">
+                                                Infektionsvisualisierung
+                                            </span>
+                                    </label>
+                                </div>
                             </div>
                         </div>
 
@@ -438,17 +499,19 @@
                             <div class="mdl-card__title">
                                 <h2 class="mdl-card__title-text">Verteilung Bevölkerung (%) im Verlauf der Zeit (Start bis Jetzt)</h2>
                             </div>
-                            <div class="sideCardContentBox">
+                            <div id="statisticsContentBox" class="sideCardContentBox">
                                 <div class="mdl-card__actions mdl-card--border">
                                 </div>
                                 <div id="chartDiv">
                                 </div>
                             </div>
+                            <!--
                             <div class="mdl-card__menu">
                                 <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
                                     <i class="material-icons">share</i>
                                 </button>
                             </div>
+                            -->
                         </div>
 
                     </div>
@@ -467,7 +530,7 @@
                                         <span class="mdl-switch__label">
                                                 Selbstquarantäne
                                                 <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                    <i id="selfQuarantine" class="material-icons-outlined infoBoxOpener">info</i>
+                                                    <i id="selfQuarantine" class="material-icons infoBoxOpener">info</i>
                                                 </button>
                                             </span>
                                     </label>
@@ -477,7 +540,7 @@
                                         <span class="mdl-switch__label">
                                                 Verhaltensregeln
                                                 <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                    <i id="verhaltensregeln" class="material-icons-outlined infoBoxOpener">info</i>
+                                                    <i id="verhaltensregeln" class="material-icons infoBoxOpener">info</i>
                                                 </button>
                                             </span>
                                     </label>
@@ -487,7 +550,7 @@
                                         <span class="mdl-switch__label">
                                                 Kapazitäten der Krankenhäuser verdoppeln
                                                 <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                    <i id="doubleKh" class="material-icons-outlined infoBoxOpener">info</i>
+                                                    <i id="doubleKh" class="material-icons infoBoxOpener">info</i>
                                                 </button>
                                             </span>
                                     </label>
@@ -497,7 +560,7 @@
                                         <span class="mdl-switch__label">
                                                 Homeoffice
                                                 <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                    <i id="homeoffice" class="material-icons-outlined infoBoxOpener">info</i>
+                                                    <i id="homeoffice" class="material-icons infoBoxOpener">info</i>
                                                 </button>
                                             </span>
                                     </label>
@@ -507,7 +570,7 @@
                                         <span class="mdl-switch__label">
                                                 Freizeitstätten schließen und Veranstaltungen absagen
                                                 <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                    <i id="closePublic" class="material-icons-outlined infoBoxOpener">info</i>
+                                                    <i id="closePublic" class="material-icons infoBoxOpener">info</i>
                                                 </button>
                                             </span>
                                     </label>
@@ -517,7 +580,7 @@
                                         <span class="mdl-switch__label">
                                                 Schulschließungen
                                                 <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                    <i id="closeSchools" class="material-icons-outlined infoBoxOpener">info</i>
+                                                    <i id="closeSchools" class="material-icons infoBoxOpener">info</i>
                                                 </button>
                                             </span>
                                     </label>
@@ -527,19 +590,20 @@
                                         <span class="mdl-switch__label">
                                                 Corona Tests
                                                 <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                    <i id="coronaTests" class="material-icons-outlined infoBoxOpener">info</i>
+                                                    <i id="coronaTests" class="material-icons infoBoxOpener">info</i>
                                                 </button>
                                             </span>
                                     </label>
 
-                                    <div class="spaces"></div>
-                                    <input id="stayHomeSlider" class="mdl-slider mdl-js-slider" type="range" min="20" max="80" value="20" tabindex="0" step="30">
-                                    <span class="mdl-switch__label">
-                                            Menschen bleiben zu Hause
-                                            <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                <i id="stayHome" class="material-icons-outlined infoBoxOpener">info</i>
-                                            </button>
-                                    </span>
+                                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_stayHome">
+                                        <input type="checkbox" id="TOGGLE_stayHome" class="toggleInput mdl-switch__input">
+                                        <span class="mdl-switch__label">
+                                                Menschen bleiben zu Hause
+                                                <button class="mdl-button mdl-js-button mdl-button--icon">
+                                                    <i id="stayHome" class="material-icons infoBoxOpener">info</i>
+                                                </button>
+                                            </span>
+                                    </label>
 
                                 </div>
 
