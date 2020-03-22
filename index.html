@@ -16,7 +16,6 @@
             var unityInstance = UnityLoader.instantiate("unityContainer", "Build/WebGL.json");
         </script>
 
-
         <style>
             .unityCard {
                 width: 100%;
@@ -162,6 +161,11 @@
                 height: auto;
             }
 
+            .legendeImg {
+                height: 5em;
+                margin-left: 10%;
+            }
+
         </style>
 
         <script>
@@ -264,6 +268,7 @@
                 $("#RunPause").html("Start");
                 isPaused = true;
                 startedOnce = false;
+
             }
 
             function hideStartStop() {
@@ -480,12 +485,13 @@
                                     <div class="mdl-card__actions mdl-card--border">
                                         <a id="RunPause" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="ToggleRunPause()">Start</a>
                                         <a id="reset" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="reset()">Reset</a>
+                                        <img src="legende.png" class="legendeImg">
                                         <div class="toggleInfektionsvisualisierung">
                                             <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOOGLE_debugVis">
                                                 <input type="checkbox" id="TOOGLE_debugVis" class="toggleInput mdl-switch__input">
                                                 <span class="mdl-switch__label">
-                                                                Infektionsvisualisierung
-                                                            </span>
+                                                        Infektionsvisualisierung
+                                                    </span>
                                             </label>
                                         </div>
                                     </div>
@@ -535,81 +541,81 @@
                                             <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_selfQuarantine">
                                                 <input type="checkbox" id="TOGGLE_selfQuarantine" class="toggleInput mdl-switch__input">
                                                 <span class="mdl-switch__label">
-                                                                Selbstquarantäne
-                                                                <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                                    <i id="selfQuarantine" class="material-icons infoBoxOpener">info</i>
-                                                                </button>
-                                                            </span>
+                                                        Selbstquarantäne
+                                                        <button class="mdl-button mdl-js-button mdl-button--icon">
+                                                            <i id="selfQuarantine" class="material-icons infoBoxOpener">info</i>
+                                                        </button>
+                                                    </span>
                                             </label>
 
                                             <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_verhaltensregeln">
                                                 <input type="checkbox" id="TOGGLE_verhaltensregeln" class="toggleInput mdl-switch__input">
                                                 <span class="mdl-switch__label">
-                                                                Verhaltensregeln
-                                                                <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                                    <i id="verhaltensregeln" class="material-icons infoBoxOpener">info</i>
-                                                                </button>
-                                                            </span>
+                                                        Verhaltensregeln
+                                                        <button class="mdl-button mdl-js-button mdl-button--icon">
+                                                            <i id="verhaltensregeln" class="material-icons infoBoxOpener">info</i>
+                                                        </button>
+                                                    </span>
                                             </label>
 
                                             <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_doubleKh">
                                                 <input type="checkbox" id="TOGGLE_doubleKh" class="toggleInput mdl-switch__input">
                                                 <span class="mdl-switch__label">
-                                                                Kapazitäten der Krankenhäuser verdoppeln
-                                                                <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                                    <i id="doubleKh" class="material-icons infoBoxOpener">info</i>
-                                                                </button>
-                                                            </span>
+                                                        Kapazitäten der Krankenhäuser verdoppeln
+                                                        <button class="mdl-button mdl-js-button mdl-button--icon">
+                                                            <i id="doubleKh" class="material-icons infoBoxOpener">info</i>
+                                                        </button>
+                                                    </span>
                                             </label>
 
                                             <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_homeoffice">
                                                 <input type="checkbox" id="TOGGLE_homeoffice" class="toggleInput mdl-switch__input">
                                                 <span class="mdl-switch__label">
-                                                                Homeoffice
-                                                                <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                                    <i id="homeoffice" class="material-icons infoBoxOpener">info</i>
-                                                                </button>
-                                                            </span>
+                                                        Homeoffice
+                                                        <button class="mdl-button mdl-js-button mdl-button--icon">
+                                                            <i id="homeoffice" class="material-icons infoBoxOpener">info</i>
+                                                        </button>
+                                                    </span>
                                             </label>
 
                                             <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_closePublic">
                                                 <input type="checkbox" id="TOGGLE_closePublic" class="toggleInput mdl-switch__input">
                                                 <span class="mdl-switch__label">
-                                                                Freizeitstätten schließen und Veranstaltungen absagen
-                                                                <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                                    <i id="closePublic" class="material-icons infoBoxOpener">info</i>
-                                                                </button>
-                                                            </span>
+                                                        Freizeitstätten schließen und Veranstaltungen absagen
+                                                        <button class="mdl-button mdl-js-button mdl-button--icon">
+                                                            <i id="closePublic" class="material-icons infoBoxOpener">info</i>
+                                                        </button>
+                                                    </span>
                                             </label>
 
                                             <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_closeSchools">
                                                 <input type="checkbox" id="TOGGLE_closeSchools" class="toggleInput mdl-switch__input">
                                                 <span class="mdl-switch__label">
-                                                                Schulschließungen
-                                                                <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                                    <i id="closeSchools" class="material-icons infoBoxOpener">info</i>
-                                                                </button>
-                                                            </span>
+                                                        Schulschließungen
+                                                        <button class="mdl-button mdl-js-button mdl-button--icon">
+                                                            <i id="closeSchools" class="material-icons infoBoxOpener">info</i>
+                                                        </button>
+                                                    </span>
                                             </label>
 
                                             <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_coronaTests">
                                                 <input type="checkbox" id="TOGGLE_coronaTests" class="toggleInput mdl-switch__input">
                                                 <span class="mdl-switch__label">
-                                                                Corona Tests
-                                                                <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                                    <i id="coronaTests" class="material-icons infoBoxOpener">info</i>
-                                                                </button>
-                                                            </span>
+                                                        Corona Tests
+                                                        <button class="mdl-button mdl-js-button mdl-button--icon">
+                                                            <i id="coronaTests" class="material-icons infoBoxOpener">info</i>
+                                                        </button>
+                                                    </span>
                                             </label>
 
                                             <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_stayHome">
                                                 <input type="checkbox" id="TOGGLE_stayHome" class="toggleInput mdl-switch__input">
                                                 <span class="mdl-switch__label">
-                                                                Menschen bleiben zu Hause
-                                                                <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                                    <i id="stayHome" class="material-icons infoBoxOpener">info</i>
-                                                                </button>
-                                                            </span>
+                                                        Menschen bleiben zu Hause
+                                                        <button class="mdl-button mdl-js-button mdl-button--icon">
+                                                            <i id="stayHome" class="material-icons infoBoxOpener">info</i>
+                                                        </button>
+                                                    </span>
                                             </label>
 
                                         </div>
