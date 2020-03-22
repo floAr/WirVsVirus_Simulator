@@ -29,8 +29,8 @@ public class ServiceLocator : MonoBehaviour
     public WebBridge WebBridge;
     public Graveyard Graveyard;
 
+    
 
-    public int Seed = 12345;
 
     public float InfectionChance
     {
@@ -55,6 +55,5 @@ public class ServiceLocator : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        Random.InitState(Seed);
     }
 }

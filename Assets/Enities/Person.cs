@@ -394,9 +394,7 @@ public class Person : MonoBehaviour
         InfectionSystem.Play();
 
         // TODO 
-       var marker = GameObject.CreatePrimitive(PrimitiveType.Sphere);
-        marker.transform.position = this.transform.position;
-        marker.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
+        ServiceLocator.Instance.InfectionGraph.RegisterInfection(this.transform.position);
     }
 
     private void UpdateUnity()

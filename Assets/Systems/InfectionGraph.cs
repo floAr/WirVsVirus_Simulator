@@ -13,6 +13,7 @@ public class InfectionGraph : MonoBehaviour
 
     public Material glMat;
     public List<Person> _persons;
+    public List<Vector3> _infectionSpots;
 
     private void Start()
     {
@@ -20,6 +21,7 @@ public class InfectionGraph : MonoBehaviour
         //_linearGraph = new List<Transform>();
         _spawnerRef = ServiceLocator.Instance.Spawner;
         _persons = new List<Person>();
+        _infectionSpots = new List<Vector3>();
     }
 
     //private void Update()
@@ -87,5 +89,10 @@ public class InfectionGraph : MonoBehaviour
         GL.End();
 
         GL.PopMatrix();
+    }
+
+    public void RegisterInfection(Vector3 pos)
+    {
+
     }
 }
