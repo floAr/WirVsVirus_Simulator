@@ -29,8 +29,8 @@ public class ServiceLocator : MonoBehaviour
     public WebBridge WebBridge;
     public Graveyard Graveyard;
 
+    
 
-    public int Seed = 12345;
 
     public float InfectionChance
     {
@@ -48,12 +48,12 @@ public class ServiceLocator : MonoBehaviour
     public void TOGGLE_homeoffice() { HomeOffice = !HomeOffice; }
     public void TOGGLE_coronaTests() { CoronaTests = !CoronaTests; }
     public void TOGGLE_closePublic() { CloseRestaurants = !CloseRestaurants; }
+    public void TOGGLE_selfQuarantine() { SelfQuarantaine = !SelfQuarantaine; }
     #endregion
 
 
     private void Awake()
     {
         Instance = this;
-        Random.InitState(Seed);
     }
 }

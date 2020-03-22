@@ -11,8 +11,8 @@ public class Person : MonoBehaviour
     public bool isInfected;
     public bool isImmune = false;
     public bool isDead = false;
-    public int sicknessCounter = 900;
-    public int deathCounter = 150;
+    public int sicknessCounter = 960;
+    public int deathCounter = 480;
     public int infectionSeverity = 0; // 0 = keine Sypthome 1 = Husten & Fieber 3 = Lungenentzündung
     public int ageGroup = 1; //0 = Kind 1 = Erwachsen 2 = Rentner
     public SpriteRenderer render;
@@ -29,9 +29,9 @@ public class Person : MonoBehaviour
     void Awake()
     {
         //age
-        int randInt = Random.Range(0, 10);
+        int randInt = Random.Range(0, 12);
         if (randInt < 3) ageGroup = 0;
-        else if (randInt < 7) ageGroup = 1;
+        else if (randInt < 9) ageGroup = 1;
         else ageGroup = 2;
 
         //severity
@@ -59,10 +59,10 @@ public class Person : MonoBehaviour
         AvailableMissions.Add(new Mission()
         {
             Destination = typeof(Hospital),
-            Counter = 30,
-            MaxCounter = 30,
-            Duration = 120,
-            MaxDuration = 120,
+            Delay = 30,
+            MaxDelay = 30,
+            Duration = 100,
+            MaxDuration = 100,
             IsApplicable = (p) => p.isInfected && p.infectionSeverity == 2
         });
 
@@ -70,21 +70,21 @@ public class Person : MonoBehaviour
         AvailableMissions.Add(new Mission()
         {
             Destination = typeof(House),
-            Counter = 180,
-            MaxCounter = 180,
-            Duration = 60,
-            MaxDuration = 60,
-            IsApplicable = (p) => p.isInfected && p.infectionSeverity == 1
+            Delay = 180,
+            MaxDelay = 180,
+            Duration = 360,
+            MaxDuration = 360,
+            IsApplicable = (p) => p.isInfected && p.infectionSeverity == 1 && ServiceLocator.Instance.SelfQuarantaine
         });
 
         //all other go to self quaratine if we have tests 
         AvailableMissions.Add(new Mission()
         {
             Destination = typeof(House),
-            Counter = 30,
-            MaxCounter = 30,
-            Duration = 60,
-            MaxDuration = 60,
+            Delay = 30,
+            MaxDelay = 30,
+            Duration = 180,
+            MaxDuration = 180,
             IsApplicable = (p) => p.isInfected && ServiceLocator.Instance.CoronaTests
         });
      
@@ -93,8 +93,8 @@ public class Person : MonoBehaviour
             AvailableMissions.Add(new Mission()
             {
                 Destination = typeof(Workplace),
-                Counter = Random.Range(200, 300),
-                MaxCounter = 300,
+                Delay = Random.Range(200, 500),
+                MaxDelay = 500,
                 Duration = 120,
                 MaxDuration = 120,
                 IsApplicable = (p) => !ServiceLocator.Instance.HomeOffice
@@ -106,8 +106,8 @@ public class Person : MonoBehaviour
             {
                 Destination = typeof(House),
                 SpecificPlace = GetNearbyPlace(typeof(House)),
-                Counter = Random.Range(200, 300),
-                MaxCounter = 300,
+                Delay = Random.Range(200, 500),
+                MaxDelay = 500,
                 Duration = 120,
                 MaxDuration = 120,
                 IsApplicable = (p) => ServiceLocator.Instance.HomeOffice
@@ -118,10 +118,10 @@ public class Person : MonoBehaviour
             AvailableMissions.Add(new Mission()
             {
                 Destination = typeof(School),
-                Counter = Random.Range(200, 300),
-                MaxCounter = 300,
-                Duration = 120,
-                MaxDuration = 120,
+                Delay = Random.Range(200, 500),
+                MaxDelay = 400,
+                Duration = 90,
+                MaxDuration = 90,
                 IsApplicable = (p) => !ServiceLocator.Instance.CloseSchools
             });
 
@@ -131,10 +131,10 @@ public class Person : MonoBehaviour
             {
                 Destination = typeof(House),
                 SpecificPlace = GetNearbyPlace(typeof(House)),
-                Counter = Random.Range(200, 300),
-                MaxCounter = 300,
-                Duration = 120,
-                MaxDuration = 120,
+                Delay = Random.Range(200, 500),
+                MaxDelay = 500,
+                Duration = 90,
+                MaxDuration = 90,
                 IsApplicable = (p) => ServiceLocator.Instance.CloseSchools
             });
 
@@ -144,10 +144,10 @@ public class Person : MonoBehaviour
             {
                 Destination = typeof(House),
                 SpecificPlace = GetNearbyPlace(typeof(House)),
-                Counter = Random.Range(200, 300),
-                MaxCounter = 300,
-                Duration = 60,
-                MaxDuration = 60,
+                Delay = Random.Range(200, 500),
+                MaxDelay = 500,
+                Duration = 90,
+                MaxDuration = 90,
                 IsApplicable = (p) => ServiceLocator.Instance.CloseSchools
             });
 
@@ -155,9 +155,9 @@ public class Person : MonoBehaviour
         AvailableMissions.Add(new Mission()
         {
             Destination = typeof(Freetime),
-            SpecificPlace = GetNearbyPlace(typeof(Freetime)),
-            Counter = Random.Range(300, 1000),
-            MaxCounter = 900,
+            //SpecificPlace = GetNearbyPlace(typeof(Freetime)),
+            Delay = Random.Range(300, 1000),
+            MaxDelay = 1000,
             Duration = 50,
             MaxDuration = 50,
             IsApplicable = (p) => !ServiceLocator.Instance.CloseRestaurants
@@ -168,10 +168,10 @@ public class Person : MonoBehaviour
         {
             Destination = typeof(House),
             SpecificPlace = GetNearbyPlace(typeof(House)),
-            Counter = Random.Range(100, 200),
-            MaxCounter = 150,
-            Duration = 50,
-            MaxDuration = 50,
+            Delay = Random.Range(0, 30),
+            MaxDelay = 30,
+            Duration = 100,
+            MaxDuration = 100,
             IsApplicable = (p) => ServiceLocator.Instance.StayAtHome
         });
 
@@ -180,8 +180,8 @@ public class Person : MonoBehaviour
         {
             Destination = typeof(House),
             SpecificPlace = GetNearbyPlace(typeof(House)),
-            Counter = Random.Range(200, 300),
-            MaxCounter = 300,
+            Delay = Random.Range(300, 500),
+            MaxDelay = 500,
             Duration = 50,
             MaxDuration = 50
         });
@@ -221,7 +221,7 @@ public class Person : MonoBehaviour
         {
             if (mission.IsApplicable(this))
             {
-                if (--mission.Counter <= 0 && CurMission == null)
+                if (--mission.Delay <= 0 && CurMission == null)
                 {
                     StartMission(mission);
                 }
@@ -285,7 +285,7 @@ public class Person : MonoBehaviour
         ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(this);
 
         CurMission.Duration = CurMission.MaxDuration;
-        CurMission.Counter = CurMission.MaxCounter;
+        CurMission.Delay = CurMission.MaxDelay;
         CurTargetPlace = null;
         CurPlace = null;
         CurMission = null;
@@ -343,8 +343,7 @@ public class Person : MonoBehaviour
         if (isInfected || isImmune)
             return;
 
-        float infectionChance = ServiceLocator.Instance.InfectionChance * (ServiceLocator.Instance.WashYourHands ? 0.7f : 1f) *
-           (ServiceLocator.Instance.SocialDistancing ? 0.7f : 1f);
+        float infectionChance = ServiceLocator.Instance.InfectionChance * (ServiceLocator.Instance.SocialDistancing ? 0.7f : 1f);
         Vector2 evasionVector = Vector2.zero;
 
         for (int i = 0; i < ServiceLocator.Instance.Spawner.Persons.Count; i++)
@@ -392,6 +391,9 @@ public class Person : MonoBehaviour
         ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(this);
         ServiceLocator.Instance.InfectionGraph.AddInfectedPerson(this);
         InfectionSystem.Play();
+
+        // TODO 
+        ServiceLocator.Instance.InfectionGraph.RegisterInfection(this.transform.position);
     }
 
     private void UpdateUnity()
