@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311992, g: 0.38074034, b: 0.35872713, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311953, g: 0.38074014, b: 0.3587274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -788,17 +788,17 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1.14
       objectReference: {fileID: 0}
+    - target: {fileID: 4556965596869804412, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: Capacity
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 454042141957412667, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: e3a7f484b0b0ece40b1bc8ce0438d612,
         type: 3}
-    - target: {fileID: 4556965596869804412, guid: b2ee81e1b777ff6499d7d402b42b172f,
-        type: 3}
-      propertyPath: Capacity
-      value: 15
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2ee81e1b777ff6499d7d402b42b172f, type: 3}
 --- !u!4 &302988619 stripped
@@ -1100,17 +1100,17 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1.14
       objectReference: {fileID: 0}
+    - target: {fileID: 4556965596869804412, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: Capacity
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 454042141957412667, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: e3a7f484b0b0ece40b1bc8ce0438d612,
         type: 3}
-    - target: {fileID: 4556965596869804412, guid: b2ee81e1b777ff6499d7d402b42b172f,
-        type: 3}
-      propertyPath: Capacity
-      value: 15
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2ee81e1b777ff6499d7d402b42b172f, type: 3}
 --- !u!1001 &451685660
@@ -2168,11 +2168,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2001870511}
     m_Modifications:
-    - target: {fileID: -7663507962820554169, guid: 7696fb5fac60a4e4fb22d1200f8f5f44,
-        type: 3}
-      propertyPath: Capacity
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2373968770121139650, guid: 7696fb5fac60a4e4fb22d1200f8f5f44,
         type: 3}
       propertyPath: m_Name
@@ -2182,6 +2177,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7663507962820554169, guid: 7696fb5fac60a4e4fb22d1200f8f5f44,
+        type: 3}
+      propertyPath: Capacity
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 623331131669611956, guid: 7696fb5fac60a4e4fb22d1200f8f5f44,
         type: 3}
@@ -2652,17 +2652,17 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1.14
       objectReference: {fileID: 0}
+    - target: {fileID: 4556965596869804412, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: Capacity
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 454042141957412667, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: e3a7f484b0b0ece40b1bc8ce0438d612,
         type: 3}
-    - target: {fileID: 4556965596869804412, guid: b2ee81e1b777ff6499d7d402b42b172f,
-        type: 3}
-      propertyPath: Capacity
-      value: 15
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2ee81e1b777ff6499d7d402b42b172f, type: 3}
 --- !u!1001 &839214364
@@ -3479,17 +3479,17 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 618102763869109672, guid: 5947203f31679f74ea32db7b24146155,
+        type: 3}
+      propertyPath: Capacity
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 6655101638783819550, guid: 5947203f31679f74ea32db7b24146155,
         type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 8015f2204950770479e90ba37b954a8e,
         type: 3}
-    - target: {fileID: 618102763869109672, guid: 5947203f31679f74ea32db7b24146155,
-        type: 3}
-      propertyPath: Capacity
-      value: 10
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5947203f31679f74ea32db7b24146155, type: 3}
 --- !u!4 &933074892 stripped
@@ -3701,6 +3701,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   glMat: {fileID: 2100000, guid: 48bbd3481c2c5bf4bad661e144455387, type: 2}
   _persons: []
+  _infectionSpots: []
 --- !u!4 &965567804 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
@@ -5678,17 +5679,17 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 1.14
       objectReference: {fileID: 0}
+    - target: {fileID: 4556965596869804412, guid: b2ee81e1b777ff6499d7d402b42b172f,
+        type: 3}
+      propertyPath: Capacity
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 454042141957412667, guid: b2ee81e1b777ff6499d7d402b42b172f,
         type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: e3a7f484b0b0ece40b1bc8ce0438d612,
         type: 3}
-    - target: {fileID: 4556965596869804412, guid: b2ee81e1b777ff6499d7d402b42b172f,
-        type: 3}
-      propertyPath: Capacity
-      value: 15
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b2ee81e1b777ff6499d7d402b42b172f, type: 3}
 --- !u!4 &1747024955 stripped
@@ -12630,7 +12631,7 @@ PrefabInstance:
     - target: {fileID: 884995164733764133, guid: 36eb960731ac0034881a2484c9b2a534,
         type: 3}
       propertyPath: timeSteps
-      value: 15
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 884995164733764133, guid: 36eb960731ac0034881a2484c9b2a534,
         type: 3}
@@ -12715,11 +12716,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2001870511}
     m_Modifications:
-    - target: {fileID: -7663507962820554169, guid: 7696fb5fac60a4e4fb22d1200f8f5f44,
-        type: 3}
-      propertyPath: Capacity
-      value: 2
-      objectReference: {fileID: 0}
     - target: {fileID: 2373968770121139650, guid: 7696fb5fac60a4e4fb22d1200f8f5f44,
         type: 3}
       propertyPath: m_Name
@@ -12729,6 +12725,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_IsActive
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7663507962820554169, guid: 7696fb5fac60a4e4fb22d1200f8f5f44,
+        type: 3}
+      propertyPath: Capacity
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 623331131669611956, guid: 7696fb5fac60a4e4fb22d1200f8f5f44,
         type: 3}
