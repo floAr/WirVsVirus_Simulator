@@ -32,10 +32,19 @@ public class SimulationMaster : MonoBehaviour
 
     private StringBuilder[] _dataChains;
 
-    public void Run(int seed = 1)
+    private void Awake()
+    {
+        Reset(1);
+    }
+
+    public void Reset(int seed)
+    {
+        UnityEngine.Random.InitState(seed);
+    }
+
+    public void Run()
     {
 
-        UnityEngine.Random.InitState(seed);
         isRunning = true;
         PlayButton.gameObject.SetActive(false);
         PauseButton.gameObject.SetActive(true);
