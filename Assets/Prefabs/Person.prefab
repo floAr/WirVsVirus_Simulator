@@ -4863,8 +4863,8 @@ MonoBehaviour:
   isInfected: 0
   isImmune: 0
   isDead: 0
-  sicknessCounter: 480
-  deathCounter: 240
+  sicknessCounter: 900
+  deathCounter: 600
   infectionSeverity: 0
   ageGroup: 1
   render: {fileID: 3465818326561158393}

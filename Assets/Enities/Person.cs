@@ -12,7 +12,7 @@ public class Person : MonoBehaviour
     public bool isImmune = false;
     public bool isDead = false;
     public int sicknessCounter = 960;
-    public int deathCounter = 240;
+    public int deathCounter = 480;
     public int infectionSeverity = 0; // 0 = keine Sypthome 1 = Husten & Fieber 3 = Lungenentzündung
     public int ageGroup = 1; //0 = Kind 1 = Erwachsen 2 = Rentner
     public SpriteRenderer render;
@@ -61,8 +61,8 @@ public class Person : MonoBehaviour
             Destination = typeof(Hospital),
             Delay = 30,
             MaxDelay = 30,
-            Duration = 240,
-            MaxDuration = 240,
+            Duration = 100,
+            MaxDuration = 100,
             IsApplicable = (p) => p.isInfected && p.infectionSeverity == 2
         });
 
@@ -74,7 +74,7 @@ public class Person : MonoBehaviour
             MaxDelay = 180,
             Duration = 360,
             MaxDuration = 360,
-            IsApplicable = (p) => p.isInfected && p.infectionSeverity == 1
+            IsApplicable = (p) => p.isInfected && p.infectionSeverity == 1 && ServiceLocator.Instance.SelfQuarantaine
         });
 
         //all other go to self quaratine if we have tests 
@@ -155,7 +155,7 @@ public class Person : MonoBehaviour
         AvailableMissions.Add(new Mission()
         {
             Destination = typeof(Freetime),
-            SpecificPlace = GetNearbyPlace(typeof(Freetime)),
+            //SpecificPlace = GetNearbyPlace(typeof(Freetime)),
             Delay = Random.Range(300, 1000),
             MaxDelay = 1000,
             Duration = 50,
@@ -343,8 +343,7 @@ public class Person : MonoBehaviour
         if (isInfected || isImmune)
             return;
 
-        float infectionChance = ServiceLocator.Instance.InfectionChance * (ServiceLocator.Instance.WashYourHands ? 0.7f : 1f) *
-           (ServiceLocator.Instance.SocialDistancing ? 0.7f : 1f);
+        float infectionChance = ServiceLocator.Instance.InfectionChance * (ServiceLocator.Instance.SocialDistancing ? 0.7f : 1f);
         Vector2 evasionVector = Vector2.zero;
 
         for (int i = 0; i < ServiceLocator.Instance.Spawner.Persons.Count; i++)
