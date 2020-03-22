@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Text;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using XCharts;
 
@@ -34,12 +35,19 @@ public class SimulationMaster : MonoBehaviour
 
     private void Awake()
     {
+        UnityEngine.Random.InitState(1);
+    }
+
+    [ContextMenu("Reset Scene")]
+    void ResetScene()
+    {
         Reset(1);
     }
 
     public void Reset(int seed)
     {
-        UnityEngine.Random.InitState(seed);
+        string currentSceneName = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(currentSceneName);
     }
 
     public void Run()
@@ -149,7 +157,7 @@ public class SimulationMaster : MonoBehaviour
         OnUnityUpdate?.Invoke(this, new SimulationMasterTickEventArg()
         {
             TimeStep = timeStep
-        }); ;
+        });
     }
 }
 
