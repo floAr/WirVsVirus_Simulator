@@ -97,11 +97,11 @@
             /*
              * Layout
              */
-            .demo-layout-transparent {
+            .layout {
                 background: url('adobestock_323880109.jpeg') center / cover;
             }
-            .demo-layout-transparent .mdl-layout__header,
-            .demo-layout-transparent .mdl-layout__drawer-button {
+            .layout .mdl-layout__header,
+            .layout .mdl-layout__drawer-button {
                 color: white;
             }
 
@@ -121,6 +121,15 @@
 
             .inlineIcon {
                 vertical-align:middle;
+            }
+
+            .backgroundImgCopyrightLink {
+                position: absolute;
+                bottom: 0;
+            }
+
+            .red {
+                color: red;
             }
 
 
@@ -198,7 +207,7 @@
         <script>
             var isPaused = true;
             var startedOnce = false;
-            function ToggleRunPause() {
+            function toggleRunPause() {
                 if(isPaused){
                     $("#RunPause").html("Pause");
                     unityInstance.SendMessage("SimulationControl","Run");
@@ -471,7 +480,7 @@
 
 
     <body>
-        <div class="demo-layout-transparent mdl-layout mdl-js-layout">
+        <div class="layout mdl-layout mdl-js-layout">
             <header class="mdl-layout__header mdl-layout__header--transparent">
                 <div class="mdl-layout__header-row">
                     <span class="mdl-layout-title">WirVsVirus Simulator -  Was tun gegen Corona?</span>
@@ -485,9 +494,9 @@
             <div class="mdl-layout__drawer">
                 <span class="mdl-layout-title">WirVsVirus Simulator</span>
                 <nav class="mdl-navigation">
-                    <a class="mdl-navigation__link" target="_blank" href="https://wirvsvirushackathon.org/"><img class="wirVsVirusImg wirVsVirusImgSide" src="Logo_Projekt.png">WirVsVirus Hackathon</a>
+                    <a class="mdl-navigation__link" target="_blank" href="https://wirvsvirushackathon.org/">Erstellt mit viel <i class="material-icons inlineIcon red">favorite</i> auf dem WirVsVirus Hackathon<img class="wirVsVirusImg wirVsVirusImgSide" src="Logo_Projekt.png"></a>
                     <a class="mdl-navigation__link" target="_blank" href="https://github.com/floAr/WirVsVirus_Simulator">Quellcode auf Github</a>
-                    <a class="mdl-navigation__link" target="_blank" href="https://stock.adobe.com">Hintergundbild: ©dottedyeti - stock.adobe.com</a>
+                    <a class="mdl-navigation__link backgroundImgCopyrightLink" target="_blank" href="https://stock.adobe.com">Hintergundbild: ©dottedyeti - stock.adobe.com</a>
                 </nav>
             </div>
 
@@ -521,7 +530,7 @@
                                         </div>
                                     </div>
                                     <div class="mdl-card__actions mdl-card--border">
-                                        <a id="RunPause" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="ToggleRunPause()">Start</a>
+                                        <a id="RunPause" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="toggleRunPause()">Start</a>
                                         <a id="reset" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="reset()">Reset</a>
                                         <img src="legende.png" class="legendeImg">
                                         <div class="toggleInfektionsvisualisierung">
