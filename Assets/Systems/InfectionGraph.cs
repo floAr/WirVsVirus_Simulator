@@ -93,6 +93,6 @@ public class InfectionGraph : MonoBehaviour
 
     public void RegisterInfection(Vector3 pos)
     {
-
+        _infectionSpots.Add(pos);
     }
 }
