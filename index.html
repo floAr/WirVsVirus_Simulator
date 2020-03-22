@@ -145,7 +145,7 @@
     <script>
         var isPaused = true;
         var startedOnce = false;
-
+		var seed = 1;
         function ToggleRunPause() {
             if(isPaused){
                 document.getElementById("RunPause").innerHTML = "Pause";
@@ -163,6 +163,10 @@
                 unityInstance.SendMessage("SimulationControl","Pause");
             }
             isPaused=!isPaused
+        }
+		
+		function Reset() {
+                unityInstance.SendMessage("SimulationControl","Reset",seed);
         }
 
         $( document ).ready(function() {
