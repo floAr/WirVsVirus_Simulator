@@ -12,8 +12,10 @@ public class InfectionGraph : MonoBehaviour
     //private List<Transform> _linearGraph;
 
     public Material glMat;
+    public GameObject infectonSpotPrefab;
     public List<Person> _persons;
     public List<Vector3> _infectionSpots;
+    public Transform SpotParent;
 
     private void Start()
     {
@@ -94,5 +96,6 @@ public class InfectionGraph : MonoBehaviour
     public void RegisterInfection(Vector3 pos)
     {
         _infectionSpots.Add(pos);
+        Instantiate<GameObject>(infectonSpotPrefab, pos, Quaternion.identity, SpotParent);
     }
 }

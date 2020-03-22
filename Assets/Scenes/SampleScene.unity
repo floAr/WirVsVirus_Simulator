@@ -3683,7 +3683,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1527536706}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3700,7 +3701,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   glMat: {fileID: 2100000, guid: 48bbd3481c2c5bf4bad661e144455387, type: 2}
+  infectonSpotPrefab: {fileID: 5056776115884698985, guid: 482557cb8ff912a43a9716b54ec393da,
+    type: 3}
   _persons: []
+  _infectionSpots: []
+  SpotParent: {fileID: 1527536706}
 --- !u!4 &965567804 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
@@ -5185,6 +5190,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1522925102}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1527536705
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1527536706}
+  m_Layer: 0
+  m_Name: InfectionSpotRoot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1527536706
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1527536705}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 963194228}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1547916998 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5730278788265894526, guid: b2ee81e1b777ff6499d7d402b42b172f,
@@ -12957,7 +12992,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1634658189, guid: 842bd042f6b52f245b2801d3d1aa9106, type: 3}
       propertyPath: isRunning
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1634658189, guid: 842bd042f6b52f245b2801d3d1aa9106, type: 3}
       propertyPath: chart
