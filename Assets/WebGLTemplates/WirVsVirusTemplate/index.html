@@ -24,6 +24,7 @@
             margin-left: 72px;
             min-height: 74vh;
         }
+
         /* webgl layout */
 
         .webgl-wrapper {
@@ -73,7 +74,7 @@
             min-height: 30vh;
         }
         .demo-layout-transparent {
-            background: url('https://dfcby4322olzt.cloudfront.net/wp-content/uploads/2020/03/1800x1200_coronavirus_1.jpg') center / cover;
+            background: url('adobestock_323880109.jpeg') center / cover;
         }
         .demo-layout-transparent .mdl-layout__header,
         .demo-layout-transparent .mdl-layout__drawer-button {
@@ -106,25 +107,34 @@
             background-color: rgba(0, 0, 0, 0.3);
         }
 
-        .space {
+        .spaces {
             height: 35px;
         }
 
         .infoBox {
-            top: 35%;
-            left: 40%;
-            width: 40%;
-            margin-top: -9em; /*set to a negative number 1/2 of your height*/
-            margin-left: -15em; /*set to a negative number 1/2 of your width*/
-            position:fixed;
+            top: 50%;
+            left: 50%;
+            width: 50%;
+            max-height: 70vh;
+            max-width: 70vw;
+
+            margin-top: -15em;
+            margin-left: -30em;
+
+            position:absolute;
             z-index: 1000;
         }
 
+        .infoBoxText {
+            overflow: auto;
+        }
+
         .backgroundBlur {
-            filter: blur(4px);
-            position: absolute;
+            filter: blur(8px);
+            /*position: absolute;*/
             width: 100%;
             height: 100%;
+            overflow: scroll;
         }
 
         .closeInfoBoxBtn {
@@ -148,7 +158,7 @@
                     document.getElementById("RunPause").innerHTML = "Start";
                 }
                 else {
-                    document.getElementById("RunPause").innerHTML = "Resume";
+                    document.getElementById("RunPause").innerHTML = "Fortsetzen";
                 }
                 unityInstance.SendMessage("SimulationControl","Pause");
             }
@@ -160,7 +170,9 @@
         }
 
         $( document ).ready(function() {
-            const demoInput = document.getElementById('selfQuarantine');
+            $(".is-checked").removeClass("is-checked");
+
+            const demoInput = document.getElementById('stayHomeSlider');
             const labelMaker = function (e) {
                 const input = e.target || e;
                 const label = input.parentElement.querySelectorAll('.label')[0] || document.createElement('div');
@@ -215,9 +227,6 @@
                 console.log(this.id);
             });
 
-
-            //updateChart([[0,9935898,0,9935898,0,9935898,0,9935898,0,9935898,0,9935898,0,9935898,0,9871795,0,9871795,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,9807692,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359,0,974359],[0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01282051,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077,0,01923077],[0,0,0,0,0,0,0,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256,0,006410256],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0],[0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0]]);
-
         });
 
         function openDialog(id) {
@@ -239,11 +248,11 @@
                     '<p><strong>Lösung:</strong> Das Gesundheitswesen bereitet sich auf die steigende Zahl COVID-19-Patienten vor, indem es die Anzahl von Intensivbetten erhöht. Dazu sagen Kliniken beispielsweise geplante Operationen ab, die nicht dringend nötig sind, sie funktionieren normale Stationen zu Intensivstationen um oder bauen Ersatzkrankenhäuser in Messehallen oder anderen öffentlichen Orten auf. Außerdem werden Ärzte und Pflegekräfte zum Beispiel aus dem Ruhestand, aus dem Medizinstudium oder aus Pflegeschulen in die Kliniken geholt, um das reguläre Personal zu unterstützen.</p>\n' +
                     '<p><strong>Fazit:</strong> Je weniger Menschen gleichzeitig wegen COVID-19 ins Krankenhaus müssen und je länger es dauert, bis viele Menschen sich angesteckt haben, desto mehr Zeit hat das Gesundheitswesen, um sich darauf vorzubereiten. Es müssen weniger Menschen an dem Virus sterben.</p>';
             }
-            else if(id == "selbstquarantäne") {
+            else if(id == "selfQuarantine") {
                 title = "Selbstquarantäne";
                 text = '          <p><strong>Maßnahme: Selbstquarantäne</strong></p>\n' +
                     '<p><strong>Problem:</strong> Wenn man sich mit dem neuen Coronavirus ansteckt, wird man nicht unbedingt sofort krank. Es kann bis zu zwei Wochen dauern, bis man die Symptome merkt. Außerdem ist bei jungen und gesunden Menschen der Verlauf der Krankheit meist sehr mild und fühlt sich an wie ein normaler grippaler Infekt. Viele Infizierte merken sogar gar nicht, dass sie krank sind. Trotzdem können all diese Menschen das Virus an andere weitergeben und so viele andere anstecken, ohne es zu merken.</p>\n' +
-                    '<p><strong>Lösung:</strong> Wer bei sich selbst die typischen Symptome von COVID-19 <em>(Link zu offizieller Symptomliste bei BMG, RKI o.ä.)</em> bemerkt, kann sich in sogenannte Selbstquarantäne begeben. Das heißt, dass die Person ab sofort komplett zu Hause bleibt und keine anderen Menschen mehr trifft. Wenn möglich, sollte diejenige oder derjenige dann auch andere für sich einkaufen gehen lassen – am besten ohne diese Personen direkt zu treffen (Einkäufe z.B. vor der Wohnungstür abstellen). Eine Selbstquarantäne ist auch sinnvoll, wenn man mit einer Person engen Kontakt hatte, die nachweislich an COVID-19 erkrankt ist. Ganz wichtig ist, beim Verdacht, sich angesteckt zu haben, zuerst die Hotline des Gesundheitsamtes <em>(Link zu Liste/Anlaufstelle)</em> anzurufen und zu besprechen, was man tun soll. Man sollte auf keinen Fall einfach direkt zu seinem Arzt gehen, da man auch dort viele andere Menschen anstecken kann. Das Gesundheitsamt kann eine Quarantäne von 14 Tagen auch anordnen.</p>\n' +
+                    '<p><strong>Lösung:</strong> Wer bei sich selbst die <em><a href="https://www.zusammengegencorona.de/informieren/symptome-erkennen/" target="_blank">typischen Symptome von COVID-19</a></em> bemerkt, kann sich in sogenannte Selbstquarantäne begeben. Das heißt, dass die Person ab sofort komplett zu Hause bleibt und keine anderen Menschen mehr trifft. Wenn möglich, sollte diejenige oder derjenige dann auch andere für sich einkaufen gehen lassen – am besten ohne diese Personen direkt zu treffen (Einkäufe z.B. vor der Wohnungstür abstellen). Eine Selbstquarantäne ist auch sinnvoll, wenn man mit einer Person engen Kontakt hatte, die nachweislich an COVID-19 erkrankt ist. Ganz wichtig ist, beim Verdacht, sich angesteckt zu haben, zuerst die <em><a href="https://tools.rki.de/PLZTool/" target="_blank">Hotline des Gesundheitsamtes</a></em> anzurufen und zu besprechen, was man tun soll. Man sollte auf keinen Fall einfach direkt zu seinem Arzt gehen, da man auch dort viele andere Menschen anstecken kann. Das Gesundheitsamt kann eine Quarantäne von 14 Tagen auch anordnen.</p>\n' +
                     '<p><strong>Fazit:</strong> Wenn sich Menschen auch mit leichten Symptomen oder nach dem Kontakt mit COVID-19-Erkrankten in Quarantäne begeben, können sie viele Ansteckungen verhindern.</p>';
             }
             else if(id == "homeoffice") {
@@ -295,251 +304,250 @@
             $("#infoBox").fadeIn();
         }
 
-		function updateChart(array) {
+        function updateChart(array) {
 
-			var xEntrys = [];
+            var xEntrys = [];
 
-			for (var i = 0; i < array[0].length; i++) {
-				xEntrys.push(i);
-			}
-
-
-			var gesund = {
-				x: xEntrys,
-				y: array[0],
-				name: 'Gesund',
-				type: 'bar',
-				marker: {
-					color: 'rgb(226,226,226)'
-				}
-			};
-
-			var krank = {
-				x: xEntrys,
-				y: array[1],
-				name: 'Krank',
-				type: 'bar',
-				marker: {
-					color: 'rgb(192,0,0)'
-				}
-			};
+            for (var i = 0; i < array[0].length; i++) {
+                xEntrys.push(i);
+            }
 
 
-			var tot = {
-				x: xEntrys,
-				y: array[2],
-				name: 'Verstorben',
-				type: 'bar',
-				marker: {
-					color: 'rgb(37,37,37)'
-				}
-			};
+            var gesund = {
+                x: xEntrys,
+                y: array[0],
+                name: 'Gesunde',
+                type: 'bar',
+                marker: {
+                    color: 'rgb(226,226,226)'
+                }
+            };
 
-			var genesen = {
-				x: xEntrys,
-				y: array[3],
-				name: 'Immune',
-				type: 'bar',
-				marker: {
-					color: 'rgb(167,202,255)'
-				}
-			};
+            var krank = {
+                x: xEntrys,
+                y: array[1],
+                name: 'Kranke',
+                type: 'bar',
+                marker: {
+                    color: 'rgb(192,0,0)'
+                }
+            };
+
+
+            var tot = {
+                x: xEntrys,
+                y: array[2],
+                name: 'Verstorben',
+                type: 'bar',
+                marker: {
+                    color: 'rgb(37,37,37)'
+                }
+            };
+
+            var genesen = {
+                x: xEntrys,
+                y: array[3],
+                name: 'Immune',
+                type: 'bar',
+                marker: {
+                    color: 'rgb(167,202,255)'
+                }
+            };
 
 
             var data = [tot, krank, genesen, gesund];
 
-			var layout = {  autosize: false,
-				height: 400,
-				width: 500,
-				 margin: {
-					l: 60,
-					r: 10,
-					b: 0,
-					t: 25,
-					pad: 4
-				 },
-				barmode: 'stack',
-				bargap:0,
-				legend: {"orientation": "h"},
-				xaxis: {
-					showticklabels:false
+            var layout = {  autosize: false,
+                height: $("#statistics").height() - 90,
+                width: $("#statistics").width() - 30,
+                margin: {
+                    l: 60,
+                    r: 10,
+                    b: 0,
+                    t: 25,
+                    pad: 4
+                },
+                barmode: 'stack',
+                bargap:0,
+                legend: {"orientation": "h"},
+                xaxis: {
+                    showticklabels:false
                 },
 
-				};
+            };
 
-			Plotly.newPlot('chartDiv', data, layout, {displayModeBar: false});
-		}
+            Plotly.newPlot('chartDiv', data, layout, {displayModeBar: false});
+        }
 
-	</script>
+    </script>
 
 </head>
 
 
 
 <body>
-    <div class="demo-layout-transparent mdl-layout mdl-js-layout">
-        <header class="mdl-layout__header mdl-layout__header--transparent">
-            <div class="mdl-layout__header-row">
-                <span class="mdl-layout-title">WirVsVirus_Simulator</span>
-                <div class="mdl-layout-spacer"></div>
-                <nav class="mdl-navigation">
-                    <a class="mdl-navigation__link" target="_blank" href="https://wirvsvirushackathon.org/">WirVsVirus Hackathon</a>
-                </nav>
-            </div>
-        </header>
-
-        <div class="mdl-layout__drawer">
+<div class="demo-layout-transparent mdl-layout mdl-js-layout">
+    <header class="mdl-layout__header mdl-layout__header--transparent">
+        <div class="mdl-layout__header-row">
             <span class="mdl-layout-title">WirVsVirus Simulator</span>
+            <div class="mdl-layout-spacer"></div>
             <nav class="mdl-navigation">
                 <a class="mdl-navigation__link" target="_blank" href="https://wirvsvirushackathon.org/">WirVsVirus Hackathon</a>
-                <a class="mdl-navigation__link" target="_blank" href="https://github.com/floAr/WirVsVirus_Simulator">Source on Github</a>
             </nav>
         </div>
+    </header>
+
+    <div class="mdl-layout__drawer">
+        <span class="mdl-layout-title">WirVsVirus Simulator</span>
+        <nav class="mdl-navigation">
+            <a class="mdl-navigation__link" target="_blank" href="https://wirvsvirushackathon.org/">WirVsVirus Hackathon</a>
+            <a class="mdl-navigation__link" target="_blank" href="https://github.com/floAr/WirVsVirus_Simulator">Source on Github</a>
+            <a class="mdl-navigation__link" target="_blank" href="https://stock.adobe.com">Hintergundbild: ©dottedyeti - stock.adobe.com</a>
+        </nav>
+    </div>
 
 
-        <main id="siteMain" class="mdl-layout__content">
-            <div class="mdl-grid">
+    <main id="siteMain" class="mdl-layout__content">
+        <div class="mdl-grid">
 
-                <div class="mdl-cell mdl-cell--7-col">
+            <div class="mdl-cell mdl-cell--7-col">
 
-                    <div class="mdl-grid">
+                <div class="mdl-grid">
 
-                        <div class="mdl-cell mdl-cell--12-col">
+                    <div class="mdl-cell mdl-cell--12-col">
 
-                            <div class="unityCard demo-card-wide mdl-card mdl-shadow--2dp">
-                                <div class="webgl-wrapper">
-                                    <div class="webgl-content">
-                                        <div id="unityContainer" style="width: %UNITY_WIDTH%px; height: %UNITY_HEIGHT%px; margin: auto"></div>
-                                    </div>
-                                </div>
-                                <div class="mdl-card__actions mdl-card--border">
-                                    <a id="RunPause" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="ToggleRunPause()">Start</a>
+                        <div class="unityCard demo-card-wide mdl-card mdl-shadow--2dp">
+                            <div class="webgl-wrapper">
+                                <div class="webgl-content">
+                                    <div id="unityContainer" style="width: %UNITY_WIDTH%px; height: %UNITY_HEIGHT%px; margin: auto"></div>
                                 </div>
                             </div>
-
+                            <div class="mdl-card__actions mdl-card--border">
+                                <a id="RunPause" class="mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect" onclick="ToggleRunPause()">Start</a>
+                            </div>
                         </div>
 
                     </div>
+
                 </div>
+            </div>
 
-                <div class="mdl-cell mdl-cell--5-col">
+            <div class="mdl-cell mdl-cell--5-col">
 
-                    <div class="mdl-grid">
+                <div class="mdl-grid">
 
-                        <div class="mdl-cell mdl-cell--12-col">
+                    <div class="mdl-cell mdl-cell--12-col">
 
-                            <div class="statisticsCard demo-card-wide mdl-card mdl-shadow--2dp" id="statistics">
-                                <div class="mdl-card__title">
-                                    <h2 class="mdl-card__title-text">Verteilung Bevölkerung (%)</h2>
+                        <div class="statisticsCard demo-card-wide mdl-card mdl-shadow--2dp" id="statistics">
+                            <div class="mdl-card__title">
+                                <h2 class="mdl-card__title-text">Verteilung Bevölkerung (%) im Verlauf der Zeit (Start bis Jetzt)</h2>
+                            </div>
+                            <div class="sideCardContentBox">
+                                <div class="mdl-card__actions mdl-card--border">
                                 </div>
-                                <div class="sideCardContentBox">
-                                    <div class="mdl-card__actions mdl-card--border">
-                                    </div>
-                                    <div id="chartDiv">
-                                    </div>
-                                </div>
-                                <div class="mdl-card__menu">
-                                    <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                                        <i class="material-icons">share</i>
-                                    </button>
+                                <div id="chartDiv">
                                 </div>
                             </div>
-
+                            <div class="mdl-card__menu">
+                                <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+                                    <i class="material-icons">share</i>
+                                </button>
+                            </div>
                         </div>
 
-                        <div class="mdl-cell mdl-cell--12-col">
+                    </div>
 
-                            <div class="measuresCard demo-card-wide mdl-card mdl-shadow--2dp">
-                                <div class="mdl-card__title">
-                                    <h2 class="mdl-card__title-text">Maßnahmen</h2>
-                                </div>
-                                <div class="sideCardContentBox">
-                                    <div class="mdl-card__actions mdl-card--border">
+                    <div class="mdl-cell mdl-cell--12-col">
 
-                                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_stayHome">
-                                            <input type="checkbox" id="TOGGLE_stayHome" class="toggleInput mdl-switch__input">
-                                            <span class="mdl-switch__label">
-                                                Menschen sollen zu Hause bleiben
+                        <div class="measuresCard demo-card-wide mdl-card mdl-shadow--2dp">
+                            <div class="mdl-card__title">
+                                <h2 class="mdl-card__title-text">Maßnahmen</h2>
+                            </div>
+                            <div class="sideCardContentBox">
+                                <div class="mdl-card__actions mdl-card--border">
+
+                                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_selfQuarantine">
+                                        <input type="checkbox" id="TOGGLE_selfQuarantine" class="toggleInput mdl-switch__input">
+                                        <span class="mdl-switch__label">
+                                                Selbstquarantäne
                                                 <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                    <i id="stayHome" class="material-icons-outlined infoBoxOpener">info</i>
+                                                    <i id="selfQuarantine" class="material-icons-outlined infoBoxOpener">info</i>
                                                 </button>
                                             </span>
-                                        </label>
+                                    </label>
 
-                                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_verhaltensregeln">
-                                            <input type="checkbox" id="TOGGLE_verhaltensregeln" class="toggleInput mdl-switch__input">
-                                            <span class="mdl-switch__label">
+                                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_verhaltensregeln">
+                                        <input type="checkbox" id="TOGGLE_verhaltensregeln" class="toggleInput mdl-switch__input">
+                                        <span class="mdl-switch__label">
                                                 Verhaltensregeln
                                                 <button class="mdl-button mdl-js-button mdl-button--icon">
                                                     <i id="verhaltensregeln" class="material-icons-outlined infoBoxOpener">info</i>
                                                 </button>
                                             </span>
-                                        </label>
+                                    </label>
 
-                                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_doubleKh">
-                                            <input type="checkbox" id="TOGGLE_doubleKh" class="toggleInput mdl-switch__input">
-                                            <span class="mdl-switch__label">
+                                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_doubleKh">
+                                        <input type="checkbox" id="TOGGLE_doubleKh" class="toggleInput mdl-switch__input">
+                                        <span class="mdl-switch__label">
                                                 Kapazitäten der Krankenhäuser verdoppeln
                                                 <button class="mdl-button mdl-js-button mdl-button--icon">
                                                     <i id="doubleKh" class="material-icons-outlined infoBoxOpener">info</i>
                                                 </button>
                                             </span>
-                                        </label>
+                                    </label>
 
-                                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_homeoffice">
-                                            <input type="checkbox" id="TOGGLE_homeoffice" class="toggleInput mdl-switch__input">
-                                            <span class="mdl-switch__label">
+                                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_homeoffice">
+                                        <input type="checkbox" id="TOGGLE_homeoffice" class="toggleInput mdl-switch__input">
+                                        <span class="mdl-switch__label">
                                                 Homeoffice
                                                 <button class="mdl-button mdl-js-button mdl-button--icon">
                                                     <i id="homeoffice" class="material-icons-outlined infoBoxOpener">info</i>
                                                 </button>
                                             </span>
-                                        </label>
+                                    </label>
 
-                                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_closePublic">
-                                            <input type="checkbox" id="TOGGLE_closePublic" class="toggleInput mdl-switch__input">
-                                            <span class="mdl-switch__label">
+                                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_closePublic">
+                                        <input type="checkbox" id="TOGGLE_closePublic" class="toggleInput mdl-switch__input">
+                                        <span class="mdl-switch__label">
                                                 Freizeitstätten schließen und Veranstaltungen absagen
                                                 <button class="mdl-button mdl-js-button mdl-button--icon">
                                                     <i id="closePublic" class="material-icons-outlined infoBoxOpener">info</i>
                                                 </button>
                                             </span>
-                                        </label>
+                                    </label>
 
-                                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_closeSchools">
-                                            <input type="checkbox" id="TOGGLE_closeSchools" class="toggleInput mdl-switch__input">
-                                            <span class="mdl-switch__label">
+                                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_closeSchools">
+                                        <input type="checkbox" id="TOGGLE_closeSchools" class="toggleInput mdl-switch__input">
+                                        <span class="mdl-switch__label">
                                                 Schulschließungen
                                                 <button class="mdl-button mdl-js-button mdl-button--icon">
                                                     <i id="closeSchools" class="material-icons-outlined infoBoxOpener">info</i>
                                                 </button>
                                             </span>
-                                        </label>
+                                    </label>
 
-                                        <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_coronaTests">
-                                            <input type="checkbox" id="TOGGLE_coronaTests" class="toggleInput mdl-switch__input">
-                                            <span class="mdl-switch__label">
+                                    <label class="mdl-switch mdl-js-switch mdl-js-ripple-effect" for="TOGGLE_coronaTests">
+                                        <input type="checkbox" id="TOGGLE_coronaTests" class="toggleInput mdl-switch__input">
+                                        <span class="mdl-switch__label">
                                                 Corona Tests
                                                 <button class="mdl-button mdl-js-button mdl-button--icon">
                                                     <i id="coronaTests" class="material-icons-outlined infoBoxOpener">info</i>
                                                 </button>
                                             </span>
-                                        </label>
+                                    </label>
 
-                                        <div class="space"></div>
-                                        <input id="selfQuarantine" class="mdl-slider mdl-js-slider" type="range" min="20" max="80" value="20" tabindex="0" step="30">
-                                        <span class="mdl-switch__label">
-                                            Selbstquarantäne
+                                    <div class="spaces"></div>
+                                    <input id="stayHomeSlider" class="mdl-slider mdl-js-slider" type="range" min="20" max="80" value="20" tabindex="0" step="30">
+                                    <span class="mdl-switch__label">
+                                            Menschen bleiben zu Hause
                                             <button class="mdl-button mdl-js-button mdl-button--icon">
-                                                <i id="selbstquarantäne" class="material-icons-outlined infoBoxOpener">info</i>
+                                                <i id="stayHome" class="material-icons-outlined infoBoxOpener">info</i>
                                             </button>
-                                        </span>
-
-                                    </div>
+                                    </span>
 
                                 </div>
-                            </div>
 
+                            </div>
                         </div>
 
                     </div>
@@ -548,30 +556,32 @@
 
             </div>
 
-        </main>
-
-        <div id="infoBox" class="infoBox demo-card-wide mdl-card mdl-shadow--2dp" style="display: none">
-            <div class="mdl-card__title">
-                <h2 id="infoBoxTitle" class="mdl-card__title-text">Title</h2>
-            </div>
-            <div id="infoBoxText" class="mdl-card__supporting-text">
-                TEXT
-            </div>
-            <div class="mdl-card__actions mdl-card--border">
-                <div class="mdl-layout-spacer"></div>
-                <a class="closeInfoBoxBtn mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
-                    Close
-                </a>
-            </div>
-            <!--
-            <div class="mdl-card__menu">
-              <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
-                <i class="material-icons">share</i>
-              </button>
-            </div>
-            -->
         </div>
+
+    </main>
+
+    <div id="infoBox" class="infoBox demo-card-wide mdl-card mdl-shadow--2dp" style="display: none">
+        <div class="mdl-card__title">
+            <h2 id="infoBoxTitle" class="mdl-card__title-text">Title</h2>
+        </div>
+        <div id="infoBoxText" class="mdl-card__supporting-text infoBoxText">
+            TEXT
+        </div>
+        <div class="mdl-card__actions mdl-card--border">
+            <div class="mdl-layout-spacer"></div>
+            <a class="closeInfoBoxBtn mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect">
+                Close
+            </a>
+        </div>
+        <!--
+        <div class="mdl-card__menu">
+          <button class="mdl-button mdl-button--icon mdl-js-button mdl-js-ripple-effect">
+            <i class="material-icons">share</i>
+          </button>
+        </div>
+        -->
     </div>
+</div>
 </body>
 <script>
     var isFullscreen = false;
