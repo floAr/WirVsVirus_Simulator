@@ -29,9 +29,9 @@ public class Person : MonoBehaviour
     void Awake()
     {
         //age
-        int randInt = Random.Range(0, 10);
+        int randInt = Random.Range(0, 12);
         if (randInt < 3) ageGroup = 0;
-        else if (randInt < 7) ageGroup = 1;
+        else if (randInt < 9) ageGroup = 1;
         else ageGroup = 2;
 
         //severity
@@ -392,6 +392,11 @@ public class Person : MonoBehaviour
         ServiceLocator.Instance.PersonBuilder.UpdateRepresentation(this);
         ServiceLocator.Instance.InfectionGraph.AddInfectedPerson(this);
         InfectionSystem.Play();
+
+        // TODO 
+       var marker = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+        marker.transform.position = this.transform.position;
+        marker.transform.localScale = new Vector3(0.1f, 0.1f, 0.1f);
     }
 
     private void UpdateUnity()
