@@ -48,6 +48,7 @@ public class ServiceLocator : MonoBehaviour
     public void TOGGLE_homeoffice() { HomeOffice = !HomeOffice; }
     public void TOGGLE_coronaTests() { CoronaTests = !CoronaTests; }
     public void TOGGLE_closePublic() { CloseRestaurants = !CloseRestaurants; }
+    public void TOGGLE_selfQuarantine() { SelfQuarantaine = !SelfQuarantaine; }
     #endregion
 
 
